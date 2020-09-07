@@ -54,14 +54,14 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [
-                        "10.1.0.0/16"
+                        "10.2.0.0/16"
                     ]
                 },
                 "subnets": [
                     {
                         "name": "dn002-subnet",
                         "properties": {
-                            "addressPrefix": "10.1.0.0/24",
+                            "addressPrefix": "10.2.0.0/24",
                             "privateEndpointNetworkPolicies": "Enabled",
                             "privateLinkServiceNetworkPolicies": "Enabled",
                             "networkSecurityGroup": {
@@ -72,7 +72,7 @@
                     {
                         "name": "dn002-privatelink-subnet",
                         "properties": {
-                            "addressPrefix": "10.1.1.0/24",
+                            "addressPrefix": "10.2.1.0/24",
                             "privateEndpointNetworkPolicies": "Disabled",
                             "privateLinkServiceNetworkPolicies": "Disabled"
                         }
@@ -80,7 +80,7 @@
                     {
                         "name": "dn002-databricks-public-subnet",
                         "properties": {
-                            "addressPrefix": "10.1.2.0/24",
+                            "addressPrefix": "10.2.2.0/24",
                             "privateEndpointNetworkPolicies": "Enabled",
                             "privateLinkServiceNetworkPolicies": "Enabled",
                             "networkSecurityGroup": {
@@ -99,7 +99,7 @@
                     {
                         "name": "dn002-databricks-private-subnet",
                         "properties": {
-                            "addressPrefix": "10.1.3.0/24",
+                            "addressPrefix": "10.2.3.0/24",
                             "privateEndpointNetworkPolicies": "Enabled",
                             "privateLinkServiceNetworkPolicies": "Enabled",
                             "networkSecurityGroup": {
