@@ -6,7 +6,7 @@
             "value": "northeurope"
         },
         "sqlServerName": {
-            "value": "datanode001-sqlserver001"
+            "value": "dn002-sqlserver001"
         },
         "administratorLogin": {
             "reference": {
