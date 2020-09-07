@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "dataFactoryName": {
+            "value": "dn002-datafactory001"
+        },
+        "dataFactoryGitAccount": {
+            "value": ""
+        },
+        "dataFactoryGitRepo": {
+            "value": ""
+        },
+        "dataFactoryGitCollaborationBranch": {
+            "value": ""
+        },
+        "dataFactoryGitRootFolder": {
+            "value": ""
+        },
+        "dataFactoryGitType": {
+            "value": "FactoryGitHubConfiguration"
+        },
+        "keyVaultId": {
+            "value": "/subscriptions/558bf93d-0c7b-4436-82ab-a7ed6fda34aa/resourceGroups/dn002-mgmt/providers/Microsoft.KeyVault/vaults/dn002-keyvault001"
+        }
+    }
+}

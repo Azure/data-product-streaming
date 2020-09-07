@@ -1,0 +1,45 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "sqlServerId": {
+            "value": "/subscriptions/558bf93d-0c7b-4436-82ab-a7ed6fda34aa/resourceGroups/dn002-mgmt/providers/Microsoft.Sql/servers/dn002-sqlserver001"
+        },
+        "sqlDatabaseName": {
+            "value": "HiveMetastoreDB"
+        },
+        "sqlDatabaseSku": {
+            "value": "GP_Gen5"
+        },
+        "sqlDatabaseTier": {
+            "value": "GeneralPurpose"
+        },
+        "sqlDatabaseCapacity": {
+            "value": 2
+        },
+        "sqlDatabaseMaxSizeInBytes": {
+            "value": 34359738368
+        },
+        "sqlDatabaseZoneRedundant": {
+            "value": false
+        },
+        "sqlDatabaseLicenseType": {
+            "value": "LicenseIncluded"
+        },
+        "sqlDatabaseReadReplicaCount": {
+            "value": 0
+        },
+        "sqlDatabaseMinCapacity": {
+            "value": "0.5"
+        },
+        "sqlDatabaseStorageAccountType": {
+            "value": "GRS"
+        },
+        "sqlDatabaseAutoPauseDelay": {
+            "value": -1
+        }
+    }
+}
