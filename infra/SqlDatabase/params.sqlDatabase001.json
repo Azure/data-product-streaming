@@ -6,22 +6,25 @@
             "value": "northeurope"
         },
         "sqlServerId": {
-            "value": "/subscriptions/558bf93d-0c7b-4436-82ab-a7ed6fda34aa/resourceGroups/dn002-mgmt/providers/Microsoft.Sql/servers/dn002-sqlserver001"
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd001/providers/Microsoft.Sql/servers/dn001-dd001-sqlserver001"
+        },
+        "sqlServerAdministratorLoginPassword": {
+            "value": "<your-secure-password>"
         },
         "sqlDatabaseName": {
-            "value": "HiveMetastoreDB"
+            "value": "DataDomain001"
         },
         "sqlDatabaseSku": {
-            "value": "GP_Gen5"
+            "value": "Basic"
         },
         "sqlDatabaseTier": {
-            "value": "GeneralPurpose"
+            "value": "Basic"
         },
         "sqlDatabaseCapacity": {
-            "value": 2
+            "value": 5
         },
         "sqlDatabaseMaxSizeInBytes": {
-            "value": 34359738368
+            "value": 524288000
         },
         "sqlDatabaseZoneRedundant": {
             "value": false
@@ -40,6 +43,9 @@
         },
         "sqlDatabaseAutoPauseDelay": {
             "value": -1
+        },
+        "keyVaultId": {
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd001/providers/Microsoft.KeyVault/vaults/dn001-dd001-keyvault001"
         }
     }
 }

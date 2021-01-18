@@ -1,4 +1,3 @@
-This is not maintained. Please go to: https://github.com/Azure/data-node
 
 # Contributing
 
