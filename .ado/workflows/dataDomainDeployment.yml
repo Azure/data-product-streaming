@@ -241,7 +241,7 @@ stages:
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/params.synapse001.json'
             deploymentMode: 'Validation'
             overrideParameters: >
-              -sqlServerAdministratorLoginPassword "$(password)"
+              -synapseSqlAdministratorPassword "$(password)"
         
         # Deploy SQL Pool 001 - validation
         - task: AzureResourceManagerTemplateDeployment@3
@@ -495,7 +495,7 @@ stages:
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/params.synapse001.json'
             deploymentMode: 'Incremental'
             overrideParameters: >
-              -sqlServerAdministratorLoginPassword "$(password)"
+              -synapseSqlAdministratorPassword "$(password)"
         
         # Deploy SQL Pool 001
         - task: AzureResourceManagerTemplateDeployment@3
