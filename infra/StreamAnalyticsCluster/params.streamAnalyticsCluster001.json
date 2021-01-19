@@ -6,7 +6,7 @@
             "value": "northeurope"
         },
         "streamAnalyticsClusterName": {
-            "value": "dn001-dd001-streamanalyticscluster001"
+            "value": "dn001-dd002-streamanalyticscluster001"
         },
         "streamAnalyticsClusterCapacity": {
             "value": 36
