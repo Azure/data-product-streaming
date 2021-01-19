@@ -30,7 +30,7 @@
         "privateDnsZoneIdEventHub": {
             "type": "string",
             "metadata": {
-                "description": "Specifies the ID of the private dns zoneof event hub."
+                "description": "Specifies the ID of the private dns zone of event hub."
             }
         }
     },
