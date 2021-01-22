@@ -15,13 +15,13 @@
             "value": ""
         },
         "eventHubId": {
-            "value": ""
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.EventHub/namespaces/dn001-dd002-eventhub001"
         },
         "sqlServerId": {
-            "value": ""
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.Sql/servers/dn001-dd002-sqlserver001"
         },
         "cosmosDbId": {
-            "value": ""
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.DocumentDB/databaseAccounts/dn001-dd002-cosmos001"
         }
     }
 }
