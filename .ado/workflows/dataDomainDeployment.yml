@@ -101,42 +101,6 @@ stages:
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/params.eventHub001.json'
             deploymentMode: 'Validation'
         
-        # Deploy Stream Analytics Cluster 001 - validation
-        - task: AzureResourceManagerTemplateDeployment@3
-          name: stream_analytics_cluster_001_validation
-          displayName: Deploy Stream Analytics Cluster 001 - validation
-          enabled: true
-          continueOnError: false
-          inputs:
-            deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
-            action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
-            templateLocation: 'Linked artifact'
-            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
-            deploymentMode: 'Validation'
-        
-        # Deploy Stream Analytics 001 - validation
-        - task: AzureResourceManagerTemplateDeployment@3
-          name: stream_analytics_001_validation
-          displayName: Deploy Stream Analytics 001 - validation
-          enabled: true
-          continueOnError: false
-          inputs:
-            deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
-            action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
-            templateLocation: 'Linked artifact'
-            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
-            deploymentMode: 'Validation'
-        
         # Generate Password 001
         - task: PowerShell@2
           name: generate_password_001
@@ -278,6 +242,42 @@ stages:
             csmFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/deploy.bigDataPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/params.bigDataPool001.json'
             deploymentMode: 'Validation'
+        
+        # Deploy Stream Analytics Cluster 001 - validation
+        - task: AzureResourceManagerTemplateDeployment@3
+          name: stream_analytics_cluster_001_validation
+          displayName: Deploy Stream Analytics Cluster 001 - validation
+          enabled: true
+          continueOnError: false
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
+            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
+            location: '$(AZURE_LOCATION)'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
+            deploymentMode: 'Validation'
+        
+        # Deploy Stream Analytics 001 - validation
+        - task: AzureResourceManagerTemplateDeployment@3
+          name: stream_analytics_001_validation
+          displayName: Deploy Stream Analytics 001 - validation
+          enabled: true
+          continueOnError: false
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
+            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
+            location: '$(AZURE_LOCATION)'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
+            deploymentMode: 'Validation'
   
   - stage: Deployment
     displayName: 'Deployment of ARM templates'
@@ -353,42 +353,6 @@ stages:
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/deploy.eventHub.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/params.eventHub001.json'
-            deploymentMode: 'Incremental'
-        
-        # Deploy Stream Analytics Cluster 001
-        - task: AzureResourceManagerTemplateDeployment@3
-          name: stream_analytics_cluster_001_deployment
-          displayName: Deploy Stream Analytics Cluster 001
-          enabled: true
-          continueOnError: false
-          inputs:
-            deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
-            action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
-            templateLocation: 'Linked artifact'
-            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
-            deploymentMode: 'Incremental'
-        
-        # Deploy Stream Analytics 001
-        - task: AzureResourceManagerTemplateDeployment@3
-          name: stream_analytics_001_deployment
-          displayName: Deploy Stream Analytics 001
-          enabled: true
-          continueOnError: false
-          inputs:
-            deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
-            action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
-            templateLocation: 'Linked artifact'
-            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
             deploymentMode: 'Incremental'
         
         # Generate Password 001
@@ -531,4 +495,40 @@ stages:
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/deploy.bigDataPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/params.bigDataPool001.json'
+            deploymentMode: 'Incremental'
+        
+        # Deploy Stream Analytics Cluster 001
+        - task: AzureResourceManagerTemplateDeployment@3
+          name: stream_analytics_cluster_001_deployment
+          displayName: Deploy Stream Analytics Cluster 001
+          enabled: true
+          continueOnError: false
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
+            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
+            location: '$(AZURE_LOCATION)'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
+            deploymentMode: 'Incremental'
+        
+        # Deploy Stream Analytics 001
+        - task: AzureResourceManagerTemplateDeployment@3
+          name: stream_analytics_001_deployment
+          displayName: Deploy Stream Analytics 001
+          enabled: true
+          continueOnError: false
+          inputs:
+            deploymentScope: 'Resource Group'
+            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
+            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            action: 'Create Or Update Resource Group'
+            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
+            location: '$(AZURE_LOCATION)'
+            templateLocation: 'Linked artifact'
+            csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
             deploymentMode: 'Incremental'

@@ -115,32 +115,6 @@ jobs:
         parameters: ${{ github.workspace }}/infra/EventHub/params.eventHub001.json
         deploymentMode: Validate
     
-    # Deploy Stream Analytics Cluster 001 - validation
-    - name: Deploy Stream Analytics Cluster 001 - validation
-      id: stream_analytics_cluster_001_validation
-      uses: azure/arm-deploy@v1
-      with:
-        scope: resourcegroup
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
-        region: ${{ env.AZURE_LOCATION }}
-        template: ${{ github.workspace }}/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json
-        parameters: ${{ github.workspace }}/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json
-        deploymentMode: Validate
-    
-    # Deploy Stream Analytics 001 - validation
-    - name: Deploy Stream Analytics 001 - validation
-      id: stream_analytics_001_validation
-      uses: azure/arm-deploy@v1
-      with:
-        scope: resourcegroup
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
-        region: ${{ env.AZURE_LOCATION }}
-        template: ${{ github.workspace }}/infra/StreamAnalytics/deploy.streamAnalytics.json
-        parameters: ${{ github.workspace }}/infra/StreamAnalytics/params.streamAnalytics001.json
-        deploymentMode: Validate
-    
     # Generate Password 001
     - name: Generate Password 001
       id: generate_password_001
@@ -233,6 +207,32 @@ jobs:
         parameters: ${{ github.workspace }}/infra/BigDataPool/params.bigDataPool001.json
         deploymentMode: Validate
     
+    # Deploy Stream Analytics Cluster 001 - validation
+    - name: Deploy Stream Analytics Cluster 001 - validation
+      id: stream_analytics_cluster_001_validation
+      uses: azure/arm-deploy@v1
+      with:
+        scope: resourcegroup
+        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+        region: ${{ env.AZURE_LOCATION }}
+        template: ${{ github.workspace }}/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json
+        parameters: ${{ github.workspace }}/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json
+        deploymentMode: Validate
+    
+    # Deploy Stream Analytics 001 - validation
+    - name: Deploy Stream Analytics 001 - validation
+      id: stream_analytics_001_validation
+      uses: azure/arm-deploy@v1
+      with:
+        scope: resourcegroup
+        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+        region: ${{ env.AZURE_LOCATION }}
+        template: ${{ github.workspace }}/infra/StreamAnalytics/deploy.streamAnalytics.json
+        parameters: ${{ github.workspace }}/infra/StreamAnalytics/params.streamAnalytics001.json
+        deploymentMode: Validate
+    
     # Log out from Azure
     - name: Log out from Azure
       id: azure_logout
@@ -297,32 +297,6 @@ jobs:
         region: ${{ env.AZURE_LOCATION }}
         template: ${{ github.workspace }}/infra/EventHub/deploy.eventHub.json
         parameters: ${{ github.workspace }}/infra/EventHub/params.eventHub001.json
-        deploymentMode: Incremental
-    
-    # Deploy Stream Analytics Cluster 001
-    - name: Deploy Stream Analytics Cluster 001
-      id: stream_analytics_cluster_001_deployment
-      uses: azure/arm-deploy@v1
-      with:
-        scope: resourcegroup
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
-        region: ${{ env.AZURE_LOCATION }}
-        template: ${{ github.workspace }}/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json
-        parameters: ${{ github.workspace }}/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json
-        deploymentMode: Incremental
-    
-    # Deploy Stream Analytics 001
-    - name: Deploy Stream Analytics 001
-      id: stream_analytics_001_deployment
-      uses: azure/arm-deploy@v1
-      with:
-        scope: resourcegroup
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
-        region: ${{ env.AZURE_LOCATION }}
-        template: ${{ github.workspace }}/infra/StreamAnalytics/deploy.streamAnalytics.json
-        parameters: ${{ github.workspace }}/infra/StreamAnalytics/params.streamAnalytics001.json
         deploymentMode: Incremental
     
     # Generate Password 001
@@ -415,6 +389,32 @@ jobs:
         region: ${{ env.AZURE_LOCATION }}
         template: ${{ github.workspace }}/infra/BigDataPool/deploy.bigDataPool.json
         parameters: ${{ github.workspace }}/infra/BigDataPool/params.bigDataPool001.json
+        deploymentMode: Incremental
+    
+    # Deploy Stream Analytics Cluster 001
+    - name: Deploy Stream Analytics Cluster 001
+      id: stream_analytics_cluster_001_deployment
+      uses: azure/arm-deploy@v1
+      with:
+        scope: resourcegroup
+        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+        region: ${{ env.AZURE_LOCATION }}
+        template: ${{ github.workspace }}/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json
+        parameters: ${{ github.workspace }}/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json
+        deploymentMode: Incremental
+    
+    # Deploy Stream Analytics 001
+    - name: Deploy Stream Analytics 001
+      id: stream_analytics_001_deployment
+      uses: azure/arm-deploy@v1
+      with:
+        scope: resourcegroup
+        subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
+        resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
+        region: ${{ env.AZURE_LOCATION }}
+        template: ${{ github.workspace }}/infra/StreamAnalytics/deploy.streamAnalytics.json
+        parameters: ${{ github.workspace }}/infra/StreamAnalytics/params.streamAnalytics001.json
         deploymentMode: Incremental
     
     # Log out from Azure
