@@ -175,5 +175,10 @@
             }
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "cosmosDbId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.DocumentDB/databaseAccounts', variables('cosmosAccountName'))]"
+        }
+    }
 }

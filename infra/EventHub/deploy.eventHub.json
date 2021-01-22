@@ -205,5 +205,10 @@
             "resourceGroup": "[split(variables('keyVaultId'), '/')[4]]"
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "eventHubId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubName'))]"
+        }
+    }
 }

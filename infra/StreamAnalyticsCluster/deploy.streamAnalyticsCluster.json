@@ -175,5 +175,10 @@
             ]
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "streamAnalyticsClusterId": {
+            "type": "string",
+            "value": "[resourceId('Microsoft.StreamAnalytics/clusters', variables('streamAnalyticsClusterName'))]"
+        }
+    }
 }
