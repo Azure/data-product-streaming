@@ -15,7 +15,7 @@
             "value": ""
         },
         "streamAnalyticsClusterId": {
-            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd001/providers/Microsoft.StreamAnalytics/clusters/dn001-dd002-streamanalyticscluster001"
+            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.StreamAnalytics/clusters/dn001-dd002-streamanalyticscluster001"
         }
     }
 }
