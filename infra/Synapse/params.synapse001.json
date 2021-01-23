@@ -6,7 +6,7 @@
             "value": "northeurope"
         },
         "synapseWorkspaceName": {
-            "value": "dn001dd002synapse001"
+            "value": "dn001-dd002-synapse001"
         },
         "synapseDefaultStorageAccountName": {
             "value": "dn001workspacesa"
