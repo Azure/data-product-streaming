@@ -57,7 +57,7 @@
                 "authorizationPolicies": [],
                 "publicNetworkAccess": "Disabled",
                 "ipFilterRules": [],
-                "minTlsVersion": "1.2",
+                // "minTlsVersion": "1.2",
                 "eventHubEndpoints": {},
                 "routing": {},
                 "storageEndpoints": {},
