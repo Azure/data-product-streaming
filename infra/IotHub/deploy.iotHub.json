@@ -62,7 +62,7 @@
                 "routing": {},
                 "storageEndpoints": {},
                 "messagingEndpoints": {},
-                "enableFileUploadNotifications": true,
+                "enableFileUploadNotifications": false,
                 "cloudToDevice": {},
                 "comments": "",
                 "features": "DeviceManagement"
