@@ -107,7 +107,7 @@
                         "value": "[variables('location')]"
                     },
                     "keyVaultName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-keyvault001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-keyvault001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 24)]"
                     },
                     "subnetId": {
                         "value": "[variables('privateLinkSubnetId')]"
@@ -133,7 +133,7 @@
                         "value": "[variables('location')]"
                     },
                     "iotHubName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-iothub001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-iothub001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 50)]"
                     },
                     "subnetId": {
                         "value": "[variables('privateLinkSubnetId')]"
@@ -165,7 +165,7 @@
                         "value": "[variables('location')]"
                     },
                     "eventHubName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-eventhub001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-eventhub001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 50)]"
                     },
                     "eventHubSku": {
                         "value": "Standard"
@@ -203,7 +203,7 @@
                         "value": "[variables('location')]"
                     },
                     "sqlServerName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-sqlserver001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-sqlserver001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 63)]"
                     },
                     "administratorLogin": {
                         "value": "ServerMainUser"
@@ -307,7 +307,7 @@
                         "value": "[variables('location')]"
                     },
                     "cosmosAccountName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-cosmos001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-cosmos001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 44)]"
                     },
                     "keyVaultId": {
                         "value": "[reference('keyVault001Deployment').outputs.keyVaultId.value]"
@@ -338,7 +338,7 @@
                         "value": "[variables('location')]"
                     },
                     "synapseWorkspaceName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-synapse001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-synapse001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 50)]"
                     },
                     "synapseDefaultStorageAccountName": {
                         "value": "[variables('synapseDefaultStorageAccountName')]"
@@ -463,7 +463,7 @@
                         "value": "[variables('location')]"
                     },
                     "streamAnalyticsClusterName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-streamanalyticscluster001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-streamanalyticscluster001'), 63)]"
                     },
                     "streamAnalyticsClusterCapacity": {
                         "value": 36
@@ -504,7 +504,7 @@
                         "value": "[variables('location')]"
                     },
                     "streamAnalyticsName": {
-                        "value": "[concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-streamanalytics001')]"
+                        "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-streamanalytics001'), 63)]"
                     },
                     "streamAnalyticsCapacity": {
                         "value": 1
