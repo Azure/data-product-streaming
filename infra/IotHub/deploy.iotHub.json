@@ -51,6 +51,7 @@
             "location": "[variables('location')]",
             "sku": {
                 "name": "S1",
+                "tier": "Standard",
                 "capacity": 1
             },
             "properties": {
@@ -58,12 +59,48 @@
                 "publicNetworkAccess": "Disabled",
                 "ipFilterRules": [],
                 // "minTlsVersion": "1.2",
-                "eventHubEndpoints": {},
-                "routing": {},
+                "eventHubEndpoints": {
+                    "events": {
+                        "retentionTimeInDays": 1,
+                        "partitionCount": 4
+                    }
+                },
+                "routing": {
+                    "endpoints": {
+                        "serviceBusQueues": [],
+                        "serviceBusTopics": [],
+                        "eventHubs": [],
+                        "storageContainers": []
+                    },
+                    "routes": [],
+                    "fallbackRoute": {
+                        "name": "$fallback",
+                        "source": "DeviceMessages",
+                        "condition": "true",
+                        "endpointNames": [
+                            "events"
+                        ],
+                        "isEnabled": false
+                    }
+                },
                 "storageEndpoints": {},
-                "messagingEndpoints": {},
+                "messagingEndpoints": {
+                    "fileNotifications": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                },
                 "enableFileUploadNotifications": false,
-                "cloudToDevice": {},
+                "cloudToDevice": {
+                    "maxDeliveryCount": 10,
+                    "defaultTtlAsIso8601": "PT1H",
+                    "feedback": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                },
                 "comments": "",
                 "features": "DeviceManagement"
             }
