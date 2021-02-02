@@ -39,7 +39,7 @@
                 "description": "Specifies the resource ID of the resource group of the private dns zones."
             }
         },
-        "privateLinkSubnetId": {
+        "subnetId": {
             "type": "string",
             "defaultValue": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<your-rg-name>/providers/Microsoft.Network/virtualNetworks/<your-vnet-name>/subnets/<your-subnet-name>",
             "metadata": {
@@ -78,28 +78,69 @@
         "dataDomainName": "[parameters('dataDomainName')]",
         "location": "[parameters('location')]",
         "privateDnsZoneResourceGroupId": "[parameters('privateDnsZoneResourceGroupId')]",
-        "privateLinkSubnetId": "[parameters('privateLinkSubnetId')]",
+        "subnetId": "[parameters('subnetId')]",
+        "subnetName": "[last(variables('subnetId'))]",
+        "vnetName": "[split(variables('subnetId'), '/')[8]]",
+        "vnetSubscriptionId": "[split(variables('subnetId'), '/')[2]]",
+        "vnetResourceGroupName": "[split(variables('subnetId'), '/')[4]]",
         "databaseAdministratorLoginPassword": "[parameters('databaseAdministratorLoginPassword')]",
         "synapseDefaultStorageAccountName": "[parameters('synapseDefaultStorageAccountName')]",
         "synapseDefaultStorageAccountFileSystem": "[parameters('synapseDefaultStorageAccountFileSystem')]",
         "streamAnalyticsStorageAccountId": "[parameters('streamAnalyticsStorageAccountId')]",
-        "keyVaultTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/KeyVault/deploy.keyVault.json?token=AIHRGTXYPYUXQ7U6ZAMRKFDACQPSG",
-        "iotHubTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/IotHub/deploy.iotHub.json?token=AIHRGTW6IT4OIPUAUOXNNJLACQPTG",
-        "eventHubTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/EventHub/deploy.eventHub.json?token=AIHRGTVXV5KF4SAW5WVV6MLACQPUG",
-        "sqlServerTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlServer/deploy.sqlServer.json?token=AIHRGTVGTHGQPRE25UUXHYDACQPVK",
-        "sqlDatabaseTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlDatabase/deploy.sqlDatabase.json?token=AIHRGTU3UPWZ7WTWY2ZAOZLACQPWM",
-        "streamAnalyticsClusterTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json?token=AIHRGTRFNSPOJ7R7GOR2OPTACQPXQ",
-        "streamAnalyticsTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/StreamAnalytics/deploy.streamAnalytics.json?token=AIHRGTUTI4VEF2U7C6UZP5TACQPZC",
-        "cosmosDbTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/CosmosDb/deploy.cosmosDb.json?token=AIHRGTQ52GMR7IPBWVMMBITACQP2G",
-        "synapseTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/Synapse/deploy.synapse.json?token=AIHRGTV4HTJBYJ7JCXWKUZDACQP34",
-        "sqlPoolTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlPool/deploy.sqlPool.json?token=AIHRGTSGWK54H5R2OOZ42DDACQP4Y",
-        "bigDataPoolTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/BigDataPool/deploy.bigDataPool.json?token=AIHRGTX2NBBJ5BAMTB7K24TACQP6E"
+        "bigDataPoolTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/BigDataPool/deploy.bigDataPool.json",
+        "cosmosDbTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/CosmosDb/deploy.cosmosDb.json",
+        "eventHubTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/EventHub/deploy.eventHub.json",
+        "iotHubTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/IotHub/deploy.iotHub.json",
+        "keyVaultTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/KeyVault/deploy.keyVault.json",
+        "sqlDatabaseTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlDatabase/deploy.sqlDatabase.json",
+        "sqlPoolTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlPool/deploy.sqlPool.json",
+        "sqlServerTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/SqlServer/deploy.sqlServer.json",
+        "streamAnalyticsTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/StreamAnalytics/deploy.streamAnalytics.json",
+        "streamAnalyticsClusterTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json",
+        "synapseTemplateLink": "https://raw.githubusercontent.com/Azure/data-domain-streaming/main/infra/Synapse/deploy.synapse.json"
     },
     "resources": [
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
+            "name": "subnetUpdateDeployment",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "resources": [
+                        {
+                            "type": "Microsoft.Network/virtualNetworks/subnets",
+                            "apiVersion": "2019-09-01",
+                            "name": "[concat(variables('vnetName'), '/', variables('subnetName'))]",
+                            "id": "[variables('subnetId')]",
+                            "properties": {
+                                "addressPrefix": "[reference(variables('subnetId'), '2020-07-01').addressPrefix]",
+                                "networkSecurityGroup": {
+                                    "id": "[reference(variables('subnetId'), '2020-07-01').networkSecurityGroup.id]"
+                                },
+                                "routeTable": {
+                                    "id": "[reference(variables('subnetId'), '2020-07-01').routeTable.id]"
+                                },
+                                "delegations": [],
+                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateLinkServiceNetworkPolicies": "Disabled"
+                            }
+                        }
+                    ]
+                }
+            },
+            "subscriptionId": "[variables('vnetSubscriptionId')]",
+            "resourceGroup": "[variables('vnetResourceGroupName')]"
+        },
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2020-06-01",
             "name": "keyVault001Deployment",
+            "dependsOn": [
+                "subnetUpdateDeployment"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -114,7 +155,7 @@
                         "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-keyvault001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 24)]"
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneId": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net')]"
@@ -126,6 +167,9 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
             "name": "iotHub001Deployment",
+            "dependsOn": [
+                "subnetUpdateDeployment"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -140,7 +184,7 @@
                         "value": "[take(concat(variables('enterpriseScaleAnalyticsCompanyPrefix'), '-', variables('dataNodeName'), '-', variables('dataDomainName'), '-iothub001', uniqueString(subscription().subscriptionId, resourceGroup().id)), 50)]"
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneIdIotHub": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.azure-devices.net')]"
@@ -156,6 +200,7 @@
             "apiVersion": "2020-06-01",
             "name": "eventHub001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "keyVault001Deployment"
             ],
             "properties": {
@@ -184,7 +229,7 @@
                         "value": "[reference('keyVault001Deployment').outputs.keyVaultId.value]"
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneId": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net')]"
@@ -196,6 +241,9 @@
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2020-06-01",
             "name": "sqlServer001Deployment",
+            "dependsOn": [
+                "subnetUpdateDeployment"
+            ],
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
@@ -222,7 +270,7 @@
                         "value": ""
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneId": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.database.windows.net')]"
@@ -235,6 +283,7 @@
             "apiVersion": "2020-06-01",
             "name": "sqlDatabase001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "keyVault001Deployment",
                 "sqlserver001Deployment"
             ],
@@ -298,6 +347,7 @@
             "apiVersion": "2020-06-01",
             "name": "cosmosDb001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "keyVault001Deployment"
             ],
             "properties": {
@@ -317,7 +367,7 @@
                         "value": "[reference('keyVault001Deployment').outputs.keyVaultId.value]"
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneId": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.documents.azure.com')]"
@@ -330,6 +380,7 @@
             "apiVersion": "2020-06-01",
             "name": "synapse001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment"
             ],
             "properties": {
                 "mode": "Incremental",
@@ -369,7 +420,7 @@
                         "value": ""
                     },
                     "subnetId": {
-                        "value": "[variables('privateLinkSubnetId')]"
+                        "value": "[variables('subnetId')]"
                     },
                     "privateDnsZoneIdSql": {
                         "value": "[concat(variables('privateDnsZoneResourceGroupId'), '/providers/Microsoft.Network/privateDnsZones/privatelink.sql.azuresynapse.net')]"
@@ -385,6 +436,7 @@
             "apiVersion": "2020-06-01",
             "name": "sqlPool001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "synapse001Deployment"
             ],
             "properties": {
@@ -414,6 +466,7 @@
             "apiVersion": "2020-06-01",
             "name": "bigDataPool001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "synapse001Deployment"
             ],
             "properties": {
@@ -452,6 +505,7 @@
             "apiVersion": "2020-06-01",
             "name": "streamAnalyticsCluster001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "eventHub001Deployment",
                 "sqlServer001Deployment",
                 "cosmosDb001Deployment"
@@ -492,6 +546,7 @@
             "apiVersion": "2020-06-01",
             "name": "streamAnalytics001Deployment",
             "dependsOn": [
+                "subnetUpdateDeployment",
                 "eventHub001Deployment",
                 "sqlServer001Deployment",
                 "cosmosDb001Deployment",
