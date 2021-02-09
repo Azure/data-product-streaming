@@ -1,27 +1,27 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
-    "contentVersion": "1.0.0.0",
-    "parameters": {
-        "location": {
-            "value": "northeurope"
-        },
-        "streamAnalyticsClusterName": {
-            "value": "dn001-dd002-streamanalyticscluster001"
-        },
-        "streamAnalyticsClusterCapacity": {
-            "value": 36
-        },
-        "storageAccountId": {
-            "value": ""
-        },
-        "eventHubId": {
-            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.EventHub/namespaces/dn001-dd002-eventhub001"
-        },
-        "sqlServerId": {
-            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.Sql/servers/dn001-dd002-sqlserver001"
-        },
-        "cosmosDbId": {
-            "value": "/subscriptions/2f68ca09-59d9-4ab5-ad11-c54872bfa28d/resourceGroups/dn001-dd002/providers/Microsoft.DocumentDB/databaseAccounts/dn001-dd002-cosmos001"
-        }
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "value": "<my-region>"
+    },
+    "streamAnalyticsClusterName": {
+      "value": "mydatalandingzonename-streamanalyticscluster001"
+    },
+    "streamAnalyticsClusterCapacity": {
+      "value": 36
+    },
+    "storageAccountId": {
+      "value": ""
+    },
+    "eventHubId": {
+      "value": "/subscriptions/<my-data-landing-zone-subscription-id>/resourceGroups/mydatalandingzonename-rg/providers/Microsoft.EventHub/namespaces/mydatalandingzonename-eventhub001"
+    },
+    "sqlServerId": {
+      "value": "/subscriptions/<my-data-landing-zone-subscription-id>/resourceGroups/mydatalandingzonename-rg/providers/Microsoft.Sql/servers/mydatalandingzonename-sqlserver001"
+    },
+    "cosmosDbId": {
+      "value": "/subscriptions/<my-data-landing-zone-subscription-id>/resourceGroups/mydatalandingzonename-rg/providers/Microsoft.DocumentDB/databaseAccounts/mydatalandingzonename-cosmos001"
     }
+  }
 }
