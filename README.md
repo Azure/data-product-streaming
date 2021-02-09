@@ -3,7 +3,7 @@
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
 
 <p align="center">
-    <img src="./docs/media/DomainStreaming.png" alt="Data Landing Zone" width="500"/> 
+    <img src="./docs/media/DomainStreaming.png" alt="Data Domain - Streaming" width="500"/> 
 </p>
 
 # Contributing
