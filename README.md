@@ -1,28 +1,3 @@
-# Deploy to Azure
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
-
-<p align="center">
-    <img src="./docs/media/DomainStreaming.png" alt="Data Domain - Streaming" width="500"/> 
-</p>
-
-
-
-
-
-# Deploy to Azure
-
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
-
-
-
-
-
-
-
-
-
-
 
 
 # Enterprise Scale Analytics - Data Domain Streaming
@@ -34,7 +9,7 @@ TODO
 
 ## What will be deployed?
 
-By default, all the services which comes under Data Domain Streaming are enabled and you must explicitly disable them if you don't want it to be deployed. For more details regarding the services which will be deployed, please check [Domains](https://github.com/Azure/Enterprise-Scale-Analytics/blob/main/docs/03-datalandingzones/05-domains.md).
+By default, all the services which comes under Data Domain Streaming are enabled and you must explicitly disable them if you don't want it to be deployed. 
 
 <p align="center">
     <img src="./docs/media/DomainStreaming.png" alt="Data Domain - Streaming" width="500"/> 
@@ -54,6 +29,7 @@ For each Domain, in a Data Landing Zone, which is onboarded it is created:
  - [Sql Elastic Pool](https://docs.microsoft.com/en-us/azure/azure-sql/database/elastic-pool-overview)
  - [BigData Pool](https://docs.microsoft.com/en-us/sql/big-data-cluster/concept-data-pool?view=sql-server-ver15)
 
+For more details regarding the services which will be deployed, please check [Domains](https://github.com/Azure/Enterprise-Scale-Analytics/blob/main/docs/03-datalandingzones/05-domains.md).
 
 You have two options for deploying this reference architecture:
 1. Use the `Deploy to Azure` Button or
@@ -73,6 +49,8 @@ If you don’t have an Azure subscription, [create your Azure free account today
 |Data Domain Streaming |
 |:---------------------|
 [&nbsp;&nbsp;![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
+
+&nbsp;&nbsp;
 
 # Option 2: GitHub Actions or Azure DevOps Pipelines
 
@@ -323,7 +301,7 @@ As a last step, you need to reference the Azure DevOps Yaml pipeline, that is st
 
 **Congratulations!** You have successfully executed all steps to deploy the template into your environment through GitHub Actions or Azure DevOps.
 
-If you are using GitHub Actions, you can navigate to the **Actions** tab of the main page of the repository, where you will see a workflow with the name `Data Management Deployment` running. Click on it to see how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-landing-zone/issues).
+If you are using GitHub Actions, you can navigate to the **Actions** tab of the main page of the repository, where you will see a workflow with the name `Data Domaine Streaming Deployment` running. Click on it to see how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-landing-zone/issues).
 
 If you are using Azure DevOps Pipelines, you can navigate to the pipeline that you have created as part of step 6 and follow  how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-management-zone/issues).
 
