@@ -109,15 +109,5 @@
             "parameters.sqlServerId.value": "/subscriptions/${DataLandingZoneSubscriptionId}/resourceGroups/${DataLandingZoneName}-rg/providers/Microsoft.Sql/servers/${DataLandingZoneName}-sqlserver001",
             "parameters.cosmosDbId.value": "/subscriptions/${DataLandingZoneSubscriptionId}/resourceGroups/${DataLandingZoneName}-rg/providers/Microsoft.DocumentDB/databaseAccounts/${DataLandingZoneName}-cosmos001"
         }
-    },
-    {
-        "filePath": ".ado/workflows/dataDomainDeployment.yml",
-        "fileType": "yaml",
-        "parameters": {
-            "variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME": "${AzureResourceManagerConnectionName}",
-            "variables.AZURE_SUBSCRIPTION_ID": "${DataLandingZoneSubscriptionId}",
-            "variables.AZURE_RESOURCE_GROUP_NAME": "${DataLandingZoneName}-rg",
-            "variables.AZURE_LOCATION": "${Location}"
-        }
     }
 ]
