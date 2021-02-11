@@ -71,24 +71,20 @@ If you don’t have an Azure subscription, [create your Azure free account today
 
 ## 2. Setting up the required Service Principal and access
 
-A service principal needs to be generated for authentication and authorization from GitHub or Azure DevOps to your Azure subscription. This is required to deploy resources to your environment. Just go to the `Azure Portal` to find the ID of your subscription. Then start Azure CLI or PowerShell, login to Azure, set the Azure context and execute the following commands to generate the required credentials:
+A service principal needs to be generated for authentication and authorization from GitHub or Azure DevOps to your Azure subscription. This is required to deploy resources to your environment. Just go to the `Azure Portal` to find the ID of your subscription. Then start Azure (Cloud) CLI, login to Azure, set the Azure context and execute the following command to generate the required credentials:
 
 > NOTE: The purpose of this new Service Principal is to assign least-privilege rights. Therefore, it requires the **Contributor** role at a resource group scope in order to deploy the resources inside the resource group dedicated to a specific data domain. The **Network Contributor** role assignment is required as well in this repository in order to assign the resources to the dedicated subnet.
 
 **Azure CLI**
 ```Shell
-# Replace {service-principal-name}, {subscription-id} and {resource-group} with your 
-# Azure subscription id and resource group name and any name for your service principal
-az ad sp create-for-rbac --name {service-principal-name}
+# Replace {service-principal-name} with 
+# any name for your service principal
+az ad sp create-for-rbac \
+    --name "{service-principal-name}" \
+    --skip-assignment \
+    --sdk-auth
 ```
 
-**Azure Powershell**
-```PowerShell
-# Replace {service-principal-name} and {subscription-id} with your 
-# Azure subscription id and any name for your service principal.
-New-AzADServicePrincipal `
-  -DisplayName "{service-principal-name}"
-```
 
 This will generate the following JSON output:
 ```JSON
