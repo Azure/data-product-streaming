@@ -2,9 +2,9 @@
 
 > **General disclaimer** Please be aware that this template is in public preview. Therefore, expect smaller bugs and issues when working with the solution. Please submit an Issue, if you come across any issues that you would like us to fix.
 
-# Description 
+# Description
 
-Enterprise Scale analytics emphasizes self-service and follows the concept of creating landing zones for cross-functional teams. Operation end responsibility of these landing zones is handed over to teh responsible teams inside the data node. The teams are free to deploy their own services within the guardrails of Azure Policy. To scale across the landing zones more quickly and allow a shorter time to market, we use the consept of Data Domain and Data Product templates. Data Domain and Data Product templates are blueprints, which can be used to quickly spin up environments for cross-functional teams. The teams can fork these repos to quickly spin up environemnts based on their requirements. This Data Domain template deploys a set of services, which can be used for data stream processing. The template includes a set of different services for processing datastreams, from which the teams can choose based on their their requirements and preferences.
+Enterprise Scale analytics emphasizes self-service and follows the concept of creating landing zones for cross-functional teams. Operation end responsibility of these landing zones is handed over to the responsible teams inside the data node. The teams are free to deploy their own services within the guardrails of Azure Policy. To scale across the landing zones more quickly and allow a shorter time to market, we use the concept of Data Domain and Data Product templates. Data Domain and Data Product templates are blueprints, which can be used to quickly spin up environments for these cross-functional teams. The teams can fork these repos to quickly spin up environments based on their requirements. This Data Domain template deploys a set of services, which can be used for data stream processing. The template includes a set of different services for processing datastreams, from which the teams can choose based on their their requirements and preferences.
 
 ## What will be deployed?
 
