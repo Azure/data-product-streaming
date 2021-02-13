@@ -1,4 +1,4 @@
-name: Data Domain Streaming Deployment
+name: Data Domain Deployment
 
 trigger:
   branches:
