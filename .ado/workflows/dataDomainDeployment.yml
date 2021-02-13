@@ -1,4 +1,4 @@
-name: Data Node Deployment
+name: Data Domain Streaming Deployment
 
 trigger:
   branches:
@@ -150,7 +150,7 @@ stages:
             location: '$(AZURE_LOCATION)'
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/deploy.sqlDatabase.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/SqlDatabase/params.sqlDatabase001.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/params.sqlDatabase001.json'
             deploymentMode: 'Validation'
             overrideParameters: >
               -sqlServerAdministratorLoginPassword "$(password)"
@@ -170,7 +170,7 @@ stages:
             location: '$(AZURE_LOCATION)'
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/deploy.cosmosDb.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/CosmosDb/params.cosmosDb001.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/params.cosmosDb001.json'
             deploymentMode: 'Validation'
         
         # Generate Password 002
@@ -404,7 +404,7 @@ stages:
             location: '$(AZURE_LOCATION)'
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/deploy.sqlDatabase.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/SqlDatabase/params.sqlDatabase001.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/params.sqlDatabase001.json'
             deploymentMode: 'Incremental'
             overrideParameters: >
               -sqlServerAdministratorLoginPassword "$(password)"
@@ -424,7 +424,7 @@ stages:
             location: '$(AZURE_LOCATION)'
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/deploy.cosmosDb.json'
-            csmParametersFile: '$(System.DefaultWorkingDirectory)/CosmosDb/params.cosmosDb001.json'
+            csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/params.cosmosDb001.json'
             deploymentMode: 'Incremental'
         
         # Generate Password 002
