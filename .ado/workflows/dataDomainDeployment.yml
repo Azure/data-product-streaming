@@ -55,11 +55,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/KeyVault/deploy.keyVault.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/KeyVault/params.keyVault001.json'
@@ -73,11 +73,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/IotHub/deploy.iotHub.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/IotHub/params.iotHub001.json'
@@ -91,11 +91,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/deploy.eventHub.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/params.eventHub001.json'
@@ -123,11 +123,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlServer/deploy.sqlServer.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlServer/params.sqlServer001.json'
@@ -143,11 +143,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/deploy.sqlDatabase.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/params.sqlDatabase001.json'
@@ -163,11 +163,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/deploy.cosmosDb.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/params.cosmosDb001.json'
@@ -195,11 +195,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/deploy.synapse.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/params.synapse001.json'
@@ -215,11 +215,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlPool/deploy.sqlPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlPool/params.sqlPool001.json'
@@ -233,11 +233,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/deploy.bigDataPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/params.bigDataPool001.json'
@@ -251,11 +251,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
@@ -269,11 +269,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
@@ -309,11 +309,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/KeyVault/deploy.keyVault.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/KeyVault/params.keyVault001.json'
@@ -327,11 +327,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/IotHub/deploy.iotHub.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/IotHub/params.iotHub001.json'
@@ -345,11 +345,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/deploy.eventHub.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/EventHub/params.eventHub001.json'
@@ -377,11 +377,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlServer/deploy.sqlServer.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlServer/params.sqlServer001.json'
@@ -397,11 +397,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/deploy.sqlDatabase.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlDatabase/params.sqlDatabase001.json'
@@ -417,11 +417,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/deploy.cosmosDb.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/CosmosDb/params.cosmosDb001.json'
@@ -449,11 +449,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/deploy.synapse.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/Synapse/params.synapse001.json'
@@ -469,11 +469,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/SqlPool/deploy.sqlPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/SqlPool/params.sqlPool001.json'
@@ -487,11 +487,11 @@ stages:
           continueOnError: true
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/deploy.bigDataPool.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/BigDataPool/params.bigDataPool001.json'
@@ -505,11 +505,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/deploy.streamAnalyticsCluster.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalyticsCluster/params.streamAnalyticsCluster001.json'
@@ -523,11 +523,11 @@ stages:
           continueOnError: false
           inputs:
             deploymentScope: 'Resource Group'
-            azureResourceManagerConnection: '$(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)'
-            subscriptionId: '$(AZURE_SUBSCRIPTION_ID)'
+            azureResourceManagerConnection: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+            subscriptionId: ${{ variables.AZURE_SUBSCRIPTION_ID }}
             action: 'Create Or Update Resource Group'
-            resourceGroupName: '$(AZURE_RESOURCE_GROUP_NAME)'
-            location: '$(AZURE_LOCATION)'
+            resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
+            location: ${{ variables.AZURE_LOCATION }}
             templateLocation: 'Linked artifact'
             csmFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/deploy.streamAnalytics.json'
             csmParametersFile: '$(System.DefaultWorkingDirectory)/infra/StreamAnalytics/params.streamAnalytics001.json'
