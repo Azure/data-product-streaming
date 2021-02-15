@@ -170,7 +170,7 @@
         {
             "type": "Microsoft.Resources/deployments",
             "apiVersion": "2019-10-01",
-            "name": "SecretDeployment",
+            "name": "EventHubSecretDeployment",
             "dependsOn": [
                 "[resourceId('Microsoft.EventHub/namespaces', variables('eventHubName'))]"
             ],
