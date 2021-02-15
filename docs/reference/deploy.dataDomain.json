@@ -523,7 +523,7 @@
                         "value": "[variables('streamAnalyticsStorageAccountId')]"
                     },
                     "eventHubId": {
-                        "value": "[reference('eventHub001Deployment').outputs.keyVaultId.value]"
+                        "value": "[reference('eventHub001Deployment').outputs.eventHubId.value]"
                     },
                     "sqlServerId": {
                         "value": "[reference('sqlserver001Deployment').outputs.sqlServerId.value]"
