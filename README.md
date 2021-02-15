@@ -47,7 +47,7 @@ If you don’t have an Azure subscription, [create your Azure free account today
 
 |Data Domain Streaming |
 |:---------------------|
-[&nbsp;&nbsp;![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
+[&nbsp;&nbsp;![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
 
 # Option 2: GitHub Actions or Azure DevOps Pipelines
 
