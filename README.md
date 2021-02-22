@@ -43,11 +43,12 @@ The following prerequisites are required to make this repository work:
 
 If you don’t have an Azure subscription, [create your Azure free account today](https://azure.microsoft.com/en-us/free/).
 
-# Option 1: Deploy to Azure - Quickstart
+# Option 1: Deploy to Azure - Quickstart (Coming soon ...)
 
-|Data Domain Streaming |
-|:---------------------|
-[&nbsp;&nbsp;![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json)
+| Data Domain Streaming |
+|:----------------------|
+<!-- [&nbsp;&nbsp;![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json) -->
+![Deploy to Azure](/docs/media/deploytoazuregrey.png)
 
 # Option 2: GitHub Actions or Azure DevOps Pipelines
 
