@@ -11,6 +11,7 @@
 ## What will be deployed?
 
 By default, all the services which come under Data Domain Streaming are enabled, and you must explicitly disable services that you don't want to be deployed.
+
 > **Note:** Before deploying the resources, we recommend to check registration status of the required resource providers in your subscription. For more information, see [Resource providers for Azure services](https://docs.microsoft.com/azure/azure-resource-manager/management/resource-providers-and-types).
 
 <p align="center">
