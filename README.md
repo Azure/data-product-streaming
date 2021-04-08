@@ -132,7 +132,7 @@ Now that the new Service Principal is created, as mentioned,  role assignments a
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-To add these role assignments, you can use the [Azure Portal](https://portal.azure.com/) or run the following commands:
+To add these role assignments, you can use the [Azure Portal](https://portal.azure.com/) or run the following commands using Azure CLI/Azure Powershell:
 
 #### Azure CLI - Add role assignments
 
@@ -141,21 +141,21 @@ To add these role assignments, you can use the [Azure Portal](https://portal.azu
 az ad sp list --display-name "{servicePrincipalName}" --query "[].{objectId:objectId}" --output tsv
 
 # Add role assignment
-# 1. Resource Scope
+# Resource Scope level assignment
 az role assignment create \
   --assignee "{servicePrincipalObjectId}" \
   --role "{roleName}" \
   --scopes "{scope}"
 
-# 2. Resource group scope
+# Resource group scope level assignment
 az role assignment create \
   --assignee "{servicePrincipalObjectId}" \
   --role "{roleName}" \
   --resource-group "{resourceGroupName}"
 
-# 3. Child-Resource Scope
+
+# For Child-Resource Scope level assignment
 # TBD
-```
 
 #### Azure Powershell - Add role assignments
 
@@ -164,19 +164,19 @@ az role assignment create \
 $spObjectId = (Get-AzADServicePrincipal -DisplayName "{servicePrincipalName}").id
 
 # Add role assignment
-# 1. Resource Scope
+# For Resource Scope level assignment
 New-AzRoleAssignment `
   -ObjectId $spObjectId `
   -RoleDefinitionName "{roleName}" `
   -Scope "{scope}"
 
-# 2. Resource group scope
+# For Resource group scope level assignment
 New-AzRoleAssignment `
   -ObjectId $spObjectId `
   -RoleDefinitionName "{roleName}" `
   -ResourceGroupName "{resourceGroupName}"
 
-# 3. Child-Resource Scope
+# For Child-Resource Scope level assignment
 New-AzRoleAssignment `
   -ObjectId $spObjectId `
   -RoleDefinitionName "{roleName}" `
@@ -185,6 +185,7 @@ New-AzRoleAssignment `
   -ParentResource "virtualNetworks/{virtualNetworkName}" `
   -ResourceGroupName "{resourceGroupName}
 ```
+
 
 ### 3. Resource Deployment
 
