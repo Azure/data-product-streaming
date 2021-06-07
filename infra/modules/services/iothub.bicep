@@ -55,7 +55,7 @@ resource iothub 'Microsoft.Devices/IotHubs@2021-03-31' = {
         ttlAsIso8601: 'PT1H'
       }
     }
-    minTlsVersion: '1.2'  // Uncomment to enforce TLS Version 1.2. This is only available in select region (https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-tls-support)
+    // minTlsVersion: '1.2'  // Uncomment to enforce TLS Version 1.2. This is only available in select region (https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-tls-support)
     networkRuleSets: {
       applyToBuiltInEventHubEndpoint: true
       defaultAction: 'Deny'

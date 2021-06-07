@@ -17,7 +17,7 @@ resource storageAccountFileSystem 'Microsoft.Storage/storageAccounts/blobService
   name: '${storageAccountName}/default/${storageAccountFileSystemName}'
 }
 
-resource streamanalyticsjob 'Microsoft.Synapse/workspaces@2021-03-01' existing = {
+resource streamanalyticsjob 'Microsoft.StreamAnalytics/streamingjobs@2017-04-01-preview' existing = {
   name: streamanalyticsjobName
   scope: resourceGroup(streamanalyticsjobSubscriptionId, streamanalyticsjobResourceGroupName)
 }

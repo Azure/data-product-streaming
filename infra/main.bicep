@@ -22,7 +22,7 @@ param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the default storage account for strea analytics.')
-param streamanalyticsDefaultStorageAccountId string
+param streamanalyticsDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the central purview instance.')
 param purviewId string
 @description('Specifies whether role assignments should be enabled.')
@@ -59,6 +59,9 @@ var tags = {
 }
 var synapseDefaultStorageAccountSubscriptionId = split(synapseDefaultStorageAccountFileSystemId, '/')[2]
 var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageAccountFileSystemId, '/')[4]
+var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
+var streamanalyticsDefaultStorageAccountResourceGroupName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4]
+var streamanalyticsDefaultStorageAccountName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8]
 
 // Resources
 module keyvault001 'modules/services/keyvault.bicep' = {
@@ -165,7 +168,7 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
     tags: tags
     eventhubNamespaceId: eventhubNamespace001.outputs.eventhubNamespaceId
     sqlServerId: sql001.outputs.sqlserverId
-    storageAccountId: streamanalyticsDefaultStorageAccountId
+    storageAccountId: resourceId(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName, 'Microsoft.Storage/storageAccounts', streamanalyticsDefaultStorageAccountName)
     streamanalyticsclusterName: '${name}-streamanalyticscluster001'
     streamanalyticsclusterSkuCapacity: 36
     streamanalyticsName: '${name}-streamanalytics001'
@@ -175,9 +178,9 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
 
 module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalyticsRoleAssignmentStorage.bicep' = if (enableRoleAssignments) {
   name: 'streamanalytics001RoleAssignmentStorage'
-  scope: resourceGroup(synapseDefaultStorageAccountSubscriptionId, synapseDefaultStorageAccountResourceGroupName)
+  scope: resourceGroup(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName)
   params: {
-    storageAccountFileSystemId: synapseDefaultStorageAccountFileSystemId
+    storageAccountFileSystemId: streamanalyticsDefaultStorageAccountFileSystemId
     streamanalyticsjobId: streamanalytics001.outputs.streamanalyticsjob001Id
   }
 }

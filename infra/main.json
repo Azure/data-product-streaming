@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.63.48766",
-      "templateHash": "12485534684110956692"
+      "templateHash": "12228656581795582972"
     }
   },
   "parameters": {
@@ -46,7 +46,7 @@
         "description": "Specifies the resource ID of the default storage account file system for synapse."
       }
     },
-    "streamanalyticsDefaultStorageAccountId": {
+    "streamanalyticsDefaultStorageAccountFileSystemId": {
       "type": "string",
       "metadata": {
         "description": "Specifies the resource ID of the default storage account for strea analytics."
@@ -124,7 +124,10 @@
       "Name": "[variables('name')]"
     },
     "synapseDefaultStorageAccountSubscriptionId": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2]]",
-    "synapseDefaultStorageAccountResourceGroupName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4]]"
+    "synapseDefaultStorageAccountResourceGroupName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4]]",
+    "streamanalyticsDefaultStorageAccountSubscriptionId": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2]]",
+    "streamanalyticsDefaultStorageAccountResourceGroupName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[4]]",
+    "streamanalyticsDefaultStorageAccountName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[8]]"
   },
   "resources": [
     {
@@ -1082,7 +1085,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.63.48766",
-              "templateHash": "12425784233031036511"
+              "templateHash": "10438268165754138197"
             }
           },
           "parameters": {
@@ -1158,7 +1161,6 @@
                     "ttlAsIso8601": "PT1H"
                   }
                 },
-                "minTlsVersion": "1.2",
                 "networkRuleSets": {
                   "applyToBuiltInEventHubEndpoint": true,
                   "defaultAction": "Deny",
@@ -1417,7 +1419,7 @@
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2019-10-01').outputs.sqlserverId.value]"
           },
           "storageAccountId": {
-            "value": "[parameters('streamanalyticsDefaultStorageAccountId')]"
+            "value": "[resourceId(variables('streamanalyticsDefaultStorageAccountSubscriptionId'), variables('streamanalyticsDefaultStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts', variables('streamanalyticsDefaultStorageAccountName'))]"
           },
           "streamanalyticsclusterName": {
             "value": "[format('{0}-streamanalyticscluster001', variables('name'))]"
@@ -1634,8 +1636,8 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
       "name": "streamanalytics001RoleAssignmentStorage",
-      "subscriptionId": "[variables('synapseDefaultStorageAccountSubscriptionId')]",
-      "resourceGroup": "[variables('synapseDefaultStorageAccountResourceGroupName')]",
+      "subscriptionId": "[variables('streamanalyticsDefaultStorageAccountSubscriptionId')]",
+      "resourceGroup": "[variables('streamanalyticsDefaultStorageAccountResourceGroupName')]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -1643,7 +1645,7 @@
         "mode": "Incremental",
         "parameters": {
           "storageAccountFileSystemId": {
-            "value": "[parameters('synapseDefaultStorageAccountFileSystemId')]"
+            "value": "[parameters('streamanalyticsDefaultStorageAccountFileSystemId')]"
           },
           "streamanalyticsjobId": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2019-10-01').outputs.streamanalyticsjob001Id.value]"
@@ -1656,7 +1658,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.63.48766",
-              "templateHash": "5603884970257143432"
+              "templateHash": "3749127490045858601"
             }
           },
           "parameters": {
@@ -1680,10 +1682,10 @@
               "type": "Microsoft.Authorization/roleAssignments",
               "apiVersion": "2020-04-01-preview",
               "scope": "[format('Microsoft.Storage/storageAccounts/{0}/blobServices/{1}/containers/{2}', split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[0], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[1], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[2])]",
-              "name": "[guid(uniqueString(resourceId('Microsoft.Storage/storageAccounts/blobServices/containers', split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[0], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[1], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[2]), extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', variables('streamanalyticsjobSubscriptionId'), variables('streamanalyticsjobResourceGroupName')), 'Microsoft.Synapse/workspaces', variables('streamanalyticsjobName'))))]",
+              "name": "[guid(uniqueString(resourceId('Microsoft.Storage/storageAccounts/blobServices/containers', split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[0], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[1], split(format('{0}/default/{1}', variables('storageAccountName'), variables('storageAccountFileSystemName')), '/')[2]), extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', variables('streamanalyticsjobSubscriptionId'), variables('streamanalyticsjobResourceGroupName')), 'Microsoft.StreamAnalytics/streamingjobs', variables('streamanalyticsjobName'))))]",
               "properties": {
                 "roleDefinitionId": "[resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
-                "principalId": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', variables('streamanalyticsjobSubscriptionId'), variables('streamanalyticsjobResourceGroupName')), 'Microsoft.Synapse/workspaces', variables('streamanalyticsjobName')), '2021-03-01', 'full').identity.principalId]"
+                "principalId": "[reference(extensionResourceId(format('/subscriptions/{0}/resourceGroups/{1}', variables('streamanalyticsjobSubscriptionId'), variables('streamanalyticsjobResourceGroupName')), 'Microsoft.StreamAnalytics/streamingjobs', variables('streamanalyticsjobName')), '2017-04-01-preview', 'full').identity.principalId]"
               }
             }
           ]
