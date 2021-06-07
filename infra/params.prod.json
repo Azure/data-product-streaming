@@ -17,7 +17,7 @@
         "synapseDefaultStorageAccountFileSystemId": {
             "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prod-storage/providers/Microsoft.Storage/storageAccounts/dlz01prodencur/blobServices/default/containers/dd002"
         },
-        "streamanalyticsDefaultStorageAccountId": {
+        "streamanalyticsDefaultStorageAccountFileSystemId": {
             "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prod-storage/providers/Microsoft.Storage/storageAccounts/dlz01prodencur/blobServices/default/containers/dd002"
         },
         "subnetId": {
