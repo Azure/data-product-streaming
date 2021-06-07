@@ -1,0 +1,133 @@
+// This template is used to create a Databricks workspace.
+targetScope = 'resourceGroup'
+
+// Parameters
+param location string
+param tags object
+param subnetId string
+param iothubName string
+param iothubSkuName string
+@minValue(1)
+param iothubSkuCapacity int
+param privateDnsZoneIdIothub string
+param privateDnsZoneIdEventhubNamespace string
+
+// Variables
+var iothubPrivateEndpointName = '${iothub.name}-private-endpoint'
+
+// Resources
+resource iothub 'Microsoft.Devices/IotHubs@2021-03-31' = {
+  name: iothubName
+  location: location
+  tags: tags
+  identity: {
+    type: 'SystemAssigned'
+  }
+  sku: {
+    name: iothubSkuName
+    capacity: iothubSkuCapacity
+  }
+  properties: {
+    authorizationPolicies: []
+    cloudToDevice: {
+      defaultTtlAsIso8601: 'PT1M'
+      feedback: {
+        lockDurationAsIso8601: 'PT1M'
+        maxDeliveryCount: 10
+        ttlAsIso8601: 'PT1H'
+      }
+      maxDeliveryCount: 10
+    }
+    comments: ''
+    enableFileUploadNotifications: false
+    eventHubEndpoints: {
+      events: {
+        partitionCount: 4
+        retentionTimeInDays: 1
+      }
+    }
+    features: 'DeviceManagement'
+    ipFilterRules: []
+    messagingEndpoints: {
+      fileNotifications: {
+        lockDurationAsIso8601: 'PT1M'
+        maxDeliveryCount: 10
+        ttlAsIso8601: 'PT1H'
+      }
+    }
+    minTlsVersion: '1.2'  // Uncomment to enforce TLS Version 1.2. This is only available in select region (https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-tls-support)
+    networkRuleSets: {
+      applyToBuiltInEventHubEndpoint: true
+      defaultAction: 'Deny'
+      ipRules: []
+    }
+    publicNetworkAccess: 'Disabled'
+    routing: {
+      endpoints: {
+        eventHubs: []
+        serviceBusQueues: []
+        serviceBusTopics: []
+        storageContainers: []
+      }
+      enrichments: []
+      fallbackRoute: {
+        condition: 'true'
+        endpointNames: [
+          'events'
+        ]
+        isEnabled: false
+        name: '$fallback'
+        source: 'DeviceMessages'
+      }
+      routes: []
+    }
+    storageEndpoints: {}
+  }
+}
+
+resource iothubPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01' = {
+  name: iothubPrivateEndpointName
+  location: location
+  tags: tags
+  properties: {
+    manualPrivateLinkServiceConnections: []
+    privateLinkServiceConnections: [
+      {
+        name: iothubPrivateEndpointName
+        properties: {
+          groupIds: [
+            'iotHub'
+          ]
+          privateLinkServiceId: iothub.id
+          requestMessage: ''
+        }
+      }
+    ]
+    subnet: {
+      id: subnetId
+    }
+  }
+}
+
+resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = {
+  parent: iothubPrivateEndpoint
+  name: 'aRecord'
+  properties: {
+    privateDnsZoneConfigs: [
+      {
+        name: '${iothubPrivateEndpoint.name}-arecord-iothub'
+        properties: {
+          privateDnsZoneId: privateDnsZoneIdIothub
+        }
+      }
+      {
+        name: '${iothubPrivateEndpoint.name}-arecord-eventhub'
+        properties: {
+          privateDnsZoneId: privateDnsZoneIdEventhubNamespace
+        }
+      }
+    ]
+  }
+}
+
+// Outputs
