@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "northeurope"
+        },
+        "environment": {
+            "value": "prod"
+        },
+        "prefix": {
+            "value": "dom02"
+        },
+        "administratorPassword": {
+            "value": "<your-secure-password>"
+        },
+        "synapseDefaultStorageAccountFileSystemId": {
+            "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prod-storage/providers/Microsoft.Storage/storageAccounts/dlz01prodencur/blobServices/default/containers/dd002"
+        },
+        "streamanalyticsDefaultStorageAccountFileSystemId": {
+            "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prod-storage/providers/Microsoft.Storage/storageAccounts/dlz01prodencur/blobServices/default/containers/dd002"
+        },
+        "subnetId": {
+            "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prod-network/providers/Microsoft.Network/virtualNetworks/dlz01-prod-vnet/subnets/DataDomain002Subnet"
+        },
+        "purviewId": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-governance/providers/Microsoft.Purview/accounts/dmz-prod-purview001"
+        },
+        "enableRoleAssignments": {
+            "value": false
+        },
+        "privateDnsZoneIdKeyVault": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net"
+        },
+        "privateDnsZoneIdSynapseDev": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.dev.azuresynapse.net"
+        },
+        "privateDnsZoneIdSynapseSql": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.sql.azuresynapse.net"
+        },
+        "privateDnsZoneIdEventhubNamespace": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net"
+        },
+        "privateDnsZoneIdCosmosdbSql": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.documents.azure.com"
+        },
+        "privateDnsZoneIdSqlServer": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.database.windows.net"
+        },
+        "privateDnsZoneIdIothub": {
+            "value": "/subscriptions/17588eb2-2943-461a-ab3f-00a3ceac3112/resourceGroups/dmz-prod-global-dns/providers/Microsoft.Network/privateDnsZones/privatelink.azure-devices.net"
+        }
+    }
+}
