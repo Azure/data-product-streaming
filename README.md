@@ -286,7 +286,7 @@ To begin, please open the [infra/params.dev.json](/infra/params.dev.json). In th
 | Parameter                                | Description  | Sample value |
 |:-----------------------------------------|:-------------|:-------------|
 | location | Specifies the location for all resources. | `northeurope` |
-| environment | Specifies the environment of the deployment. | `dev`, `test` or `prod` |
+| environment | Specifies the environment of the deployment. | `dev`, `tst` or `prd` |
 | prefix | Specifies the prefix for all resources created in this deployment. | `prefi` |
 | administratorPassword | Specifies the administrator password of the sql servers. Will be automatically set in the workflow. **Leave this value as is.** | `<your-secure-password>` |
 | synapseDefaultStorageAccountFileSystemId | Specifies the resource ID of the default storage account file system for synapse. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
