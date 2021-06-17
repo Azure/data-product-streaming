@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.63.48766",
-      "templateHash": "43229263656892708"
+      "templateHash": "5155830120032007207"
     }
   },
   "parameters": {
@@ -1248,7 +1248,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
-      "name": "eventhubNamespaceDomain001",
+      "name": "eventhubNamespace001",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -1413,7 +1413,7 @@
             "value": "[variables('tags')]"
           },
           "eventhubNamespaceId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespaceDomain001'), '2019-10-01').outputs.eventhubNamespaceId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2019-10-01').outputs.eventhubNamespaceId.value]"
           },
           "sqlServerId": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2019-10-01').outputs.sqlserverId.value]"
@@ -1627,7 +1627,7 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'eventhubNamespaceDomain001')]",
+        "[resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001')]",
         "[resourceId('Microsoft.Resources/deployments', 'sql001')]"
       ]
     },
