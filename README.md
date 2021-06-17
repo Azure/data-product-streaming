@@ -1,4 +1,4 @@
-# Enterprise Scale Analytics and AI - Data Domain: Stream Processing
+# Enterprise Scale Analytics and AI - Data Integration: Stream Processing
 
 > **General disclaimer** Please be aware that this template is in private preview. Therefore, expect smaller bugs and issues when working with the solution. Please submit an Issue in GitHub if you come across any issues that you would like us to fix.
 
@@ -6,17 +6,17 @@
 
 ## Description
 
-[**Enterprise Scale Analytics and AI**](https://github.com/Azure/Enterprise-Scale-Analytics) solution pattern emphasizes self-service and follows the concept of creating landing zones for cross-functional teams. Operation and responsibility of these landing zones is handed over to the responsible teams inside the data node. The teams are free to deploy their own services within the guardrails set by Azure Policy. To scale across the landing zones more quickly and allow a shorter time to market, we use the concept of `Data Domain` and `Data Product` templates. Data Domain and Data Product templates are blueprints, which can be used to quickly spin up environments for these cross-functional teams. The teams can fork these repositories to quickly spin up environments based on their requirements. This Data Domain template deploys a set of services, which can be used for data stream processing. The template includes a set of different services for processing data streams, which allows the teams to choose their tools based on their requirements and preferences.
+[**Enterprise Scale Analytics and AI**](https://github.com/Azure/Enterprise-Scale-Analytics) solution pattern emphasizes self-service and follows the concept of creating landing zones for cross-functional teams. Operation and responsibility of these landing zones is handed over to the responsible teams inside the data node. The teams are free to deploy their own services within the guardrails set by Azure Policy. To scale across the landing zones more quickly and allow a shorter time to market, we use the concept of `Data Integration` and `Data Product` templates. Data Integration and Data Product templates are blueprints, which can be used to quickly spin up environments for these cross-functional teams. The teams can fork these repositories to quickly spin up environments based on their requirements. This Data Integration template deploys a set of services, which can be used for data stream processing. The template includes a set of different services for processing data streams, which allows the teams to choose their tools based on their requirements and preferences.
 
 ## What will be deployed?
 
-By default, all the services which come under Data Domain Streaming are enabled, and you must explicitly disable services that you don't want to be deployed.
+By default, all the services which come under Data Integration Streaming are enabled, and you must explicitly disable services that you don't want to be deployed.
 
 > **Note:** Before deploying the resources, we recommend to check registration status of the required resource providers in your subscription. For more information, see [Resource providers for Azure services](https://docs.microsoft.com/azure/azure-resource-manager/management/resource-providers-and-types).
 
-![Data Management Zone](./docs/images/DomainStreaming.png)
+![Data Management Zone](./docs/images/IntegrationStreaming.png)
 
-For each Data Domain Streaming template, the following services are created:
+For each Data Integration Streaming template, the following services are created:
 
 - [Key Vault](https://docs.microsoft.com/azure/key-vault/general)
 - [Event Hub](https://docs.microsoft.com/azure/event-hubs/)
@@ -30,8 +30,6 @@ For each Data Domain Streaming template, the following services are created:
 - [SQL Elastic Pool](https://docs.microsoft.com/azure/azure-sql/database/elastic-pool-overview)
 - [BigData Pool](https://docs.microsoft.com/sql/big-data-cluster/concept-data-pool?view=sql-server-ver15)
 
-For more details regarding the services that will be deployed, please read the [Domains](https://github.com/Azure/Enterprise-Scale-Analytics/blob/main/docs/03-datalandingzones/05-domains.md) guide in the Enterprise Scale Analytics documentation.
-
 You have two options for deploying this reference architecture:
 
 1. Use the `Deploy to Azure` button for an immediate deployment
@@ -39,7 +37,7 @@ You have two options for deploying this reference architecture:
 
 ## Prerequisites
 
-> **Note:** Please make sure you have successfully deployed a [Data Management Landing Zone](https://github.com/Azure/data-management-zone) and a [Data Landing Zone](https://github.com/Azure/data-landing-zone). The Data Domain relies on the Private DNS Zones that are deployed in the Data Management Template. If you have Private DNS Zones deployed elsewhere, you can also point to these. If you do not have the Private DNS Zones deployed for the respective services, this template deployment will fail. Also, this template requires subnets as specified in the prerequisites. The Data Landing Zone already creates a few subnets, which can be used for this Data Domain.
+> **Note:** Please make sure you have successfully deployed a [Data Management Landing Zone](https://github.com/Azure/data-management-zone) and a [Data Landing Zone](https://github.com/Azure/data-landing-zone). The Data Integration relies on the Private DNS Zones that are deployed in the Data Management Template. If you have Private DNS Zones deployed elsewhere, you can also point to these. If you do not have the Private DNS Zones deployed for the respective services, this template deployment will fail. Also, this template requires subnets as specified in the prerequisites. The Data Landing Zone already creates a few subnets, which can be used for this Data Integration.
 
 The following prerequisites are required to make this repository work:
 
@@ -68,9 +66,9 @@ If you don't have an Azure subscription, [create your Azure free account today](
 
 ## Option 1: Deploy to Azure - Quickstart
 
-|Data Domain Streaming |
+|Data Integration Streaming |
 |:---------------------|
-<!-- [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-domain-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataDomain.json) -->
+<!-- [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-integration-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataIntegration.json) -->
 ![Deploy to Azure](docs/images/deploytoazuregrey.png)
 
 ## Option 2: GitHub Actions or Azure DevOps Pipelines
@@ -93,9 +91,9 @@ If you don't have an Azure subscription, [create your Azure free account today](
 
 ### 2. Setting up the required Service Principal and access
 
-A service principal with *Contributor* role needs to be generated for authentication and authorization from GitHub or Azure DevOps to your Azure **Data Landing Zone** subscription, where the data-domain-streaming services will be deployed. Just go to the Azure Portal to find the ID of your subscription. Then start the Cloud Shell or Azure CLI, login to Azure, set the Azure context and execute the following commands to generate the required credentials:
+A service principal with *Contributor* role needs to be generated for authentication and authorization from GitHub or Azure DevOps to your Azure **Data Landing Zone** subscription, where the data-integration-streaming services will be deployed. Just go to the Azure Portal to find the ID of your subscription. Then start the Cloud Shell or Azure CLI, login to Azure, set the Azure context and execute the following commands to generate the required credentials:
 
-> **Note:** The purpose of this new **Service Principal** is to assign least-privilege rights. Therefore, it requires the **Contributor** role at a resource group scope in order to deploy the resources inside the resource group dedicated to a specific data domain. The **Network Contributor** role assignment is required as well in this repository in order to add the private endpoint of resources to the dedicated subnet.
+> **Note:** The purpose of this new **Service Principal** is to assign least-privilege rights. Therefore, it requires the **Contributor** role at a resource group scope in order to deploy the resources inside the resource group dedicated to a specific data integration. The **Network Contributor** role assignment is required as well in this repository in order to add the private endpoint of resources to the dedicated subnet.
 
 #### Azure CLI
 
@@ -237,17 +235,17 @@ More information can be found [here](https://docs.microsoft.com/azure/devops/pip
 
 In order to deploy the Infrastructure as Code (IaC) templates to the desired Azure subscription, you will need to modify some parameters in the forked repository. Therefore, **this step should not be skipped for neither Azure DevOps/GitHub options**. There are two files that require updates:
 
-- `.github/workflows/dataDomainDeployment.yml` for GitHub Actions,
-- `.ado/workflows/dataDomainDeployment.yml` for Azure DevOps and
+- `.github/workflows/dataIntegrationDeployment.yml` for GitHub Actions,
+- `.ado/workflows/dataIntegrationDeployment.yml` for Azure DevOps and
 - `infra/params.dev.json`.
 
 Update these files in a seperate branch and then merge via Pull Request to trigger the initial deployment.
 
-#### Configure `dataDomainDeployment.yml`
+#### Configure `dataIntegrationDeployment.yml`
 
 ##### For GitHub Actions
 
-To begin, please open the [.github/workflows/dataDomainDeployment.yml](/.github/workflows/dataDomainDeployment.yml). In this file you need to update the environment variables section. Just click on [.github/workflows/dataDomainDeployment.yml](/.github/workflows/dataDomainDeployment.yml) and edit the following section:
+To begin, please open the [.github/workflows/dataIntegrationDeployment.yml](/.github/workflows/dataIntegrationDeployment.yml). In this file you need to update the environment variables section. Just click on [.github/workflows/dataIntegrationDeployment.yml](/.github/workflows/dataIntegrationDeployment.yml) and edit the following section:
 
 ```yaml
 env:
@@ -260,11 +258,11 @@ Further details about these parameters are provided in a table below.
 
 ##### For Azure DevOps
 
-To begin, please open the [.ado/workflows/dataDomainDeployment.yml](/.ado/workflows/dataDomainDeployment.yml). In this file you need to update the variables section. Just click on [.ado/workflows/dataDomainDeployment.yml](/.ado/workflows/dataDomainDeployment.yml) and edit the following section:
+To begin, please open the [.ado/workflows/dataIntegrationDeployment.yml](/.ado/workflows/dataIntegrationDeployment.yml). In this file you need to update the variables section. Just click on [.ado/workflows/dataIntegrationDeployment.yml](/.ado/workflows/dataIntegrationDeployment.yml) and edit the following section:
 
 ```yaml
 variables:
-  AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "domain-product-service-connection" # Update to '{resourceManagerConnectionName}'
+  AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "integration-product-service-connection" # Update to '{resourceManagerConnectionName}'
   AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b"               # Update to '{dataLandingZoneSubscriptionId}'
   AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-dd002"                                # Update to '{dataLandingZoneName}-rg'
   AZURE_LOCATION: "North Europe"                                              # Update to '{regionName}'
@@ -336,7 +334,7 @@ As a last step, you need to create an Azure DevOps pipeline in your project base
 
 1. Select your repository.
 1. Click on **Existing Azure Pipelines in YAML file**
-1. Select `main` as branch and `/.ado/workflows/dataDomainDeployment.yml` as path.
+1. Select `main` as branch and `/.ado/workflows/dataIntegrationDeployment.yml` as path.
 
       ![Configure Pipeline in DevOps](docs/images/ConfigurePipelineDevOps.png)
 
@@ -350,9 +348,9 @@ After following the instructions and updating the parameters and variables in yo
 
 **Congratulations!** You have successfully executed all steps to deploy the template into your environment through GitHub Actions or Azure DevOps.
 
-If you are using GitHub Actions, you can navigate to the **Actions** tab of the main page of the repository where you will see a workflow with the name `Data Domain Deployment` running. Click on it to see how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-domain-streaming/issues).
+If you are using GitHub Actions, you can navigate to the **Actions** tab of the main page of the repository where you will see a workflow with the name `Data Integration Deployment` running. Click on it to see how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
 
-If you are using Azure DevOps Pipelines, you can navigate to the pipeline that you have created as part of step 6 and monitor it as each service is deployed. If you run into any issues, please open an issue [here](https://github.com/Azure/data-domain-streaming/issues).
+If you are using Azure DevOps Pipelines, you can navigate to the pipeline that you have created as part of step 6 and monitor it as each service is deployed. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
 
 ### Documentation
 
@@ -360,8 +358,8 @@ If you are using Azure DevOps Pipelines, you can navigate to the pipeline that y
 
 | File/folder                   | Description                                |
 | ----------------------------- | ------------------------------------------ |
-| `.ado/workflows`              | Folder for ADO workflows. The `dataDomainDeployment.yml` workflow shows the steps for an end-to-end deployment of the architecture. |
-| `.github/workflows`           | Folder for GitHub workflows. The `dataDomainDeployment.yml` workflow shows the steps for an end-to-end deployment of the architecture. |
+| `.ado/workflows`              | Folder for ADO workflows. The `dataIntegrationDeployment.yml` workflow shows the steps for an end-to-end deployment of the architecture. |
+| `.github/workflows`           | Folder for GitHub workflows. The `dataIntegrationDeployment.yml` workflow shows the steps for an end-to-end deployment of the architecture. |
 | `code`                        | Sample password generation script that will be run in the deployment workflow for resources that require a password during the deployment. |
 | `docs`                        | Resources for this README.                 |
 | `infra`                       | Folder containing all the ARM templates for each of the resources that will be deployed (`deploy.{resource}.json`) together with their parameter files (`params.{resource}.json`). |
@@ -375,8 +373,8 @@ If you are using Azure DevOps Pipelines, you can navigate to the pipeline that y
 - [Documentation](https://github.com/Azure/Enterprise-Scale-Analytics)
 - [Implementation - Data Management](https://github.com/Azure/data-management-zone)
 - [Implementation - Data Landing Zone](https://github.com/Azure/data-landing-zone)
-- [Implementation - Data Domain - Batch](https://github.com/Azure/data-domain-batch)
-- [Implementation - Data Domain - Streaming](https://github.com/Azure/data-domain-streaming)
+- [Implementation - Data Integration - Batch](https://github.com/Azure/data-integration-batch)
+- [Implementation - Data Integration - Streaming](https://github.com/Azure/data-integration-streaming)
 - [Implementation - Data Product - Reporting](https://github.com/Azure/data-product-reporting)
 - [Implementation - Data Product - Analytics & Data Science](https://github.com/Azure/data-product-analytics)
 
