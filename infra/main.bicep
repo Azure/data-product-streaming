@@ -147,7 +147,7 @@ module iothub001 'modules/services/iothub.bicep' = {
 }
 
 module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
-  name: 'eventhubNamespaceDomain001'
+  name: 'eventhubNamespace001'
   scope: resourceGroup()
   params: {
     location: location
