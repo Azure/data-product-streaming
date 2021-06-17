@@ -263,9 +263,9 @@ To begin, please open the [.ado/workflows/dataIntegrationDeployment.yml](/.ado/w
 ```yaml
 variables:
   AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "integration-product-service-connection" # Update to '{resourceManagerConnectionName}'
-  AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b"               # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-dd002"                                # Update to '{dataLandingZoneName}-rg'
-  AZURE_LOCATION: "North Europe"                                              # Update to '{regionName}'
+  AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b"                    # Update to '{dataLandingZoneSubscriptionId}'
+  AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-dd002"                                     # Update to '{dataLandingZoneName}-rg'
+  AZURE_LOCATION: "North Europe"                                                   # Update to '{regionName}'
 ```
 
 The following table explains each of the parameters:
