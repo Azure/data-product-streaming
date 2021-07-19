@@ -37,10 +37,12 @@ You have two options for deploying this reference architecture:
 
 * [Prerequisites](./docs/ESA-IntegrationStreaming-Prerequisites.md)
 * Option 1: Deploy to Azure - Quickstart
+
 |Data Integration Streaming |
 |:---------------------|
 <!-- [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fdata-integration-streaming%2Fmain%2Fdocs%2Freference%2Fdeploy.dataIntegration.json) -->
 ![Deploy to Azure](docs/images/deploytoazuregrey.png)
+
 * Option 2: Deploy reference implementation :
   * [Prepare the deployment](./docs/ESA-IntegrationStreaming-PrepareDeployment.md)
   * [Using Azure DevOps](./docs/ESA-IntegrationStreaming-DeployUsingAzureDevops.md)
