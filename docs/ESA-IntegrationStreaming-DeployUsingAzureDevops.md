@@ -126,6 +126,6 @@ After following the instructions and updating the parameters and variables in yo
 
 You can navigate to the pipeline that you have created as part of step 6 and monitor it as each service is deployed. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
 
-<div style="text-align: right">  Next: <a href="./ESA-IntegrationStreaming-CodeStructure.md">Code structure</a> > </div>
+<p align="right"> Next: <a href="./ESA-IntegrationStreaming-CodeStructure.md">Code structure</a> > </p>
 
 < Previous: [Prepare the deployment](./ESA-IntegrationStreaming-PrepareDeployment.md)
