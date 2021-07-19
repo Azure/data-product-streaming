@@ -16,5 +16,5 @@
   Next: <a href="./ESA-IntegrationStreaming-KnownIssues.md">Known Issues</a>
 </p>
 
-< Previous: [Deploy Reference implementation using Azure Devops](./ESA-IntegrationStreaming-DeployUsingAzureDevops.md)\
-[Deploy Reference implementation using Github Actions](./ESA-IntegrationStreaming-DeployUsingGithubActions.md)
+< Previous: [Deploy Reference implementation using Azure DevOps](./ESA-IntegrationStreaming-DeployUsingAzureDevops.md)\
+[Deploy Reference implementation using GitHub Actions](./ESA-IntegrationStreaming-DeployUsingGithubActions.md)
