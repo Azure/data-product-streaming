@@ -36,7 +36,7 @@ You have two options for deploying this reference architecture:
 ## Navigation Menu
 
 * [Prerequisites](./docs/ESA-IntegrationStreaming-Prerequisites.md)
-* Option 1: Deploy to Azure - Quickstart
+* Option 1: Deploy to Azure - Quickstart (Coming soon ..)
 
 |Data Integration Streaming |
 |:---------------------|

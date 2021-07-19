@@ -124,7 +124,7 @@ After following the instructions and updating the parameters and variables in yo
 
 **Congratulations!** You have successfully executed all steps to deploy the template into your environment through Azure DevOps.
 
-You can navigate to the pipeline that you have created as part of step 6 and monitor it as each service is deployed. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
+You can navigate to the pipeline that you have created as part of step 3 and monitor it as each service is deployed. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
 
 <p align="right"> Next: <a href="./ESA-IntegrationStreaming-CodeStructure.md">Code structure</a> > </p>
 
