@@ -12,11 +12,9 @@
 | `README.md`                   | This README file.                          |
 | `SECURITY.md`                 | Microsoft Security README.                 |
 
-<div style="text-align: right">  Next: <a href="./ESA-IntegrationStreaming-KnownIssues.md">Known Issues</a> > </div>
-
-< Previous: [Deploy Reference implementation using Azure Devops](./ESA-IntegrationStreaming-DeployUsingAzureDevops.md)\
-[Deploy Reference implementation using Github Actions](./ESA-IntegrationStreaming-DeployUsingGithubActions.md)
-
 <p align="right">
   Next: <a href="./ESA-IntegrationStreaming-KnownIssues.md">Known Issues</a>
 </p>
+
+< Previous: [Deploy Reference implementation using Azure Devops](./ESA-IntegrationStreaming-DeployUsingAzureDevops.md)\
+[Deploy Reference implementation using Github Actions](./ESA-IntegrationStreaming-DeployUsingGithubActions.md)

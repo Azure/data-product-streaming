@@ -27,6 +27,6 @@ The following prerequisites are required to make this repository work:
 
 If you don't have an Azure subscription, [create your Azure free account today](https://azure.microsoft.com/free/).
 
-<div style="text-align: right">  Next: <a href="./ESA-IntegrationStreaming-PrepareDeployment.md">Prepare the deployment</a> > </div>
+<p align="right">  Next: <a href="./ESA-IntegrationStreaming-PrepareDeployment.md">Prepare the deployment</a> > </p>
 
 < Previous: [Data Integration Streaming template](../README.md)

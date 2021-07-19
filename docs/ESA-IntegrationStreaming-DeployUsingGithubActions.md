@@ -78,6 +78,6 @@ After following the instructions and updating the parameters and variables in yo
 
 You can navigate to the **Actions** tab of the main page of the repository where you will see a workflow with the name `Data Integration Deployment` running. Click on it to see how it deploys one service after another. If you run into any issues, please open an issue [here](https://github.com/Azure/data-integration-streaming/issues).
 
-<div style="text-align: right">  Next: <a href="./ESA-IntegrationStreaming-CodeStructure.md">Code structure</a> > </div>
+<p align="right">  Next: <a href="./ESA-IntegrationStreaming-CodeStructure.md">Code structure</a> > </p>
 
 < Previous: [Prepare the deployment](./ESA-IntegrationStreaming-PrepareDeployment.md)

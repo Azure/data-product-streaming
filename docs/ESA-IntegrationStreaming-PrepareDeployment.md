@@ -119,8 +119,8 @@ Deployment options:
 1. [GitHub Actions](#github-actions)
 1. [Azure DevOps](#azure-devops)
 
-<div style="text-align: right">  Next: <a href="./ESA-IntegrationStreaming-DeployUsingGithubActions.md">Deploy Reference implementation using GitHub Actions</a> > </div>
+<p align="right"> Next: <a href="./ESA-IntegrationStreaming-DeployUsingGithubActions.md">Deploy Reference implementation using GitHub Actions</a> > </p>
 
-<div style="text-align: right"> <a href="./ESA-IntegrationStreaming-DeployUsingAzureDevops.md">Deploy Reference implementation using Azure Devops</a> > </div>
+<p align="right"> <a href="./ESA-IntegrationStreaming-DeployUsingAzureDevops.md">Deploy Reference implementation using Azure Devops</a> > </p>
 
 < Previous: [Prerequisites](./ESA-IntegrationStreaming-Prerequisites.md)
