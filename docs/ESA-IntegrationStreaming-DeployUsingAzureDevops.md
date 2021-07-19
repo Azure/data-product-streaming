@@ -30,7 +30,7 @@ In order to deploy the Infrastructure as Code (IaC) templates to the desired Azu
 - `.ado/workflows/dataIntegrationDeployment.yml` and
 - `infra/params.dev.json`.
 
-Update these files in a seperate branch and then merge via Pull Request to trigger the initial deployment.
+Update these files in a separate branch and then merge via Pull Request to trigger the initial deployment.
 
 ### 2.1. Configure `dataIntegrationDeployment.yml`
 
