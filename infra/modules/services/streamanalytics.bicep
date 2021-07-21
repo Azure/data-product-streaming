@@ -1,4 +1,7 @@
-// This template is used to create a Cosmos Database.
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+// This template is used to create a Stream Analytics Job.
 targetScope = 'resourceGroup'
 
 // Parameters
@@ -27,9 +30,9 @@ param sqlServerId string
 param eventhubNamespaceId string
 
 // Variables
-var storageAccountName = last(split(storageAccountId, '/'))
-var sqlServerName = last(split(sqlServerId, '/'))
-var eventhubNamespaceName = last(split(eventhubNamespaceId, '/'))
+var storageAccountName = length(split(storageAccountId, '/')) >= 9 ? last(split(storageAccountId, '/')) : 'incorrectSegmentLength'
+var sqlServerName = length(split(sqlServerId, '/')) >= 9 ? last(split(sqlServerId, '/')) : 'incorrectSegmentLength'
+var eventhubNamespaceName = length(split(eventhubNamespaceId, '/')) >= 9 ? last(split(eventhubNamespaceId, '/')) : 'incorrectSegmentLength'
 var streamanalyticsclusterManagedPrivateEndpointNameStorageAccount = '${storageAccountName}-private-endpoint'
 var streamanalyticsclusterManagedPrivateEndpointNameSqlServer = '${sqlServerName}-private-endpoint'
 var streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace = '${eventhubNamespaceName}-private-endpoint'

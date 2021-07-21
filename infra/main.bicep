@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
 targetScope = 'resourceGroup'
 
 // General parameters
@@ -14,6 +17,8 @@ param environment string
 @maxLength(10)
 @description('Specifies the prefix for all resources created in this deployment.')
 param prefix string
+@description('Specifies the tags that you want to apply to all resources.')
+param tags object = {}
 
 // Resource parameters
 @secure()
@@ -24,9 +29,9 @@ param synapseDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the default storage account for strea analytics.')
 param streamanalyticsDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the central purview instance.')
-param purviewId string
+param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
-param enableRoleAssignments bool
+param enableRoleAssignments bool = false
 
 // Network parameters
 @description('Specifies the resource ID of the subnet to which all services will connect.')
@@ -34,29 +39,30 @@ param subnetId string
 
 // Private DNS Zone parameters
 @description('Specifies the resource ID of the private DNS zone for KeyVault.')
-param privateDnsZoneIdKeyVault string
+param privateDnsZoneIdKeyVault string = ''
 @description('Specifies the resource ID of the private DNS zone for Synapse Dev.')
-param privateDnsZoneIdSynapseDev string
+param privateDnsZoneIdSynapseDev string = ''
 @description('Specifies the resource ID of the private DNS zone for Synapse Sql.')
-param privateDnsZoneIdSynapseSql string
+param privateDnsZoneIdSynapseSql string = ''
 @description('Specifies the resource ID of the private DNS zone for EventHub Namespaces.')
-param privateDnsZoneIdEventhubNamespace string
+param privateDnsZoneIdEventhubNamespace string = ''
 @description('Specifies the resource ID of the private DNS zone for Cosmos Sql.')
-param privateDnsZoneIdCosmosdbSql string
+param privateDnsZoneIdCosmosdbSql string = ''
 @description('Specifies the resource ID of the private DNS zone for Sql Server.')
-param privateDnsZoneIdSqlServer string
+param privateDnsZoneIdSqlServer string = ''
 @description('Specifies the resource ID of the private DNS zone for IoT Hub.')
-param privateDnsZoneIdIothub string
+param privateDnsZoneIdIothub string = ''
 
 // Variables
 var name = toLower('${prefix}-${environment}')
-var tags = {
+var tagsDefault = {
   Owner: 'Enterprise Scale Analytics'
   Project: 'Enterprise Scale Analytics'
   Environment: environment
   Toolkit: 'bicep'
   Name: name
 }
+var tagsJoined = union(tagsDefault, tags)
 var synapseDefaultStorageAccountSubscriptionId = split(synapseDefaultStorageAccountFileSystemId, '/')[2]
 var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageAccountFileSystemId, '/')[4]
 var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
@@ -70,7 +76,7 @@ module keyvault001 'modules/services/keyvault.bicep' = {
   params: {
     location: location
     keyvaultName: '${name}-vault001'
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     privateDnsZoneIdKeyVault: privateDnsZoneIdKeyVault
   }
@@ -82,7 +88,7 @@ module synapse001 'modules/services/synapse.bicep' = {
   params: {
     location: location
     synapseName: '${name}-synapse001'
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     administratorPassword: administratorPassword
     synapseSqlAdminGroupName: ''
@@ -110,7 +116,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = {
   params: {
     location: location
     cosmosdbName: '${name}-cosmos001'
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     privateDnsZoneIdCosmosdbSql: privateDnsZoneIdCosmosdbSql
   }
@@ -122,7 +128,7 @@ module sql001 'modules/services/sql.bicep' = {
   params: {
     location: location
     sqlserverName: '${name}-sqlserver001'
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     administratorPassword: administratorPassword
     privateDnsZoneIdSqlServer: privateDnsZoneIdSqlServer
@@ -137,7 +143,7 @@ module iothub001 'modules/services/iothub.bicep' = {
   params: {
     location: location
     iothubName: '${name}-iothub001'
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     iothubSkuName: 'S1'
     iothubSkuCapacity: 1
@@ -151,7 +157,7 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    tags: tags
+    tags: tagsJoined
     subnetId: subnetId
     eventhubnamespaceName: '${name}-eventhub001'
     privateDnsZoneIdEventhubNamespace: privateDnsZoneIdEventhubNamespace
@@ -165,7 +171,7 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    tags: tags
+    tags: tagsJoined
     eventhubNamespaceId: eventhubNamespace001.outputs.eventhubNamespaceId
     sqlServerId: sql001.outputs.sqlserverId
     storageAccountId: resourceId(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName, 'Microsoft.Storage/storageAccounts', streamanalyticsDefaultStorageAccountName)

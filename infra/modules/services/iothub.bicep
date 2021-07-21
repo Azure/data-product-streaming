@@ -1,4 +1,7 @@
-// This template is used to create a Databricks workspace.
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+// This template is used to create an IoT Hub.
 targetScope = 'resourceGroup'
 
 // Parameters
@@ -109,7 +112,7 @@ resource iothubPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01' =
   }
 }
 
-resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = {
+resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdIothub) && !empty(privateDnsZoneIdEventhubNamespace)) {
   parent: iothubPrivateEndpoint
   name: 'aRecord'
   properties: {

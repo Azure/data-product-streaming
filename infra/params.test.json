@@ -11,6 +11,9 @@
         "prefix": {
             "value": "int02"
         },
+        "tags": {
+            "value": {}
+        },
         "administratorPassword": {
             "value": "<your-secure-password>"
         },
