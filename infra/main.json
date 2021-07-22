@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.4.63.48766",
-      "templateHash": "12893305733625037834"
+      "version": "0.4.451.19169",
+      "templateHash": "9263634847318123758"
     }
   },
   "parameters": {
@@ -34,6 +34,13 @@
       "maxLength": 10,
       "minLength": 2
     },
+    "tags": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Specifies the tags that you want to apply to all resources."
+      }
+    },
     "administratorPassword": {
       "type": "secureString",
       "metadata": {
@@ -54,12 +61,14 @@
     },
     "purviewId": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the central purview instance."
       }
     },
     "enableRoleAssignments": {
       "type": "bool",
+      "defaultValue": false,
       "metadata": {
         "description": "Specifies whether role assignments should be enabled."
       }
@@ -72,42 +81,49 @@
     },
     "privateDnsZoneIdKeyVault": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for KeyVault."
       }
     },
     "privateDnsZoneIdSynapseDev": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for Synapse Dev."
       }
     },
     "privateDnsZoneIdSynapseSql": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for Synapse Sql."
       }
     },
     "privateDnsZoneIdEventhubNamespace": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for EventHub Namespaces."
       }
     },
     "privateDnsZoneIdCosmosdbSql": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for Cosmos Sql."
       }
     },
     "privateDnsZoneIdSqlServer": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for Sql Server."
       }
     },
     "privateDnsZoneIdIothub": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the private DNS zone for IoT Hub."
       }
@@ -116,13 +132,14 @@
   "functions": [],
   "variables": {
     "name": "[toLower(format('{0}-{1}', parameters('prefix'), parameters('environment')))]",
-    "tags": {
+    "tagsDefault": {
       "Owner": "Enterprise Scale Analytics",
       "Project": "Enterprise Scale Analytics",
       "Environment": "[parameters('environment')]",
       "Toolkit": "bicep",
       "Name": "[variables('name')]"
     },
+    "tagsJoined": "[union(variables('tagsDefault'), parameters('tags'))]",
     "synapseDefaultStorageAccountSubscriptionId": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2]]",
     "synapseDefaultStorageAccountResourceGroupName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4]]",
     "streamanalyticsDefaultStorageAccountSubscriptionId": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2]]",
@@ -147,7 +164,7 @@
             "value": "[format('{0}-vault001', variables('name'))]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -162,8 +179,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "7462647776196913756"
+              "version": "0.4.451.19169",
+              "templateHash": "17396931380066691428"
             }
           },
           "parameters": {
@@ -246,6 +263,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdKeyVault')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('keyVaultPrivateEndpointName'), 'aRecord')]",
@@ -290,7 +308,7 @@
             "value": "[format('{0}-synapse001', variables('name'))]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -326,8 +344,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "1918938348641909336"
+              "version": "0.4.451.19169",
+              "templateHash": "6797724573404244465"
             }
           },
           "parameters": {
@@ -370,8 +388,8 @@
           },
           "functions": [],
           "variables": {
-            "synapseDefaultStorageAccountFileSystemName": "[last(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/'))]",
-            "synapseDefaultStorageAccountName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[8]]",
+            "synapseDefaultStorageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), last(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
+            "synapseDefaultStorageAccountName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
             "synapsePrivateEndpointNameSql": "[format('{0}-sql-private-endpoint', parameters('synapseName'))]",
             "synapsePrivateEndpointNameSqlOnDemand": "[format('{0}-sqlondemand-private-endpoint', parameters('synapseName'))]",
             "synapsePrivateEndpointNameDev": "[format('{0}-dev-private-endpoint', parameters('synapseName'))]"
@@ -515,6 +533,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdSynapseSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSql'), 'aRecord')]",
@@ -561,6 +580,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdSynapseSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSqlOnDemand'), 'aRecord')]",
@@ -607,6 +627,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdSynapseDev')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameDev'), 'aRecord')]",
@@ -660,8 +681,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "7992555801639066750"
+              "version": "0.4.451.19169",
+              "templateHash": "5856561103668696973"
             }
           },
           "parameters": {
@@ -674,11 +695,11 @@
           },
           "functions": [],
           "variables": {
-            "storageAccountFileSystemName": "[last(split(parameters('storageAccountFileSystemId'), '/'))]",
-            "storageAccountName": "[split(parameters('storageAccountFileSystemId'), '/')[8]]",
-            "synapseSubscriptionId": "[split(parameters('synapseId'), '/')[2]]",
-            "synapseResourceGroupName": "[split(parameters('synapseId'), '/')[4]]",
-            "synapseName": "[last(split(parameters('synapseId'), '/'))]"
+            "storageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), last(split(parameters('storageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
+            "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), split(parameters('storageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
+            "synapseSubscriptionId": "[if(greaterOrEquals(length(split(parameters('synapseId'), '/')), 9), split(parameters('synapseId'), '/')[2], subscription().subscriptionId)]",
+            "synapseResourceGroupName": "[if(greaterOrEquals(length(split(parameters('synapseId'), '/')), 9), split(parameters('synapseId'), '/')[4], resourceGroup().name)]",
+            "synapseName": "[if(greaterOrEquals(length(split(parameters('synapseId'), '/')), 9), last(split(parameters('synapseId'), '/')), 'incorrectSegmentLength')]"
           },
           "resources": [
             {
@@ -715,7 +736,7 @@
             "value": "[format('{0}-cosmos001', variables('name'))]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -730,8 +751,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "10773184569991276327"
+              "version": "0.4.451.19169",
+              "templateHash": "10723084503331442716"
             }
           },
           "parameters": {
@@ -828,6 +849,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdCosmosdbSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('cosmosdbPrivateEndpointName'), 'aRecord')]",
@@ -866,7 +888,7 @@
             "value": "[format('{0}-sqlserver001', variables('name'))]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -890,8 +912,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "16473997829066952094"
+              "version": "0.4.451.19169",
+              "templateHash": "9454033103282016427"
             }
           },
           "parameters": {
@@ -948,7 +970,7 @@
               "condition": "[and(not(equals(parameters('sqlserverAdminGroupName'), '')), not(equals(parameters('sqlserverAdminGroupObjectID'), '')))]",
               "type": "Microsoft.Sql/servers/administrators",
               "apiVersion": "2020-11-01-preview",
-              "name": "[format('{0}/{1}', parameters('sqlserverName'), 'activeDirectory')]",
+              "name": "[format('{0}/{1}', parameters('sqlserverName'), 'ActiveDirectory')]",
               "properties": {
                 "administratorType": "ActiveDirectory",
                 "login": "[parameters('sqlserverAdminGroupName')]",
@@ -1016,6 +1038,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdSqlServer')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('sqlserverPrivateEndpointName'), 'aRecord')]",
@@ -1060,7 +1083,7 @@
             "value": "[format('{0}-iothub001', variables('name'))]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -1084,8 +1107,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "10438268165754138197"
+              "version": "0.4.451.19169",
+              "templateHash": "661057681506718586"
             }
           },
           "parameters": {
@@ -1218,6 +1241,7 @@
               ]
             },
             {
+              "condition": "[and(not(empty(parameters('privateDnsZoneIdIothub'))), not(empty(parameters('privateDnsZoneIdEventhubNamespace'))))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('iothubPrivateEndpointName'), 'aRecord')]",
@@ -1259,7 +1283,7 @@
             "value": "[parameters('location')]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "subnetId": {
             "value": "[parameters('subnetId')]"
@@ -1283,8 +1307,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "12551778978681160296"
+              "version": "0.4.451.19169",
+              "templateHash": "15619311822110692599"
             }
           },
           "parameters": {
@@ -1369,6 +1393,7 @@
               ]
             },
             {
+              "condition": "[not(empty(parameters('privateDnsZoneIdEventhubNamespace')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
               "name": "[format('{0}/{1}', variables('eventhubNamespacePrivateEndpointName'), 'aRecord')]",
@@ -1410,7 +1435,7 @@
             "value": "[parameters('location')]"
           },
           "tags": {
-            "value": "[variables('tags')]"
+            "value": "[variables('tagsJoined')]"
           },
           "eventhubNamespaceId": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2019-10-01').outputs.eventhubNamespaceId.value]"
@@ -1440,8 +1465,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "6863567203021707397"
+              "version": "0.4.451.19169",
+              "templateHash": "16978930308717680943"
             }
           },
           "parameters": {
@@ -1489,9 +1514,9 @@
           },
           "functions": [],
           "variables": {
-            "storageAccountName": "[last(split(parameters('storageAccountId'), '/'))]",
-            "sqlServerName": "[last(split(parameters('sqlServerId'), '/'))]",
-            "eventhubNamespaceName": "[last(split(parameters('eventhubNamespaceId'), '/'))]",
+            "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountId'), '/')), 9), last(split(parameters('storageAccountId'), '/')), 'incorrectSegmentLength')]",
+            "sqlServerName": "[if(greaterOrEquals(length(split(parameters('sqlServerId'), '/')), 9), last(split(parameters('sqlServerId'), '/')), 'incorrectSegmentLength')]",
+            "eventhubNamespaceName": "[if(greaterOrEquals(length(split(parameters('eventhubNamespaceId'), '/')), 9), last(split(parameters('eventhubNamespaceId'), '/')), 'incorrectSegmentLength')]",
             "streamanalyticsclusterManagedPrivateEndpointNameStorageAccount": "[format('{0}-private-endpoint', variables('storageAccountName'))]",
             "streamanalyticsclusterManagedPrivateEndpointNameSqlServer": "[format('{0}-private-endpoint', variables('sqlServerName'))]",
             "streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace": "[format('{0}-private-endpoint', variables('eventhubNamespaceName'))]",
@@ -1657,8 +1682,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.63.48766",
-              "templateHash": "3749127490045858601"
+              "version": "0.4.451.19169",
+              "templateHash": "10620586833079918916"
             }
           },
           "parameters": {
@@ -1671,11 +1696,11 @@
           },
           "functions": [],
           "variables": {
-            "storageAccountFileSystemName": "[last(split(parameters('storageAccountFileSystemId'), '/'))]",
-            "storageAccountName": "[split(parameters('storageAccountFileSystemId'), '/')[8]]",
-            "streamanalyticsjobSubscriptionId": "[split(parameters('streamanalyticsjobId'), '/')[2]]",
-            "streamanalyticsjobResourceGroupName": "[split(parameters('streamanalyticsjobId'), '/')[4]]",
-            "streamanalyticsjobName": "[last(split(parameters('streamanalyticsjobId'), '/'))]"
+            "storageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), last(split(parameters('storageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
+            "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), split(parameters('storageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
+            "streamanalyticsjobSubscriptionId": "[if(greaterOrEquals(length(split(parameters('streamanalyticsjobId'), '/')), 9), split(parameters('streamanalyticsjobId'), '/')[2], subscription().subscriptionId)]",
+            "streamanalyticsjobResourceGroupName": "[if(greaterOrEquals(length(split(parameters('streamanalyticsjobId'), '/')), 9), split(parameters('streamanalyticsjobId'), '/')[4], resourceGroup().name)]",
+            "streamanalyticsjobName": "[if(greaterOrEquals(length(split(parameters('streamanalyticsjobId'), '/')), 9), last(split(parameters('streamanalyticsjobId'), '/')), 'incorrectSegmentLength')]"
           },
           "resources": [
             {

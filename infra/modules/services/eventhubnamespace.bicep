@@ -1,4 +1,7 @@
-// This template is used to create a Databricks workspace.
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+// This template is used to create an EventHub Namespace.
 targetScope = 'resourceGroup'
 
 // Parameters
@@ -87,7 +90,7 @@ resource eventhubNamespacePrivateEndpoint 'Microsoft.Network/privateEndpoints@20
   }
 }
 
-resource eventhubNamespacePrivateEndpointARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = {
+resource eventhubNamespacePrivateEndpointARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdEventhubNamespace)) {
   parent: eventhubNamespacePrivateEndpoint
   name: 'aRecord'
   properties: {

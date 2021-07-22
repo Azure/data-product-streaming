@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
 // The module contains a template to create a role assignment of the Synase MSI to a file system.
 targetScope = 'resourceGroup'
 
@@ -6,11 +9,11 @@ param storageAccountFileSystemId string
 param streamanalyticsjobId string
 
 // Variables
-var storageAccountFileSystemName = last(split(storageAccountFileSystemId, '/'))
-var storageAccountName = split(storageAccountFileSystemId, '/')[8]
-var streamanalyticsjobSubscriptionId = split(streamanalyticsjobId, '/')[2]
-var streamanalyticsjobResourceGroupName = split(streamanalyticsjobId, '/')[4]
-var streamanalyticsjobName = last(split(streamanalyticsjobId, '/'))
+var storageAccountFileSystemName = length(split(storageAccountFileSystemId, '/')) >= 13 ? last(split(storageAccountFileSystemId, '/')) : 'incorrectSegmentLength'
+var storageAccountName = length(split(storageAccountFileSystemId, '/')) >= 13 ? split(storageAccountFileSystemId, '/')[8] : 'incorrectSegmentLength'
+var streamanalyticsjobSubscriptionId = length(split(streamanalyticsjobId, '/')) >= 9 ? split(streamanalyticsjobId, '/')[2] : subscription().subscriptionId
+var streamanalyticsjobResourceGroupName = length(split(streamanalyticsjobId, '/')) >= 9 ? split(streamanalyticsjobId, '/')[4] : resourceGroup().name
+var streamanalyticsjobName = length(split(streamanalyticsjobId, '/')) >= 9 ? last(split(streamanalyticsjobId, '/')) : 'incorrectSegmentLength'
 
 // Resources
 resource storageAccountFileSystem 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-02-01' existing = {
