@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.451.19169",
-      "templateHash": "9263634847318123758"
+      "templateHash": "10071379043103949328"
     }
   },
   "parameters": {
@@ -56,7 +56,7 @@
     "streamanalyticsDefaultStorageAccountFileSystemId": {
       "type": "string",
       "metadata": {
-        "description": "Specifies the resource ID of the default storage account for strea analytics."
+        "description": "Specifies the resource ID of the default storage account  file system for stream analytics."
       }
     },
     "purviewId": {

@@ -26,7 +26,7 @@ param tags object = {}
 param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
-@description('Specifies the resource ID of the default storage account for strea analytics.')
+@description('Specifies the resource ID of the default storage account  file system for stream analytics.')
 param streamanalyticsDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the central purview instance.')
 param purviewId string = ''
