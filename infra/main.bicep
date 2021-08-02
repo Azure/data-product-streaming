@@ -183,7 +183,7 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
 }
 
 @batchSize(1)
-module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,10): if (enableRoleAssignments) {
+module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): if (enableRoleAssignments) {
   name: 'delay-${i}'
   dependsOn: [
     streamanalytics001

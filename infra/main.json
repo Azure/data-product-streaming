@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.451.19169",
-      "templateHash": "37024037876947438"
+      "templateHash": "7543092959463601567"
     }
   },
   "parameters": {
@@ -1660,13 +1660,13 @@
       "condition": "[parameters('enableRoleAssignments')]",
       "copy": {
         "name": "deploymentDelay",
-        "count": "[length(range(0, 10))]",
+        "count": "[length(range(0, 20))]",
         "mode": "serial",
         "batchSize": 1
       },
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2019-10-01",
-      "name": "[format('delay-{0}', range(0, 10)[copyIndex()])]",
+      "name": "[format('delay-{0}', range(0, 20)[copyIndex()])]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -1674,7 +1674,7 @@
         "mode": "Incremental",
         "parameters": {
           "deploymentDelayIndex": {
-            "value": "[range(0, 10)[copyIndex()]]"
+            "value": "[range(0, 20)[copyIndex()]]"
           }
         },
         "template": {
