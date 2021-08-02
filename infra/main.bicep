@@ -182,8 +182,23 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
   }
 }
 
+@batchSize(1)
+module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,10): if (enableRoleAssignments) {
+  name: 'delay-${i}'
+  dependsOn: [
+    streamanalytics001
+  ]
+  scope: resourceGroup()
+  params: {
+    deploymentDelayIndex: i
+  }
+}]
+
 module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalyticsRoleAssignmentStorage.bicep' = if (enableRoleAssignments) {
   name: 'streamanalytics001RoleAssignmentStorage'
+  dependsOn: [
+    deploymentDelay
+  ]
   scope: resourceGroup(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName)
   params: {
     storageAccountFileSystemId: streamanalyticsDefaultStorageAccountFileSystemId
