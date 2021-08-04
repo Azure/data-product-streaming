@@ -53,7 +53,8 @@ param privateDnsZoneIdSqlServer string = ''
 @description('Specifies the resource ID of the private DNS zone for IoT Hub.')
 param privateDnsZoneIdIothub string = ''
 
-// Template Spec parameters 
+// Template Spec parameters
+@description('Specifies the resource ID of the template spec that should be deployed as baseline.')
 param templateSpecId string
 
 // Variables
@@ -132,3 +133,5 @@ resource templatespec 'Microsoft.Resources/deployments@2021-04-01' = {
     }
   }
 }
+
+// Outputs
