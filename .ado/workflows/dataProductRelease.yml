@@ -8,8 +8,8 @@ trigger:
 variables:
   DATA_PRODUCT_NAME: "DataProductStreaming"                                        # Update to '{dataProductName}'
   AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "integration-product-service-connection" # Update to '{resourceManagerConnectionName}'
-  AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b"                    # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-di002"                                     # Update to '{dataLandingZoneName}-rg'
+  AZURE_SUBSCRIPTION_ID: "17588eb2-2943-461a-ab3f-00a3ceac3112"                    # Update to '{dataLandingZoneSubscriptionId}'
+  AZURE_RESOURCE_GROUP_NAME: "dmz-dev-automation"                                  # Update to '{dataLandingZoneName}-rg'
   AZURE_LOCATION: "North Europe"                                                   # Update to '{regionName}'
 
 stages:
