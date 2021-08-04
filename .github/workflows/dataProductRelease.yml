@@ -6,7 +6,7 @@ on:
       - "v*"
 
 env:
-  DATA_PRODUCT_NAME: "DataProductStreaming"
+  DATA_PRODUCT_NAME: "DataProductStreaming"                     # Update to '{dataProductName}'
   AZURE_SUBSCRIPTION_ID: "17588eb2-2943-461a-ab3f-00a3ceac3112" # Update to '{dataLandingZoneSubscriptionId}'
   AZURE_RESOURCE_GROUP_NAME: "dmz-dev-templatespecs"            # Update to '{dataLandingZoneName}-rg'
   AZURE_LOCATION: "northeurope"                                 # Update to '{regionName}'
@@ -51,7 +51,7 @@ jobs:
               --subscription ${{ env.AZURE_SUBSCRIPTION_ID }} \
               --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
               --location ${{ env.AZURE_LOCATION }} \
-              --template-file ${{ github.workspace }}/infra/main.json
+              --template-file "${{ github.workspace }}/infra/main.json"
 
       # Log out from Azure
       - name: Log out from Azure
