@@ -63,6 +63,7 @@ var tagsDefault = {
   Name: name
 }
 var tagsJoined = union(tagsDefault, tags)
+var administratorUsername = 'SuperMainUser'
 var synapseDefaultStorageAccountSubscriptionId = split(synapseDefaultStorageAccountFileSystemId, '/')[2]
 var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageAccountFileSystemId, '/')[4]
 var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
@@ -98,6 +99,7 @@ module synapse001 'modules/services/synapse.bicep' = {
     synapseName: synapse001Name
     tags: tagsJoined
     subnetId: subnetId
+    administratorUsername: administratorUsername
     administratorPassword: administratorPassword
     synapseSqlAdminGroupName: ''
     synapseSqlAdminGroupObjectID: ''
@@ -138,6 +140,7 @@ module sql001 'modules/services/sql.bicep' = {
     sqlserverName: sql001Name
     tags: tagsJoined
     subnetId: subnetId
+    administratorUsername: administratorUsername
     administratorPassword: administratorPassword
     privateDnsZoneIdSqlServer: privateDnsZoneIdSqlServer
     sqlserverAdminGroupName: ''
