@@ -63,7 +63,7 @@ var tagsDefault = {
   Name: name
 }
 var tagsJoined = union(tagsDefault, tags)
-var administratorUsername = 'SuperMainUser'
+var administratorUsername = 'SqlServerMainUser'
 var synapseDefaultStorageAccountSubscriptionId = split(synapseDefaultStorageAccountFileSystemId, '/')[2]
 var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageAccountFileSystemId, '/')[4]
 var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
