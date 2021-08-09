@@ -9,11 +9,11 @@ param location string
 param tags object
 param subnetId string
 param iothubName string
-param iothubSkuName string
+param iothubSkuName string = 'S1'
 @minValue(1)
-param iothubSkuCapacity int
-param privateDnsZoneIdIothub string
-param privateDnsZoneIdEventhubNamespace string
+param iothubSkuCapacity int = 1
+param privateDnsZoneIdIothub string = ''
+param privateDnsZoneIdEventhubNamespace string = ''
 
 // Variables
 var iothubPrivateEndpointName = '${iothub.name}-private-endpoint'

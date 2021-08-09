@@ -68,14 +68,22 @@ var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageA
 var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
 var streamanalyticsDefaultStorageAccountResourceGroupName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4]
 var streamanalyticsDefaultStorageAccountName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8]
+var keyVault001Name = '${name}-vault001'
+var synapse001Name = '${name}-synapse001'
+var cosmosdb001Name = '${name}-cosmos001'
+var sql001Name = '${name}-sqlserver001'
+var iothub001Name = '${name}-iothub001'
+var eventhubNamespace001Name = '${name}-eventhub001'
+var streamanalytics001Name = '${name}-streamanalytics001'
+var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
 
 // Resources
-module keyvault001 'modules/services/keyvault.bicep' = {
-  name: 'keyvault001'
+module keyVault001 'modules/services/keyvault.bicep' = {
+  name: 'keyVault001'
   scope: resourceGroup()
   params: {
     location: location
-    keyvaultName: '${name}-vault001'
+    keyvaultName: keyVault001Name
     tags: tagsJoined
     subnetId: subnetId
     privateDnsZoneIdKeyVault: privateDnsZoneIdKeyVault
@@ -87,7 +95,7 @@ module synapse001 'modules/services/synapse.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    synapseName: '${name}-synapse001'
+    synapseName: synapse001Name
     tags: tagsJoined
     subnetId: subnetId
     administratorPassword: administratorPassword
@@ -115,7 +123,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    cosmosdbName: '${name}-cosmos001'
+    cosmosdbName: cosmosdb001Name
     tags: tagsJoined
     subnetId: subnetId
     privateDnsZoneIdCosmosdbSql: privateDnsZoneIdCosmosdbSql
@@ -127,7 +135,7 @@ module sql001 'modules/services/sql.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    sqlserverName: '${name}-sqlserver001'
+    sqlserverName: sql001Name
     tags: tagsJoined
     subnetId: subnetId
     administratorPassword: administratorPassword
@@ -142,7 +150,7 @@ module iothub001 'modules/services/iothub.bicep' = {
   scope: resourceGroup()
   params: {
     location: location
-    iothubName: '${name}-iothub001'
+    iothubName: iothub001Name
     tags: tagsJoined
     subnetId: subnetId
     iothubSkuName: 'S1'
@@ -159,7 +167,7 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
     location: location
     tags: tagsJoined
     subnetId: subnetId
-    eventhubnamespaceName: '${name}-eventhub001'
+    eventhubnamespaceName: eventhubNamespace001Name
     privateDnsZoneIdEventhubNamespace: privateDnsZoneIdEventhubNamespace
     eventhubnamespaceMinThroughput: 1
     eventhubnamespaceMaxThroughput: 1
@@ -175,9 +183,9 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
     eventhubNamespaceId: eventhubNamespace001.outputs.eventhubNamespaceId
     sqlServerId: sql001.outputs.sqlserverId
     storageAccountId: resourceId(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName, 'Microsoft.Storage/storageAccounts', streamanalyticsDefaultStorageAccountName)
-    streamanalyticsclusterName: '${name}-streamanalyticscluster001'
+    streamanalyticsclusterName: streamanalyticscluster001Name
     streamanalyticsclusterSkuCapacity: 36
-    streamanalyticsName: '${name}-streamanalytics001'
+    streamanalyticsName: streamanalytics001Name
     streamanalyticsjobSkuCapacity: 1
   }
 }
