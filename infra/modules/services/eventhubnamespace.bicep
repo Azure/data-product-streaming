@@ -15,7 +15,7 @@ param eventhubnamespaceMinThroughput int
 @minValue(1)
 @maxValue(20)
 param eventhubnamespaceMaxThroughput int
-param privateDnsZoneIdEventhubNamespace string
+param privateDnsZoneIdEventhubNamespace string = ''
 
 // Variables
 var eventhubNamespacePrivateEndpointName = '${eventhubNamespace.name}-private-endpoint'

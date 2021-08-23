@@ -11,7 +11,7 @@ param streamanalyticsclusterName string
 param streamanalyticsName string
 @minValue(36)
 @maxValue(216)
-param streamanalyticsclusterSkuCapacity int
+param streamanalyticsclusterSkuCapacity int = 36
 @allowed([
   1
   3
@@ -24,10 +24,10 @@ param streamanalyticsclusterSkuCapacity int
   42
   48
 ])
-param streamanalyticsjobSkuCapacity int
-param storageAccountId string
-param sqlServerId string
-param eventhubNamespaceId string
+param streamanalyticsjobSkuCapacity int = 1
+param storageAccountId string = ''
+param sqlServerId string = ''
+param eventhubNamespaceId string = ''
 
 // Variables
 var storageAccountName = length(split(storageAccountId, '/')) >= 9 ? last(split(storageAccountId, '/')) : 'incorrectSegmentLength'
