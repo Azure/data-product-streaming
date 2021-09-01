@@ -114,7 +114,7 @@ resource iothubPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01' =
 
 resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdIothub) && !empty(privateDnsZoneIdEventhubNamespace)) {
   parent: iothubPrivateEndpoint
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {
