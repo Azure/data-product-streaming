@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "13021743013125166427"
+      "templateHash": "6526927325437857897"
     }
   },
   "parameters": {
@@ -189,7 +189,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "15339723277993214204"
+              "templateHash": "11855677596500727104"
             }
           },
           "parameters": {
@@ -276,7 +276,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdKeyVault')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('keyVaultPrivateEndpointName'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('keyVaultPrivateEndpointName'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -358,7 +358,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "12236755477810815741"
+              "templateHash": "12267714962417796830"
             }
           },
           "parameters": {
@@ -559,7 +559,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdSynapseSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSql'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSql'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -606,7 +606,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdSynapseSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSqlOnDemand'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameSqlOnDemand'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -653,7 +653,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdSynapseDev')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameDev'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('synapsePrivateEndpointNameDev'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -775,7 +775,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "18128198747734631092"
+              "templateHash": "1156447829358884525"
             }
           },
           "parameters": {
@@ -876,7 +876,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdCosmosdbSql')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('cosmosdbPrivateEndpointName'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('cosmosdbPrivateEndpointName'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -940,7 +940,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "16942979409177871223"
+              "templateHash": "9007919709076322085"
             }
           },
           "parameters": {
@@ -1074,7 +1074,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdSqlServer')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('sqlserverPrivateEndpointName'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('sqlserverPrivateEndpointName'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -1141,7 +1141,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "8828750327145730280"
+              "templateHash": "10407527876899620091"
             }
           },
           "parameters": {
@@ -1281,7 +1281,7 @@
               "condition": "[and(not(empty(parameters('privateDnsZoneIdIothub'))), not(empty(parameters('privateDnsZoneIdEventhubNamespace'))))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('iothubPrivateEndpointName'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('iothubPrivateEndpointName'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
@@ -1345,7 +1345,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "17934512854910693454"
+              "templateHash": "17416459153117104041"
             }
           },
           "parameters": {
@@ -1434,7 +1434,7 @@
               "condition": "[not(empty(parameters('privateDnsZoneIdEventhubNamespace')))]",
               "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
               "apiVersion": "2020-11-01",
-              "name": "[format('{0}/{1}', variables('eventhubNamespacePrivateEndpointName'), 'aRecord')]",
+              "name": "[format('{0}/{1}', variables('eventhubNamespacePrivateEndpointName'), 'default')]",
               "properties": {
                 "privateDnsZoneConfigs": [
                   {
