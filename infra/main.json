@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "17986280826631640684"
+      "templateHash": "7419035663361961382"
     }
   },
   "parameters": {
@@ -1141,7 +1141,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "10407527876899620091"
+              "templateHash": "13466920506392227882"
             }
           },
           "parameters": {
@@ -1164,6 +1164,7 @@
             "iothubSkuCapacity": {
               "type": "int",
               "defaultValue": 1,
+              "maxValue": 200,
               "minValue": 1
             },
             "privateDnsZoneIdIothub": {
@@ -1519,7 +1520,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "16035487727448282155"
+              "templateHash": "8085901455606187999"
             }
           },
           "parameters": {
@@ -1583,7 +1584,7 @@
           "resources": [
             {
               "type": "Microsoft.StreamAnalytics/clusters",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[parameters('streamanalyticsclusterName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
@@ -1596,7 +1597,7 @@
             {
               "condition": "[not(empty(parameters('storageAccountId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameStorageAccount'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1619,7 +1620,7 @@
             {
               "condition": "[not(empty(parameters('sqlServerId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameSqlServer'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1642,7 +1643,7 @@
             {
               "condition": "[not(empty(parameters('eventhubNamespaceId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1664,7 +1665,7 @@
             },
             {
               "type": "Microsoft.StreamAnalytics/streamingjobs",
-              "apiVersion": "2017-04-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[parameters('streamanalyticsName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
