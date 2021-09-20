@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "1296363371752267801"
+      "templateHash": "17986280826631640684"
     }
   },
   "parameters": {
@@ -1345,7 +1345,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "17416459153117104041"
+              "templateHash": "1612925201210464947"
             }
           },
           "parameters": {
@@ -1401,6 +1401,21 @@
                 "maximumThroughputUnits": "[parameters('eventhubnamespaceMaxThroughput')]",
                 "zoneRedundant": true
               }
+            },
+            {
+              "type": "Microsoft.EventHub/namespaces/networkRuleSets",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('eventhubnamespaceName'), 'default')]",
+              "properties": {
+                "defaultAction": "Deny",
+                "ipRules": [],
+                "virtualNetworkRules": [],
+                "publicNetworkAccess": "Disabled",
+                "trustedServiceAccessEnabled": false
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubnamespaceName'))]"
+              ]
             },
             {
               "type": "Microsoft.Network/privateEndpoints",
