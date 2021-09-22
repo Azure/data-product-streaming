@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "17623244608440807834"
+      "templateHash": "10195217135219668317"
     }
   },
   "parameters": {
@@ -1143,7 +1143,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "10407527876899620091"
+              "templateHash": "13466920506392227882"
             }
           },
           "parameters": {
@@ -1166,6 +1166,7 @@
             "iothubSkuCapacity": {
               "type": "int",
               "defaultValue": 1,
+              "maxValue": 200,
               "minValue": 1
             },
             "privateDnsZoneIdIothub": {
@@ -1347,7 +1348,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "17416459153117104041"
+              "templateHash": "1612925201210464947"
             }
           },
           "parameters": {
@@ -1403,6 +1404,21 @@
                 "maximumThroughputUnits": "[parameters('eventhubnamespaceMaxThroughput')]",
                 "zoneRedundant": true
               }
+            },
+            {
+              "type": "Microsoft.EventHub/namespaces/networkRuleSets",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('eventhubnamespaceName'), 'default')]",
+              "properties": {
+                "defaultAction": "Deny",
+                "ipRules": [],
+                "virtualNetworkRules": [],
+                "publicNetworkAccess": "Disabled",
+                "trustedServiceAccessEnabled": false
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.EventHub/namespaces', parameters('eventhubnamespaceName'))]"
+              ]
             },
             {
               "type": "Microsoft.Network/privateEndpoints",
@@ -1506,7 +1522,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "16035487727448282155"
+              "templateHash": "8085901455606187999"
             }
           },
           "parameters": {
@@ -1570,7 +1586,7 @@
           "resources": [
             {
               "type": "Microsoft.StreamAnalytics/clusters",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[parameters('streamanalyticsclusterName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
@@ -1583,7 +1599,7 @@
             {
               "condition": "[not(empty(parameters('storageAccountId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameStorageAccount'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1606,7 +1622,7 @@
             {
               "condition": "[not(empty(parameters('sqlServerId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameSqlServer'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1629,7 +1645,7 @@
             {
               "condition": "[not(empty(parameters('eventhubNamespaceId')))]",
               "type": "Microsoft.StreamAnalytics/clusters/privateEndpoints",
-              "apiVersion": "2020-03-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[format('{0}/{1}', parameters('streamanalyticsclusterName'), variables('streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace'))]",
               "properties": {
                 "manualPrivateLinkServiceConnections": [
@@ -1651,7 +1667,7 @@
             },
             {
               "type": "Microsoft.StreamAnalytics/streamingjobs",
-              "apiVersion": "2017-04-01-preview",
+              "apiVersion": "2020-03-01",
               "name": "[parameters('streamanalyticsName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
