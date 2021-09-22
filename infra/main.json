@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.613.9944",
-      "templateHash": "1296363371752267801"
+      "templateHash": "17623244608440807834"
     }
   },
   "parameters": {
@@ -358,7 +358,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.613.9944",
-              "templateHash": "13095982571376811461"
+              "templateHash": "1500872153097477534"
             }
           },
           "parameters": {
@@ -481,13 +481,15 @@
                 },
                 "autoScale": {
                   "enabled": true,
-                  "maxNodeCount": 10,
-                  "minNodeCount": 3
+                  "minNodeCount": 3,
+                  "maxNodeCount": 10
                 },
                 "customLibraries": [],
                 "defaultSparkLogFolder": "logs/",
                 "dynamicExecutorAllocation": {
-                  "enabled": true
+                  "enabled": true,
+                  "minExecutors": 1,
+                  "maxExecutors": 9
                 },
                 "nodeSize": "Small",
                 "nodeSizeFamily": "MemoryOptimized",
