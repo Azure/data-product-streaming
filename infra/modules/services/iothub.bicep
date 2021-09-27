@@ -9,11 +9,12 @@ param location string
 param tags object
 param subnetId string
 param iothubName string
-param iothubSkuName string
+param iothubSkuName string = 'S1'
 @minValue(1)
-param iothubSkuCapacity int
-param privateDnsZoneIdIothub string
-param privateDnsZoneIdEventhubNamespace string
+@maxValue(200)
+param iothubSkuCapacity int = 1
+param privateDnsZoneIdIothub string = ''
+param privateDnsZoneIdEventhubNamespace string = ''
 
 // Variables
 var iothubPrivateEndpointName = '${iothub.name}-private-endpoint'
@@ -114,7 +115,7 @@ resource iothubPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01' =
 
 resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdIothub) && !empty(privateDnsZoneIdEventhubNamespace)) {
   parent: iothubPrivateEndpoint
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {

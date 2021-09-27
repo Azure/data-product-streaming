@@ -11,7 +11,7 @@ param streamanalyticsclusterName string
 param streamanalyticsName string
 @minValue(36)
 @maxValue(216)
-param streamanalyticsclusterSkuCapacity int
+param streamanalyticsclusterSkuCapacity int = 36
 @allowed([
   1
   3
@@ -24,10 +24,10 @@ param streamanalyticsclusterSkuCapacity int
   42
   48
 ])
-param streamanalyticsjobSkuCapacity int
-param storageAccountId string
-param sqlServerId string
-param eventhubNamespaceId string
+param streamanalyticsjobSkuCapacity int = 1
+param storageAccountId string = ''
+param sqlServerId string = ''
+param eventhubNamespaceId string = ''
 
 // Variables
 var storageAccountName = length(split(storageAccountId, '/')) >= 9 ? last(split(storageAccountId, '/')) : 'incorrectSegmentLength'
@@ -39,7 +39,7 @@ var streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace = '${event
 var requestMessage = 'Private Endpoint for Stream Analytics Cluster ${streamanalyticscluster.name}'
 
 // Resources
-resource streamanalyticscluster 'Microsoft.StreamAnalytics/clusters@2020-03-01-preview' = {
+resource streamanalyticscluster 'Microsoft.StreamAnalytics/clusters@2020-03-01' = {
   name: streamanalyticsclusterName
   location: location
   tags: tags
@@ -50,7 +50,7 @@ resource streamanalyticscluster 'Microsoft.StreamAnalytics/clusters@2020-03-01-p
   properties: {}
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01-preview' = if (!empty(storageAccountId)) {
+resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(storageAccountId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameStorageAccount
   properties: {
@@ -69,7 +69,7 @@ resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.S
   }
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01-preview' = if (!empty(sqlServerId)) {
+resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(sqlServerId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameSqlServer
   properties: {
@@ -88,7 +88,7 @@ resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.Stream
   }
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01-preview' = if (!empty(eventhubNamespaceId)) {
+resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(eventhubNamespaceId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace
   properties: {
@@ -107,7 +107,7 @@ resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsof
   }
 }
 
-resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2017-04-01-preview' = {
+resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2020-03-01' = {
   name: streamanalyticsName
   location: location
   tags: tags

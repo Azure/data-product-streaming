@@ -9,7 +9,7 @@ param location string
 param tags object
 param subnetId string
 param keyvaultName string
-param privateDnsZoneIdKeyVault string
+param privateDnsZoneIdKeyVault string = ''
 
 // Variables
 var keyVaultPrivateEndpointName = '${keyVault.name}-private-endpoint'
@@ -69,7 +69,7 @@ resource keyVaultPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01'
 
 resource keyVaultPrivateEndpointARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdKeyVault)) {
   parent: keyVaultPrivateEndpoint
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {

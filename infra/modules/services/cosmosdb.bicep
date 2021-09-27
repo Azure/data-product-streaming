@@ -9,7 +9,7 @@ param location string
 param tags object
 param subnetId string
 param cosmosdbName string
-param privateDnsZoneIdCosmosdbSql string
+param privateDnsZoneIdCosmosdbSql string = ''
 
 // Variables
 var cosmosdbPrivateEndpointName = '${cosmosdb.name}-private-endpoint'
@@ -102,7 +102,7 @@ resource cosmosdbPrivateEndpoint 'Microsoft.Network/privateEndpoints@2020-11-01'
 
 resource cosmosdbPrivateEndpointARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdCosmosdbSql)) {
   parent: cosmosdbPrivateEndpoint
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {

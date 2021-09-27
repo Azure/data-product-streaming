@@ -9,15 +9,16 @@ param location string
 param tags object
 param subnetId string
 param synapseName string
+param administratorUsername string = 'SqlServerMainUser'
 @secure()
 param administratorPassword string
-param synapseSqlAdminGroupName string
-param synapseSqlAdminGroupObjectID string
+param synapseSqlAdminGroupName string = ''
+param synapseSqlAdminGroupObjectID string = ''
 param synapseDefaultStorageAccountFileSystemId string
-param synapseComputeSubnetId string
-param privateDnsZoneIdSynapseSql string
-param privateDnsZoneIdSynapseDev string
-param purviewId string
+param synapseComputeSubnetId string = ''
+param privateDnsZoneIdSynapseSql string = ''
+param privateDnsZoneIdSynapseDev string = ''
+param purviewId string = ''
 
 // Variables
 var synapseDefaultStorageAccountFileSystemName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? last(split(synapseDefaultStorageAccountFileSystemId, '/')) : 'incorrectSegmentLength'
@@ -50,7 +51,7 @@ resource synapse 'Microsoft.Synapse/workspaces@2021-03-01' = {
     purviewConfiguration: {
       purviewResourceId: purviewId
     }
-    sqlAdministratorLogin: 'SqlServerMainUser'
+    sqlAdministratorLogin: administratorUsername
     sqlAdministratorLoginPassword: administratorPassword
     virtualNetworkProfile: {
       computeSubnetId: synapseComputeSubnetId
@@ -85,14 +86,16 @@ resource synapseBigDataPool001 'Microsoft.Synapse/workspaces/bigDataPools@2021-0
     }
     autoScale: {
       enabled: true
-      maxNodeCount: 10
       minNodeCount: 3
+      maxNodeCount: 10
     }
     // cacheSize: 100  // Uncomment to set a specific cache size
     customLibraries: []
     defaultSparkLogFolder: 'logs/'
     dynamicExecutorAllocation: {
       enabled: true
+      minExecutors: 1
+      maxExecutors: 9
     }
     // isComputeIsolationEnabled: true  // Uncomment to enable compute isolation (only available in selective regions)
     // libraryRequirements: {  // Uncomment to install pip dependencies on the Spark cluster
@@ -107,7 +110,7 @@ resource synapseBigDataPool001 'Microsoft.Synapse/workspaces/bigDataPools@2021-0
     //   filename: 'spark.conf'
     // }
     sparkEventsFolder: 'events/'
-    sparkVersion: '3.0'
+    sparkVersion: '3.1'
   }
 }
 
@@ -121,7 +124,7 @@ resource synapseManagedIdentitySqlControlSettings 'Microsoft.Synapse/workspaces/
   }
 }
 
-resource synapseAadAdministrators 'Microsoft.Synapse/workspaces/administrators@2021-03-01' = if (synapseSqlAdminGroupName != '' && synapseSqlAdminGroupObjectID != '') {
+resource synapseAadAdministrators 'Microsoft.Synapse/workspaces/administrators@2021-03-01' = if (!empty(synapseSqlAdminGroupName)&& !empty(synapseSqlAdminGroupObjectID)) {
   parent: synapse
   name: 'activeDirectory'
   properties: {
@@ -158,7 +161,7 @@ resource synapsePrivateEndpointSql 'Microsoft.Network/privateEndpoints@2020-11-0
 
 resource synapsePrivateEndpointSqlARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdSynapseSql)) {
   parent: synapsePrivateEndpointSql
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {
@@ -197,7 +200,7 @@ resource synapsePrivateEndpointSqlOnDemand 'Microsoft.Network/privateEndpoints@2
 
 resource synapsePrivateEndpointSqlOnDemandARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdSynapseSql)) {
   parent: synapsePrivateEndpointSqlOnDemand
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {
@@ -236,7 +239,7 @@ resource synapsePrivateEndpointDev 'Microsoft.Network/privateEndpoints@2020-11-0
 
 resource synapsePrivateEndpointDevARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdSynapseDev)) {
   parent: synapsePrivateEndpointDev
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {

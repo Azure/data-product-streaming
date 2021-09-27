@@ -15,7 +15,7 @@ param eventhubnamespaceMinThroughput int
 @minValue(1)
 @maxValue(20)
 param eventhubnamespaceMaxThroughput int
-param privateDnsZoneIdEventhubNamespace string
+param privateDnsZoneIdEventhubNamespace string = ''
 
 // Variables
 var eventhubNamespacePrivateEndpointName = '${eventhubNamespace.name}-private-endpoint'
@@ -38,6 +38,18 @@ resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-01-01-preview' = 
     kafkaEnabled: true
     maximumThroughputUnits: eventhubnamespaceMaxThroughput
     zoneRedundant: true
+  }
+}
+
+resource eventhubNamespaceNetworkRuleSets 'Microsoft.EventHub/namespaces/networkRuleSets@2021-06-01-preview' = {
+  name: 'default'
+  parent: eventhubNamespace
+  properties: {
+    defaultAction: 'Deny'
+    ipRules: []
+    virtualNetworkRules: []
+    publicNetworkAccess: 'Disabled'
+    trustedServiceAccessEnabled: false
   }
 }
 
@@ -92,7 +104,7 @@ resource eventhubNamespacePrivateEndpoint 'Microsoft.Network/privateEndpoints@20
 
 resource eventhubNamespacePrivateEndpointARecord 'Microsoft.Network/privateEndpoints/privateDnsZoneGroups@2020-11-01' = if (!empty(privateDnsZoneIdEventhubNamespace)) {
   parent: eventhubNamespacePrivateEndpoint
-  name: 'aRecord'
+  name: 'default'
   properties: {
     privateDnsZoneConfigs: [
       {
