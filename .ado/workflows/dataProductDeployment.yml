@@ -21,9 +21,9 @@ pr:
 
 variables:
   AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "integration-product-service-connection" # Update to '{resourceManagerConnectionName}'
-  AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b"                    # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-di002"                                     # Update to '{dataLandingZoneName}-rg'
-  AZURE_LOCATION: "North Europe"                                                   # Update to '{regionName}'
+  AZURE_SUBSCRIPTION_ID: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
+  AZURE_RESOURCE_GROUP_NAME: "dlz01-dev-di002" # Update to '{dataLandingZoneName}-rg'
+  AZURE_LOCATION: "North Europe" # Update to '{regionName}'
 
 stages:
   - stage: Validation
@@ -79,6 +79,33 @@ stages:
               deploymentMode: "Validation"
               overrideParameters: >
                 -administratorPassword "$(password)"
+
+          # Deploy Data Product - what-if
+          - task: AzureCLI@2
+            name: data_product_whatif
+            displayName: Deploy Data Product - what-if
+            enabled: true
+            continueOnError: false
+            inputs:
+              azureSubscription: <Name of the Azure Resource Manager service connection>
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                az account set \
+                  --subscription ${{ variables.AZURE_SUBSCRIPTION_ID }}
+                
+                az deployment group what-if \
+                  --resource-group ${{ variables.AZURE_RESOURCE_GROUP_NAME }} \
+                  --mode "Incremental" \
+                  --template-file "$(System.DefaultWorkingDirectory)/infra/main.json" \
+                  --parameters "$(System.DefaultWorkingDirectory)/infra/params.dev.json" administratorPassword="$(password)" \
+                  --result-format "FullResourcePayloads"
+                
+              powerShellErrorActionPreference: "stop"
+              addSpnToEnvironment: false
+              useGlobalConfig: false
+              failOnStandardError: false
+              powerShellIgnoreLASTEXITCODE: false
 
   - stage: Deployment
     displayName: "Deployment of IaC templates"
