@@ -87,7 +87,7 @@ stages:
             enabled: true
             continueOnError: false
             inputs:
-              azureSubscription: <Name of the Azure Resource Manager service connection>
+              azureSubscription: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
               scriptType: pscore
               scriptLocation: inlineScript
               inlineScript: |
