@@ -72,8 +72,8 @@ jobs:
             az deployment group what-if \
               --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
               --mode "Incremental" \
-              --template-file ./infra/main.json \
-              --parameters ./infra/params.dev.json administratorPassword="${{ steps.generate_password_001.outputs.password }}" \
+              --template-file "${GITHUB_WORKSPACE}/infra/main.json" \
+              --parameters "${GITHUB_WORKSPACE}/infra/params.dev.json" administratorPassword="${{ steps.generate_password_001.outputs.password }}" \
               --result-format "FullResourcePayloads"
 
       # Log out from Azure
