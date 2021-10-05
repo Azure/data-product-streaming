@@ -1,7 +1,7 @@
 <!-- Enter a brief description/summary of your PR here. What does it fix/what does it change/how was it tested (even manually, if necessary)? -->
 ## Summary of the Pull Request
 
-<!-- Other than the issue solved, is this relevant to any other issues/existing PRs? --> 
+<!-- Other than the issue solved, is this relevant to any other issues/existing PRs? -->
 ## References
 
 <!-- Please review the items on the PR checklist before submitting-->
