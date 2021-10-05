@@ -15,8 +15,16 @@ body:
   - type: textarea
     id: feature
     attributes:
-      label: Feature or Idea
-      placeholder: Briefly describe teh new feature, idea or enhancement.
+      label: Feature or Idea - What?
+      placeholder: Briefly describe what the new feature, idea or enhancement entails.
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature
+    attributes:
+      label: Feature or Idea - Why?
+      placeholder: Briefly describe why the new feature, idea or enhancement is required and what you are trying to achieve.
     validations:
       required: true
 

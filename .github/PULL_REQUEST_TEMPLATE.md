@@ -6,7 +6,7 @@
 
 <!-- Please review the items on the PR checklist before submitting-->
 ## PR Checklist
-* [ ] Closes #xxx
+* [ ] Closes Issue #xxx
 * [ ] CLA signed. If not, go over [here](https://cla.opensource.microsoft.com/microsoft/Terminal) and sign the CLA
 
 <!-- Provide a more detailed description of the PR, other things fixed or any additional comments/features here -->
