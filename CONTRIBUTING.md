@@ -1,8 +1,8 @@
 # Contributor's Guide
 
-This project very much welcomes community contributions to this repository. Whether those are [Issue Reports](#issue-reports) or [Pull Requests](#pull-requests), any form of contribution is very much welome. Please note that by participating in this project, you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md), as well as the terms of the [CLA](#cla).
+This project welcomes community contributions. The contributions could be [Issues](#issue-reports) or [Pull Requests](#pull-requests), any form of contribution is welome. Please note that by participating in this project, you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md) and the terms of the [CLA](#cla).
 
-> If you have a question, think you have discovered an issue or would like to propose a new feature or idea, then find/file an issue report **BEFORE** starting work to fix/implement it.
+> If you have a question, have discovered an issue or perhaps you would like to propose an enhancement or idea, please file an issue report **BEFORE** commencing work on it.
 
 ## Open Development Workflow
 
