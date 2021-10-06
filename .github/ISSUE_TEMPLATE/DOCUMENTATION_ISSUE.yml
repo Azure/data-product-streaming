@@ -1,10 +1,9 @@
 name: "Documentation Issue 📚"
 description: Report issues in our documentation
-title: " "
+title: "Documentation: "
 labels:
   - documentation
   - backlog
-assignees: " "
 
 body:
   - type: markdown
