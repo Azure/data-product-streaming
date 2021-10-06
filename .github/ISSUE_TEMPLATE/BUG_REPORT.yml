@@ -29,7 +29,7 @@ body:
     id: reproduce
     attributes:
       label: Steps to reproduce
-      placeholder: Tell us the steps required to trigger your bug.
+      placeholder: Please share with us the step(s) required to reproduce the bug.
     validations:
       required: true
 
@@ -56,11 +56,11 @@ body:
     id: code_of_conduct
     attributes:
       label: Code of Conduct
-      description: The Code of Conduct helps create a safe space for everyone. We require that everyone agrees to it.
+      description: The Code of Conduct helps create a safe space for everyone. We require that everyone must abide by it.
       options:
         - label: I agree to follow this project's [Code of Conduct](/CODE_OF_CONDUCT.md)
           required: true
 
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "Thanks for completing this form!"

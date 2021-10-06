@@ -13,7 +13,7 @@ body:
         Thanks for taking the time to fill out this report! Before submitting, please make sure to [search through existing issues](https://github.com/Azure/data-product-streaming/issues) and [check the Known Issues section](/docs/EnterpriseScaleAnalytics-KnownIssues.md).
 
   - type: textarea
-    id: feature
+    id: feature_description
     attributes:
       label: Feature or Idea - What?
       placeholder: Briefly describe what the new feature, idea or enhancement entails.
@@ -21,10 +21,10 @@ body:
       required: true
 
   - type: textarea
-    id: feature
+    id: feature_reason
     attributes:
       label: Feature or Idea - Why?
-      placeholder: Briefly describe why the new feature, idea or enhancement is required and what you are trying to achieve.
+      placeholder: Briefly describe why the new feature, idea or enhancement is required and what outcome you are trying to achieve.
     validations:
       required: true
 
@@ -32,11 +32,11 @@ body:
     id: code_of_conduct
     attributes:
       label: Code of Conduct
-      description: The Code of Conduct helps create a safe space for everyone. We require that everyone agrees to it.
+      description: The Code of Conduct helps create a safe space for everyone. We require that everyone must abide by it.
       options:
         - label: I agree to follow this project's [Code of Conduct](/CODE_OF_CONDUCT.md)
           required: true
 
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "Thanks for completing this form!"

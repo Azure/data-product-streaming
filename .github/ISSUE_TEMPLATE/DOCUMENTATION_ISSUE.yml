@@ -16,7 +16,7 @@ body:
     id: description
     attributes:
       label: Documentation Issue
-      placeholder: Briefly describe which document needs to be corrected and why.
+      placeholder: Please share the name of the document along with supporting points on why it requires an amendment.
     validations:
       required: true
 
@@ -24,11 +24,11 @@ body:
     id: code_of_conduct
     attributes:
       label: Code of Conduct
-      description: The Code of Conduct helps create a safe space for everyone. We require that everyone agrees to it.
+      description: The Code of Conduct helps create a safe space for everyone. We require that everyone must abide by it.
       options:
         - label: I agree to follow this project's [Code of Conduct](/CODE_OF_CONDUCT.md)
           required: true
 
   - type: markdown
     attributes:
-      value: "Thanks for completing our form!"
+      value: "Thanks for completing this form!"
