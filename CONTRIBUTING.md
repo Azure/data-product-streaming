@@ -6,7 +6,7 @@ This project welcomes community contributions. The contributions could be [Issue
 
 ## Open Development Workflow
 
-The Customer Architecture Team (CAT) is very active in this GitHub repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repo and fixes and new implementations are implemented through pull requests that are linked to these issues. Code reviews can be followed as well to learn about the principles of the team and the development work.
+The Customer Architecture Team (CAT) is very active in this GitHub repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repo and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository..
 
 All the work of the CAT team is executed in the public to ensure a high degree of transparency for the community. In addition, it allows the community to more easily contribute to the projects because everyone is aware of new features that are commited or issues that are existing within the projects.
 
@@ -16,19 +16,19 @@ Working in the public also ensures a high-quality bar and allows open discussion
 
 We are encouraging you to select between a [Bug Report](#bug-report), a [Feature Request](#feature-request), a [Documentation Issue](#documentation-issue) and a [Vulnerability Report](#vulnerability-report) when opening a new Issue in this repository. Please provide all the required information for the respective issue reports and make sure you accept the [Code of Conduct](/CODE_OF_CONDUCT.md).
 
-Before submitting any of the types mentioned above, please search through the open and closed issues in this repository as well as through the [Known Issues](/docs/EnterpriseScaleAnalytics-KnownIssues.md). If a similar issue already exists, please upvote the existint issue comment(s) or leave a comment instead of opening a new issue. This helps us reduce the number issues and also simplifies the management on our side. Only if no existing item describes your issue report we encourage you to file a new one.
+Before submitting a report, please search through the open and closed issues in this repository as well as through the [Known Issues](/docs/EnterpriseScaleAnalytics-KnownIssues.md). If a similar issue already exists, please upvote the existint issue comment(s) or leave a comment instead of opening a new issue. This helps us reduce the number issues and also simplifies the management on our side. Only if no existing item describes your issue report we encourage you to file a new one.
 
 ### Bug Report
 
-Submit new bug reports using the "Bug Report" issue template. When submitting a bug report, try to be as specific as possible by including a detailed description of how to reproduce the issue and also share error messages and screenshots if possible. This helps us throubleshoot the bug and apply fixes more quickly.
+Submit new bug reports using the "Bug Report" issue template. When submitting a bug report, please try to be as specific as possible by including a detailed description of how to reproduce the issue and also share any error messages or screenshots if possible. This will help us throubleshoot the bug/issue and apply fixes in a timely fashion.
 
 ### Feature Request
 
-New feature requests and ideas should be submitted using the "Feature Request & Ideas" issue template. Please be specific about the "What?" and "Why?" by being specific about what the feature entails and what the benefits of including this feature will be.
+New feature requests and ideas must be submitted using the "Feature Request & Ideas" issue template. Please be specific about the "What?" and "Why?" by sharing what the feature entails and what the benefits of including this feature will be.
 
 ### Documentation Issue
 
-Documentation issues should be submitted using the "Documentation Issue" issue template. Please be specific about what document needs to be updated and why.
+Documentation issues should be submitted using the "Documentation Issue" issue template. Please be specific about which document needs to be updated and why.
 
 ### Vulnerability Report
 
@@ -36,7 +36,7 @@ Please read through the [security policy](/SECURITY.md) before submitting a vuln
 
 ## Pull Requests
 
-We encourage users to not only submit issues but also start contributing to the repository by opening pull requests to fix issues that were submitted previously. Please always submit an issue before opening a pull request to make the team aware of the requested change and to be able to discuss the possible implications of changes. Some issues or features may be quick and simple to describe and understand others may require a spec definiion to agree on changes.
+We encourage users to not only submit issues but also start contributing to the repository by opening pull requests to fix issues that were submitted previously. Please always submit an issue before opening a pull request to make the team aware of the requested change and to be able to discuss the possible implications of proposed changes. Some issues or features may be quick and simple to describe and understand while others may require a detailed spec to agree on changes.
 
 ### Getting Started
 
