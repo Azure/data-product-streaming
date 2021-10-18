@@ -6,7 +6,7 @@ This project welcomes community contributions. The contributions could be [Issue
 
 ## Open Development Workflow
 
-The Customer Architecture Team (CAT) is very active in this GitHub repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repo and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository..
+The Customer Architecture Team (CAT) is very active in this GitHub repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repo and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository.
 
 All the work of the CAT team is executed in the public to ensure a high degree of transparency for the community. In addition, it allows the community to more easily contribute to the projects because everyone is aware of new features that are commited or issues that are existing within the projects.
 
@@ -89,6 +89,32 @@ If you want the team to review the changes, mark the pull request as "Ready for 
 ### Merge
 
 After the pull request has been reviewed and approved, the feature branch will be merged into the main branch and automatically closed and deleted.
+
+## Steering Committee
+
+The Enterprise-Scale Analytics Committee and its members (aka Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, and reference implementations. Voting members may be added once approved by the Steering Committee. All members abide by all Organization polices, including the code of conduct.
+
+### Committee Members
+
+The following users are Committee Members:
+
+| **NAME**             | **GitHub Handle** | **Affiliated Organization** |
+|:---------------------|:------------------|:----------------------------|
+| Marvin Buss          | @marvinbuss       | Microsoft                   |
+| Espen Brandt-Kjelsen | @esbran           | Microsoft                   |
+| Uday Pandya          | @uday31in         | Microsoft                   |
+
+### Committee Member Responsibilities
+
+Committee Members are responsible for reviewing and approving RFCs proposing new features or design changes. The initial Committee consists of Microsoft employees. It is expected that over time, community will grow and new community members will join Committee Members. Membership is heavily dependent on the level of contribution and expertise: individuals who contribute in meaningful ways to the project will be recognized accordingly.
+
+At any point in time, a Committee Member can nominate a strong community member to join the Committee. Nominations should be submitted in the form of RFCs detailing why that individual is qualified and how they will contribute. After the RFC has been discussed, a unanimous vote will be required for the new Committee Member to be confirmed.
+
+### Contribution scope for Enterprise-Scale Analytics
+
+The following is the scope of contributions to this repository:
+
+As the Azure platform evolves and new services and features are validated in production with customers, the design guidelines will be updated in the overall architecture context. With new Services, Resources, Resource properties and API versions, the implementation guide and reference implementation must be updated as appropriate.
 
 ## CLA
 
