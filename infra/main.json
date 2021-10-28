@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "9364043114231041781"
+      "templateHash": "8611719341920658776"
     }
   },
   "parameters": {
@@ -156,11 +156,11 @@
     },
     "tagsJoined": "[union(variables('tagsDefault'), parameters('tags'))]",
     "administratorUsername": "SqlServerMainUser",
-    "synapseDefaultStorageAccountSubscriptionId": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2]]",
-    "synapseDefaultStorageAccountResourceGroupName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4]]",
-    "streamanalyticsDefaultStorageAccountSubscriptionId": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2]]",
-    "streamanalyticsDefaultStorageAccountResourceGroupName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[4]]",
-    "streamanalyticsDefaultStorageAccountName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[8]]",
+    "synapseDefaultStorageAccountSubscriptionId": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2], subscription().subscriptionId)]",
+    "synapseDefaultStorageAccountResourceGroupName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4], resourceGroup().name)]",
+    "streamanalyticsDefaultStorageAccountSubscriptionId": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2], subscription().subscriptionId)]",
+    "streamanalyticsDefaultStorageAccountResourceGroupName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[4], resourceGroup().name)]",
+    "streamanalyticsDefaultStorageAccountName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
     "keyVault001Name": "[format('{0}-vault001', variables('name'))]",
     "synapse001Name": "[format('{0}-synapse001', variables('name'))]",
     "cosmosdb001Name": "[format('{0}-cosmos001', variables('name'))]",
