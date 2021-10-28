@@ -70,9 +70,9 @@ var tagsJoined = union(tagsDefault, tags)
 var administratorUsername = 'SqlServerMainUser'
 var synapseDefaultStorageAccountSubscriptionId = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(synapseDefaultStorageAccountFileSystemId, '/')[2] : subscription().subscriptionId
 var synapseDefaultStorageAccountResourceGroupName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(synapseDefaultStorageAccountFileSystemId, '/')[4] : resourceGroup().name
-var streamanalyticsDefaultStorageAccountSubscriptionId = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2] : subscription().subscriptionId
-var streamanalyticsDefaultStorageAccountResourceGroupName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4] : resourceGroup().name
-var streamanalyticsDefaultStorageAccountName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8] : 'incorrectSegmentLength'
+var streamanalyticsDefaultStorageAccountSubscriptionId = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2] : subscription().subscriptionId
+var streamanalyticsDefaultStorageAccountResourceGroupName = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4] : resourceGroup().name
+var streamanalyticsDefaultStorageAccountName = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8] : 'incorrectSegmentLength'
 var keyVault001Name = '${name}-vault001'
 var synapse001Name = '${name}-synapse001'
 var cosmosdb001Name = '${name}-cosmos001'
