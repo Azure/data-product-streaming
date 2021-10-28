@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "15660650364947472542"
+      "templateHash": "4247829362563977720"
     }
   },
   "parameters": {
@@ -1801,7 +1801,7 @@
             "value": "[parameters('streamanalyticsDefaultStorageAccountFileSystemId')]"
           },
           "streamanalyticsjobId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-06-01').outputs.streamanalyticsjob001Id.value]"
+            "value": "[if(parameters('enableStreamAnalytics'), reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-06-01').outputs.streamanalyticsjob001Id.value, '')]"
           }
         },
         "template": {

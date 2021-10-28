@@ -217,7 +217,7 @@ module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalytic
   scope: resourceGroup(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName)
   params: {
     storageAccountFileSystemId: streamanalyticsDefaultStorageAccountFileSystemId
-    streamanalyticsjobId: streamanalytics001.outputs.streamanalyticsjob001Id
+    streamanalyticsjobId: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Id : ''
   }
 }
 
