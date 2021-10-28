@@ -26,6 +26,10 @@ param tags object = {}
 param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
+@description('Specifies whether Azure Cosmos DB should be deployed as part of the template.')
+param enableCosmos bool = false
+@description('Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template.')
+param enableStreamAnalytics bool = false
 @description('Specifies the resource ID of the default storage account  file system for stream analytics.')
 param streamanalyticsDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the central purview instance.')
@@ -120,7 +124,7 @@ module synapse001RoleAssignmentStorage 'modules/auxiliary/synapseRoleAssignmentS
   }
 }
 
-module cosmosdb001 'modules/services/cosmosdb.bicep' = {
+module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
   name: 'cosmos001'
   scope: resourceGroup()
   params: {
@@ -177,7 +181,7 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
   }
 }
 
-module streamanalytics001 'modules/services/streamanalytics.bicep' = {
+module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableStreamAnalytics) {
   name: 'streamanalytics001'
   scope: resourceGroup()
   params: {
@@ -216,3 +220,5 @@ module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalytic
     streamanalyticsjobId: streamanalytics001.outputs.streamanalyticsjob001Id
   }
 }
+
+// Outputs
