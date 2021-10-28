@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "3309834102726554832"
+      "templateHash": "6835175596515276006"
     }
   },
   "parameters": {
@@ -1734,7 +1734,7 @@
       ]
     },
     {
-      "condition": "[parameters('enableRoleAssignments')]",
+      "condition": "[and(parameters('enableStreamAnalytics'), parameters('enableRoleAssignments'))]",
       "copy": {
         "name": "deploymentDelay",
         "count": "[length(range(0, 20))]",
@@ -1784,7 +1784,7 @@
       ]
     },
     {
-      "condition": "[parameters('enableRoleAssignments')]",
+      "condition": "[and(parameters('enableStreamAnalytics'), parameters('enableRoleAssignments'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "streamanalytics001RoleAssignmentStorage",
