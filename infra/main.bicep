@@ -31,7 +31,7 @@ param enableCosmos bool = false
 @description('Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template.')
 param enableStreamAnalytics bool = false
 @description('Specifies the resource ID of the default storage account  file system for stream analytics.')
-param streamanalyticsDefaultStorageAccountFileSystemId string
+param streamanalyticsDefaultStorageAccountFileSystemId string = ''
 @description('Specifies the resource ID of the central purview instance.')
 param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
