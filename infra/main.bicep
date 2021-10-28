@@ -28,6 +28,8 @@ param administratorPassword string
 param synapseDefaultStorageAccountFileSystemId string
 @description('Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
 param enableSqlPool bool = false
+@description('Specifies whether Azure SQL Server should be deployed as part of the template.')
+param enableSqlServer bool = false
 @description('Specifies whether Azure Cosmos DB should be deployed as part of the template.')
 param enableCosmos bool = false
 @description('Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template.')
@@ -139,7 +141,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
   }
 }
 
-module sql001 'modules/services/sql.bicep' = {
+module sql001 'modules/services/sql.bicep' = if(enableSqlServer) {
   name: 'sql001'
   scope: resourceGroup()
   params: {
@@ -191,7 +193,7 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableSt
     location: location
     tags: tagsJoined
     eventhubNamespaceId: eventhubNamespace001.outputs.eventhubNamespaceId
-    sqlServerId: sql001.outputs.sqlserverId
+    sqlServerId: enableSqlServer ? sql001.outputs.sqlserverId : ''
     storageAccountId: resourceId(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName, 'Microsoft.Storage/storageAccounts', streamanalyticsDefaultStorageAccountName)
     streamanalyticsclusterName: streamanalyticscluster001Name
     streamanalyticsclusterSkuCapacity: 36

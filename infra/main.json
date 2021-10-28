@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "8160321996166031508"
+      "templateHash": "8330284745485260728"
     }
   },
   "parameters": {
@@ -58,6 +58,13 @@
       "defaultValue": false,
       "metadata": {
         "description": "Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
+      }
+    },
+    "enableSqlServer": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether Azure SQL Server should be deployed as part of the template."
       }
     },
     "enableCosmos": {
@@ -929,6 +936,7 @@
       }
     },
     {
+      "condition": "[parameters('enableSqlServer')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "sql001",
@@ -1529,7 +1537,7 @@
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-06-01').outputs.eventhubNamespaceId.value]"
           },
           "sqlServerId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-06-01').outputs.sqlserverId.value]"
+            "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-06-01').outputs.sqlserverId.value, '')]"
           },
           "storageAccountId": {
             "value": "[resourceId(variables('streamanalyticsDefaultStorageAccountSubscriptionId'), variables('streamanalyticsDefaultStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts', variables('streamanalyticsDefaultStorageAccountName'))]"

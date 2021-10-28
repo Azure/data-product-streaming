@@ -50,7 +50,7 @@ resource streamanalyticscluster 'Microsoft.StreamAnalytics/clusters@2020-03-01' 
   properties: {}
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(storageAccountId)) {
+resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if(!empty(storageAccountId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameStorageAccount
   properties: {
@@ -69,7 +69,7 @@ resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.S
   }
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(sqlServerId)) {
+resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if(!empty(sqlServerId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameSqlServer
   properties: {
@@ -88,7 +88,7 @@ resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.Stream
   }
 }
 
-resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if (!empty(eventhubNamespaceId)) {
+resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsoft.StreamAnalytics/clusters/privateEndpoints@2020-03-01' = if(!empty(eventhubNamespaceId)) {
   parent: streamanalyticscluster
   name: streamanalyticsclusterManagedPrivateEndpointNameEventhubNamespace
   properties: {

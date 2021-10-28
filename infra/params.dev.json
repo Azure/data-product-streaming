@@ -23,6 +23,9 @@
         "enableSqlPool": {
             "value": true
         },
+        "enableSqlServer": {
+            "value": true
+        },
         "enableCosmos": {
             "value": true
         },
