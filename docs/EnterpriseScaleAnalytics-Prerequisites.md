@@ -26,6 +26,7 @@ The deployment and code artifacts include the following services:
 - [Azure SQL Database](https://docs.microsoft.com/azure/azure-sql/database/)
 - [SQL Pool](https://docs.microsoft.com/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is)
 - [SQL Server](https://docs.microsoft.com/sql/sql-server/?view=sql-server-ver15)
+- [Data Explorer](https://docs.microsoft.com/en-us/azure/synapse-analytics/data-explorer/data-explorer-overview) (optional)
 - [SQL Elastic Pool](https://docs.microsoft.com/azure/azure-sql/database/elastic-pool-overview)
 - [BigData Pool](https://docs.microsoft.com/sql/big-data-cluster/concept-data-pool?view=sql-server-ver15)
 

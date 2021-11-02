@@ -408,6 +408,18 @@
                                         "allowedValues": "[map(steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemApi.value, (item) => parse(concat('{\"label\":\"', item.name, '\",\"value\":\"', item.id, '\"}')))]",
                                         "required": true
                                     }
+                                },
+                                {
+                                    "name": "enableDataExplorerPool",
+                                    "label": "Enable Data Explorer Pool",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of an Azure Data Explorer Pool (Compute optimized, Extra small).",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of an Azure Data Explorer Pool (Compute optimized, Extra small)."
+                                    }
                                 }
                             ]
                         },
@@ -895,6 +907,7 @@
                 "prefix": "[if(empty(steps('basics').dataProductName.dataProductPrefix), '', steps('basics').dataProductName.dataProductPrefix)]",
                 "administratorPassword": "[if(empty(steps('generalSettings').synapseDeploymentSettings.administratorPassword.password), '', steps('generalSettings').synapseDeploymentSettings.administratorPassword.password)]",
                 "synapseDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId), '', steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId)]",
+                "enableDataExplorerPool": "[steps('generalSettings').synapseDeploymentSettings.enableDataExplorerPool]",
                 "streamanalyticsDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId), '', steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId)]",
                 "purviewId": "[if(empty(steps('generalSettings').dataGovernanceSettings.purviewId.id), '', steps('generalSettings').dataGovernanceSettings.purviewId.id)]",
                 "enableRoleAssignments": "[steps('generalSettings').generalSettings.enableRoleAssignments]",

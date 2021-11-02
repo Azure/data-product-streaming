@@ -19,6 +19,7 @@ param synapseComputeSubnetId string = ''
 param privateDnsZoneIdSynapseSql string = ''
 param privateDnsZoneIdSynapseDev string = ''
 param purviewId string = ''
+param enableDataExplorerPool bool = false
 
 // Variables
 var synapseDefaultStorageAccountFileSystemName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? last(split(synapseDefaultStorageAccountFileSystemId, '/')) : 'incorrectSegmentLength'
@@ -71,6 +72,28 @@ resource synapseSqlPool001 'Microsoft.Synapse/workspaces/sqlPools@2021-03-01' = 
     collation: 'SQL_Latin1_General_CP1_CI_AS'
     createMode: 'Default'
     storageAccountType: 'GRS'
+  }
+}
+
+resource dataExplorerPool001 'Microsoft.Synapse/workspaces/kustoPools@2021-06-01-preview' = if(enableDataExplorerPool) {
+  parent: synapse
+  name: 'dataexplorerpool001'
+  location: location
+  tags: tags
+  sku: {
+    name: 'Compute optimized'
+    size: 'Extra small'
+  }
+  properties: {
+    enablePurge: true
+    enableStreamingIngest: true
+    optimizedAutoscale: {
+      isEnabled: true
+      version: 1
+      minimum: 1
+      maximum: 4
+    }
+    workspaceUID: synapse.properties.workspaceUID
   }
 }
 

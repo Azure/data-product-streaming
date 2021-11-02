@@ -26,6 +26,8 @@ param tags object = {}
 param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
+@description('Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
+param enableDataExplorerPool bool = false
 @description('Specifies the resource ID of the default storage account  file system for stream analytics.')
 param streamanalyticsDefaultStorageAccountFileSystemId string
 @description('Specifies the resource ID of the central purview instance.')
@@ -106,6 +108,7 @@ module synapse001 'modules/services/synapse.bicep' = {
     privateDnsZoneIdSynapseDev: privateDnsZoneIdSynapseDev
     privateDnsZoneIdSynapseSql: privateDnsZoneIdSynapseSql
     purviewId: purviewId
+    enableDataExplorerPool: enableDataExplorerPool
     synapseComputeSubnetId: ''
     synapseDefaultStorageAccountFileSystemId: synapseDefaultStorageAccountFileSystemId
   }
