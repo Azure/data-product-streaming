@@ -90,7 +90,7 @@ resource dataExplorerPool001 'Microsoft.Synapse/workspaces/kustoPools@2021-06-01
     optimizedAutoscale: {
       isEnabled: true
       version: 1
-      minimum: 1
+      minimum: 2
       maximum: 4
     }
     workspaceUID: synapse.properties.workspaceUID

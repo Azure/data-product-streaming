@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "6673888845256047147"
+      "templateHash": "6516281244858881660"
     }
   },
   "parameters": {
@@ -368,7 +368,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "8161914792047585622"
+              "templateHash": "9684840304182755212"
             }
           },
           "parameters": {
@@ -499,7 +499,7 @@
                 "optimizedAutoscale": {
                   "isEnabled": true,
                   "version": 1,
-                  "minimum": 1,
+                  "minimum": 2,
                   "maximum": 4
                 },
                 "workspaceUID": "[reference(resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))).workspaceUID]"
