@@ -71,24 +71,24 @@ To begin, please open the [infra/params.dev.json](/infra/params.dev.json). In th
 
 | Parameter                                | Description  | Sample value |
 |:-----------------------------------------|:-------------|:-------------|
-| location | Specifies the location for all resources. | `northeurope` |
-| environment | Specifies the environment of the deployment. | `dev`, `tst` or `prd` |
-| prefix | Specifies the prefix for all resources created in this deployment. | `prefi` |
-| tags | Specifies the tags that you want to apply to all resources. | {`key`: `value`} |
-| administratorPassword | Specifies the administrator password of the sql servers. Will be automatically set in the workflow. **Leave this value as is.** | `<your-secure-password>` |
-| synapseDefaultStorageAccountFileSystemId | Specifies the resource ID of the default storage account file system for synapse. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
-| enableDataExplorerPool | Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is. | `true` or `false` |
-| streamanalyticsDefaultStorageAccountFileSystemId | Specifies the resource ID of the default storage account  file system for stream analytics. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
-| subnetId | Specifies the resource ID of the subnet to which all services will connect. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/virtualNetworks/{vnet-name}/subnets/{subnet-name}` |
-| purviewId | Specifies the resource ID of the central purview instance. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Purview/accounts/{purview-name}` |
-| enableRoleAssignments | Specifies whether role assignments should be enabled. **Leave this value as is.** | `true` or `false` |
-| privateDnsZoneIdKeyVault | Specifies the resource ID of the private DNS zone for KeyVault. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net` |
-| privateDnsZoneIdSynapseDev | Specifies the resource ID of the private DNS zone for Synapse Dev. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.dev.azuresynapse.net` |
-| privateDnsZoneIdSynapseSql | Specifies the resource ID of the private DNS zone for Synapse Sql. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.sql.azuresynapse.net` |
-| privateDnsZoneIdEventhubNamespace | Specifies the resource ID of the private DNS zone for EventHub Namespace. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net` |
-| privateDnsZoneIdCosmosdbSql | Specifies the resource ID of the private DNS zone for Cosmos Sql. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.documents.azure.com` |
-| privateDnsZoneIdSqlServer | Specifies the resource ID of the private DNS zone for Sql Server. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.database.windows.net` |
-| privateDnsZoneIdIothub | Specifies the resource ID of the private DNS zone for IoT Hub. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.azure-devices.net` |
+| `location` | Specifies the location for all resources. | `northeurope` |
+| `environment` | Specifies the environment of the deployment. | `dev`, `tst` or `prd` |
+| `prefix` | Specifies the prefix for all resources created in this deployment. | `prefi` |
+| `tags` | Specifies the tags that you want to apply to all resources. | {`key`: `value`} |
+| `administratorPassword` | Specifies the administrator password of the sql servers. Will be automatically set in the workflow. **Leave this value as is.** | `<your-secure-password>` |
+| `synapseDefaultStorageAccountFileSystemId` | Specifies the Resource ID of the default storage account file system for synapse. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
+| `enableDataExplorerPool` | Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is. | `true` or `false` |
+| `streamanalyticsDefaultStorageAccountFileSystemId` | Specifies the resource ID of the default Storage Account  file system for Stream Analytics. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
+| `subnetId` | Specifies the Resource ID of the subnet to which all services will connect. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/virtualNetworks/{vnet-name}/subnets/{subnet-name}` |
+| `purviewId` | Specifies the Resource ID of the central Purview instance. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Purview/accounts/{purview-name}` |
+| `enableRoleAssignments` | Specifies whether role assignments should be enabled. **Leave this value as is.** | `true` or `false` |
+| `privateDnsZoneIdKeyVault` | Specifies the Resource ID of the private DNS zone for KeyVault. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.vaultcore.azure.net` |
+| `privateDnsZoneIdSynapseDev` | Specifies the Resource ID of the private DNS zone for Synapse Dev. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.dev.azuresynapse.net` |
+| `privateDnsZoneIdSynapseSql` | Specifies the Resource ID of the private DNS zone for Synapse Sql. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.sql.azuresynapse.net` |
+| `privateDnsZoneIdEventhubNamespace` | Specifies the Resource ID of the private DNS zone for EventHub Namespace. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.servicebus.windows.net` |
+| `privateDnsZoneIdCosmosdbSql` | Specifies the Resource ID of the private DNS zone for Cosmos Sql. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.documents.azure.com` |
+| `privateDnsZoneIdSqlServer` | Specifies the Resource ID of the private DNS zone for Sql Server. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.database.windows.net` |
+| `privateDnsZoneIdIothub` | Specifies the Resource ID of the private DNS zone for IoT Hub. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.azure-devices.net` |
 
 ### Install Azure DevOps Pipelines GitHub Application
 
