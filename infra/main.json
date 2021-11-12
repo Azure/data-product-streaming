@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "6516281244858881660"
+      "templateHash": "4904463605986618764"
     }
   },
   "parameters": {
@@ -60,8 +60,37 @@
         "description": "Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
       }
     },
+    "enableSqlPool": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
+      }
+    },
+    "enableSqlServer": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether Azure SQL Server should be deployed as part of the template."
+      }
+    },
+    "enableCosmos": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether Azure Cosmos DB should be deployed as part of the template."
+      }
+    },
+    "enableStreamAnalytics": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template."
+      }
+    },
     "streamanalyticsDefaultStorageAccountFileSystemId": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "Specifies the resource ID of the default storage account  file system for stream analytics."
       }
@@ -148,11 +177,11 @@
     },
     "tagsJoined": "[union(variables('tagsDefault'), parameters('tags'))]",
     "administratorUsername": "SqlServerMainUser",
-    "synapseDefaultStorageAccountSubscriptionId": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2]]",
-    "synapseDefaultStorageAccountResourceGroupName": "[split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4]]",
-    "streamanalyticsDefaultStorageAccountSubscriptionId": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2]]",
-    "streamanalyticsDefaultStorageAccountResourceGroupName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[4]]",
-    "streamanalyticsDefaultStorageAccountName": "[split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[8]]",
+    "synapseDefaultStorageAccountSubscriptionId": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[2], subscription().subscriptionId)]",
+    "synapseDefaultStorageAccountResourceGroupName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[4], resourceGroup().name)]",
+    "streamanalyticsDefaultStorageAccountSubscriptionId": "[if(greaterOrEquals(length(split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[2], subscription().subscriptionId)]",
+    "streamanalyticsDefaultStorageAccountResourceGroupName": "[if(greaterOrEquals(length(split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[4], resourceGroup().name)]",
+    "streamanalyticsDefaultStorageAccountName": "[if(greaterOrEquals(length(split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('streamanalyticsDefaultStorageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
     "keyVault001Name": "[format('{0}-vault001', variables('name'))]",
     "synapse001Name": "[format('{0}-synapse001', variables('name'))]",
     "cosmosdb001Name": "[format('{0}-cosmos001', variables('name'))]",
@@ -354,6 +383,9 @@
           "enableDataExplorerPool": {
             "value": "[parameters('enableDataExplorerPool')]"
           },
+          "enableSqlPool": {
+            "value": "[parameters('enableSqlPool')]"
+          },
           "synapseComputeSubnetId": {
             "value": ""
           },
@@ -368,7 +400,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "9684840304182755212"
+              "templateHash": "3729296254687081623"
             }
           },
           "parameters": {
@@ -421,6 +453,10 @@
             "enableDataExplorerPool": {
               "type": "bool",
               "defaultValue": false
+            },
+            "enableSqlPool": {
+              "type": "bool",
+              "defaultValue": false
             }
           },
           "functions": [],
@@ -465,6 +501,7 @@
               }
             },
             {
+              "condition": "[parameters('enableSqlPool')]",
               "type": "Microsoft.Synapse/workspaces/sqlPools",
               "apiVersion": "2021-03-01",
               "name": "[format('{0}/{1}', parameters('synapseName'), 'sqlPool001')]",
@@ -785,6 +822,7 @@
       ]
     },
     {
+      "condition": "[parameters('enableCosmos')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "cosmos001",
@@ -938,6 +976,7 @@
       }
     },
     {
+      "condition": "[parameters('enableSqlServer')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "sql001",
@@ -1518,6 +1557,7 @@
       }
     },
     {
+      "condition": "[parameters('enableStreamAnalytics')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "streamanalytics001",
@@ -1537,7 +1577,7 @@
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-06-01').outputs.eventhubNamespaceId.value]"
           },
           "sqlServerId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-06-01').outputs.sqlserverId.value]"
+            "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-06-01').outputs.sqlserverId.value, '')]"
           },
           "storageAccountId": {
             "value": "[resourceId(variables('streamanalyticsDefaultStorageAccountSubscriptionId'), variables('streamanalyticsDefaultStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts', variables('streamanalyticsDefaultStorageAccountName'))]"
@@ -1758,7 +1798,7 @@
       ]
     },
     {
-      "condition": "[parameters('enableRoleAssignments')]",
+      "condition": "[and(parameters('enableStreamAnalytics'), parameters('enableRoleAssignments'))]",
       "copy": {
         "name": "deploymentDelay",
         "count": "[length(range(0, 20))]",
@@ -1808,7 +1848,7 @@
       ]
     },
     {
-      "condition": "[parameters('enableRoleAssignments')]",
+      "condition": "[and(parameters('enableStreamAnalytics'), parameters('enableRoleAssignments'))]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-06-01",
       "name": "streamanalytics001RoleAssignmentStorage",
@@ -1824,7 +1864,7 @@
             "value": "[parameters('streamanalyticsDefaultStorageAccountFileSystemId')]"
           },
           "streamanalyticsjobId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-06-01').outputs.streamanalyticsjob001Id.value]"
+            "value": "[if(parameters('enableStreamAnalytics'), reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-06-01').outputs.streamanalyticsjob001Id.value, '')]"
           }
         },
         "template": {
