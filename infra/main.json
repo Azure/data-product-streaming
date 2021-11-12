@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "4904463605986618764"
+      "templateHash": "545171273914945165"
     }
   },
   "parameters": {
@@ -53,18 +53,18 @@
         "description": "Specifies the resource ID of the default storage account file system for synapse."
       }
     },
-    "enableDataExplorerPool": {
-      "type": "bool",
-      "defaultValue": false,
-      "metadata": {
-        "description": "Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
-      }
-    },
     "enableSqlPool": {
       "type": "bool",
       "defaultValue": false,
       "metadata": {
         "description": "Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
+      }
+    },
+    "enableDataExplorerPool": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
       }
     },
     "enableSqlServer": {

@@ -26,10 +26,10 @@ param tags object = {}
 param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
-@description('Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
-param enableDataExplorerPool bool = false
 @description('Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
 param enableSqlPool bool = false
+@description('Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
+param enableDataExplorerPool bool = false
 @description('Specifies whether Azure SQL Server should be deployed as part of the template.')
 param enableSqlServer bool = false
 @description('Specifies whether Azure Cosmos DB should be deployed as part of the template.')
