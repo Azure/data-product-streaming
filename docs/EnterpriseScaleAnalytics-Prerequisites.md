@@ -28,6 +28,7 @@ The deployment and code artifacts include the following services:
 - [SQL Server](https://docs.microsoft.com/sql/sql-server/?view=sql-server-ver15) (optional)
 - [SQL Elastic Pool](https://docs.microsoft.com/azure/azure-sql/database/elastic-pool-overview) (optional)
 - [BigData Pool](https://docs.microsoft.com/sql/big-data-cluster/concept-data-pool?view=sql-server-ver15)
+- [Data Explorer](https://docs.microsoft.com/en-us/azure/synapse-analytics/data-explorer/data-explorer-overview) (optional)
 
 ## Code Structure
 

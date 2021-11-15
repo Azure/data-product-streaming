@@ -28,6 +28,8 @@ param administratorPassword string
 param synapseDefaultStorageAccountFileSystemId string
 @description('Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
 param enableSqlPool bool = false
+@description('Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
+param enableDataExplorerPool bool = false
 @description('Specifies whether Azure SQL Server should be deployed as part of the template.')
 param enableSqlServer bool = false
 @description('Specifies whether Azure Cosmos DB should be deployed as part of the template.')
@@ -114,6 +116,7 @@ module synapse001 'modules/services/synapse.bicep' = {
     privateDnsZoneIdSynapseDev: privateDnsZoneIdSynapseDev
     privateDnsZoneIdSynapseSql: privateDnsZoneIdSynapseSql
     purviewId: purviewId
+    enableDataExplorerPool: enableDataExplorerPool
     enableSqlPool: enableSqlPool
     synapseComputeSubnetId: ''
     synapseDefaultStorageAccountFileSystemId: synapseDefaultStorageAccountFileSystemId

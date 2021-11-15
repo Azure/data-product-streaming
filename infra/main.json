@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "8330284745485260728"
+      "templateHash": "545171273914945165"
     }
   },
   "parameters": {
@@ -58,6 +58,13 @@
       "defaultValue": false,
       "metadata": {
         "description": "Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
+      }
+    },
+    "enableDataExplorerPool": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is."
       }
     },
     "enableSqlServer": {
@@ -373,6 +380,9 @@
           "purviewId": {
             "value": "[parameters('purviewId')]"
           },
+          "enableDataExplorerPool": {
+            "value": "[parameters('enableDataExplorerPool')]"
+          },
           "enableSqlPool": {
             "value": "[parameters('enableSqlPool')]"
           },
@@ -390,7 +400,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "16920360437300226845"
+              "templateHash": "3729296254687081623"
             }
           },
           "parameters": {
@@ -439,6 +449,10 @@
             "purviewId": {
               "type": "string",
               "defaultValue": ""
+            },
+            "enableDataExplorerPool": {
+              "type": "bool",
+              "defaultValue": false
             },
             "enableSqlPool": {
               "type": "bool",
@@ -500,6 +514,32 @@
                 "collation": "SQL_Latin1_General_CP1_CI_AS",
                 "createMode": "Default",
                 "storageAccountType": "GRS"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))]"
+              ]
+            },
+            {
+              "condition": "[parameters('enableDataExplorerPool')]",
+              "type": "Microsoft.Synapse/workspaces/kustoPools",
+              "apiVersion": "2021-06-01-preview",
+              "name": "[format('{0}/{1}', parameters('synapseName'), 'dataexplorerpool001')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "Compute optimized",
+                "size": "Extra small"
+              },
+              "properties": {
+                "enablePurge": true,
+                "enableStreamingIngest": true,
+                "optimizedAutoscale": {
+                  "isEnabled": true,
+                  "version": 1,
+                  "minimum": 2,
+                  "maximum": 4
+                },
+                "workspaceUID": "[reference(resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))).workspaceUID]"
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))]"
