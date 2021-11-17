@@ -92,7 +92,11 @@ After the pull request has been reviewed and approved, the feature branch will b
 
 ## Steering Committee
 
-The Enterprise-Scale Analytics Committee and its members (aka Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, and reference implementations. Voting members may be added once approved by the Steering Committee. All members abide by all Organization polices, including the code of conduct.
+The Enterprise-Scale Analytics Committee and its members (aka Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, policy oversight, and reference implementations.
+
+Voting members may be added once approved by the Steering Committee. All members abide by all Organization polices, including the code of conduct. Voting members may be added or removed by no less than 3/4 affirmative vote of the Steering Committee. The membership of a Steering Committee member can terminate in case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
+
+The Steering Committee is bound by the Organization's code of conduct.
 
 ### Committee Members
 
@@ -103,6 +107,10 @@ The following users are Committee Members:
 | Marvin Buss          | @marvinbuss       | Microsoft                   |
 | Espen Brandt-Kjelsen | @esbran           | Microsoft                   |
 | Uday Pandya          | @uday31in         | Microsoft                   |
+| Amanjeet Singh       | @amanjeetsingh    | Microsoft                   |
+| Andre Hass           | @andrehass        | Microsoft                   |
+| Roberto Cavalcanti   | @rocavalc         | Microsoft                   |
+| Sanem Sever          | @sasever          | Microsoft                   |
 
 ### Committee Member Responsibilities
 
