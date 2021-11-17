@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1008.15138",
-      "templateHash": "545171273914945165"
+      "templateHash": "17034236217339968203"
     }
   },
   "parameters": {
@@ -1427,7 +1427,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1008.15138",
-              "templateHash": "14136803396131198526"
+              "templateHash": "16911628907097731293"
             }
           },
           "parameters": {
@@ -1465,7 +1465,7 @@
           "resources": [
             {
               "type": "Microsoft.EventHub/namespaces",
-              "apiVersion": "2021-01-01-preview",
+              "apiVersion": "2021-06-01-preview",
               "name": "[parameters('eventhubnamespaceName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
@@ -1478,6 +1478,7 @@
                 "capacity": "[parameters('eventhubnamespaceMinThroughput')]"
               },
               "properties": {
+                "disableLocalAuth": true,
                 "isAutoInflateEnabled": true,
                 "kafkaEnabled": true,
                 "maximumThroughputUnits": "[parameters('eventhubnamespaceMaxThroughput')]",
