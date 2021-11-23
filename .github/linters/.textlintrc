@@ -3,9 +3,9 @@
         "comments": true
     },
     "rules": {
-        "terminology": true,
-        "unexpanded-acronym": {
-            "ignore_acronyms": [
+        "terminology": {
+            "defaultTerms": true,
+            "exclude": [
                 "CLI Tools"
             ]
         }
