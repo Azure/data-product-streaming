@@ -1,0 +1,13 @@
+{
+    "filters": {
+        "comments": true
+    },
+    "rules": {
+        "terminology": true,
+        "unexpanded-acronym": {
+            "ignore_acronyms": [
+                "CLI Tools"
+            ]
+        }
+    }
+}
