@@ -21,7 +21,7 @@ param privateDnsZoneIdEventhubNamespace string = ''
 var eventhubNamespacePrivateEndpointName = '${eventhubNamespace.name}-private-endpoint'
 
 // Resources
-resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-01-01-preview' = {
+resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-06-01-preview' = {
   name: eventhubnamespaceName
   location: location
   tags: tags
@@ -34,6 +34,7 @@ resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-01-01-preview' = 
     capacity: eventhubnamespaceMinThroughput
   }
   properties: {
+    disableLocalAuth: true
     isAutoInflateEnabled: true
     kafkaEnabled: true
     maximumThroughputUnits: eventhubnamespaceMaxThroughput

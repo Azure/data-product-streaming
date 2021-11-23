@@ -85,7 +85,7 @@ To begin, please open the [infra/params.dev.json](/infra/params.dev.json). In th
 | `privateDnsZoneIdSqlServer` | Specifies the Resource ID of the private DNS zone for Sql Server. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.database.windows.net` |
 | `privateDnsZoneIdIothub` | Specifies the Resource ID of the private DNS zone for IoT Hub. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/privateDnsZones/privatelink.azure-devices.net` |
 
-## Merge these changes back to the `main` branch of your repo
+## Merge these changes back to the `main` branch of your repository
 
 After following the instructions and updating the parameters and variables in your repository in a separate branch and opening the pull request, you can merge the pull request back into the `main` branch of your repository by clicking on **Merge pull request**. Finally, you can click on **Delete branch** to clean up your repository. By doing this, you trigger the deployment workflow.
 
