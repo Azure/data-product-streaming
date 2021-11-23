@@ -6,7 +6,7 @@ This project welcomes community contributions. The contributions could be [Issue
 
 ## Open Development Workflow
 
-The Customer Architecture Team (CAT) is very active in this GitHub repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repo and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository.
+The Customer Architecture Team (CAT) actively manages and contributes to this repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repository and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository.
 
 All the work of the CAT team is executed in the public to ensure a high degree of transparency for the community. In addition, it allows the community to more easily contribute to the projects because everyone is aware of new features that are commited or issues that are existing within the projects.
 
@@ -40,7 +40,7 @@ We encourage users to not only submit issues but also start contributing to the 
 
 ### Getting Started
 
-Before starting to develop, you should fork this repo (see [this forking guide](https://guides.github.com/activities/forking/) for more information). Next, you should checkout the repo locally with `git clone git@github.com:{your_username}/{repo_name}.git`.
+Before starting to develop, you should fork this repository (see [this forking guide](https://guides.github.com/activities/forking/) for more information). Next, you should checkout the repository locally with `git clone git@github.com:{your_username}/{repo_name}.git`.
 
 ### Tooling
 
@@ -94,7 +94,7 @@ After the pull request has been reviewed and approved, the feature branch will b
 
 The Enterprise-Scale Analytics Committee and its members (aka Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, policy oversight, and reference implementations.
 
-Voting members may be added once approved by the Steering Committee. All members abide by all Organization polices, including the code of conduct. Voting members may be added or removed by no less than 3/4 affirmative vote of the Steering Committee. The membership of a Steering Committee member can terminate in case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
+Voting members may be added once approved by the Steering Committee. All members abide by all organizational polices, including the code of conduct. Voting members may be added or removed by no less than 3/4 affirmative vote of the Steering Committee. The membership of a Steering Committee member can terminate in case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
 
 The Steering Committee is bound by the Organization's code of conduct.
 
