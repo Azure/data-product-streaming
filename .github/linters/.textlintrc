@@ -6,7 +6,7 @@
         "terminology": {
             "defaultTerms": true,
             "exclude": [
-                "CLI Tools"
+                "CLI tool(s)?"
             ]
         }
     }
