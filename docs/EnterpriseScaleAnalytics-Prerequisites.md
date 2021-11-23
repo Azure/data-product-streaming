@@ -20,14 +20,15 @@ The deployment and code artifacts include the following services:
 - [Key Vault](https://docs.microsoft.com/azure/key-vault/general)
 - [Event Hub](https://docs.microsoft.com/azure/event-hubs/)
 - [IoT Hub](https://docs.microsoft.com/azure/iot-hub/about-iot-hub)
-- [Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-introduction)
-- [Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction)
+- [Stream Analytics](https://docs.microsoft.com/azure/stream-analytics/stream-analytics-introduction) (optional)
+- [Cosmos DB](https://docs.microsoft.com/azure/cosmos-db/introduction) (optional)
 - [Synapse Workspace](https://docs.microsoft.com/azure/synapse-analytics/)
-- [Azure SQL Database](https://docs.microsoft.com/azure/azure-sql/database/)
-- [SQL Pool](https://docs.microsoft.com/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is)
-- [SQL Server](https://docs.microsoft.com/sql/sql-server/?view=sql-server-ver15)
-- [SQL Elastic Pool](https://docs.microsoft.com/azure/azure-sql/database/elastic-pool-overview)
+- [Azure SQL Database](https://docs.microsoft.com/azure/azure-sql/database/) (optional)
+- [SQL Pool](https://docs.microsoft.com/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is) (optional)
+- [SQL Server](https://docs.microsoft.com/sql/sql-server/?view=sql-server-ver15) (optional)
+- [SQL Elastic Pool](https://docs.microsoft.com/azure/azure-sql/database/elastic-pool-overview) (optional)
 - [BigData Pool](https://docs.microsoft.com/sql/big-data-cluster/concept-data-pool?view=sql-server-ver15)
+- [Data Explorer](https://docs.microsoft.com/en-us/azure/synapse-analytics/data-explorer/data-explorer-overview) (optional)
 
 ## Code Structure
 
@@ -72,8 +73,8 @@ For now, we are recommending to select one of the regions mentioned below. The l
 
 Before we start with the deployment, please make sure that you have the following available:
 
-- A **Data Management Landing Zone** deployed. For more information, check the [Data Management Landing Zone](https://github.com/Azure/data-management-zone) repo.
-- A **Data Landing Zone** deployed. For more information, check the [Data Landing Zone](https://github.com/Azure/data-landing-zone) repo.
+- A **Data Management Landing Zone** deployed. For more information, check the [Data Management Landing Zone](https://github.com/Azure/data-management-zone) repository.
+- A **Data Landing Zone** deployed. For more information, check the [Data Landing Zone](https://github.com/Azure/data-landing-zone) repository.
 - A resource group within an Azure subscription
 - An Azure subscription. If you don't have an Azure subscription, [create your Azure free account today](https://azure.microsoft.com/free/).
 - [User Access Administrator](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#user-access-administrator) or [Owner](https://docs.microsoft.com/azure/role-based-access-control/built-in-roles#owner) access to the subscription to be able to create a service principal and role assignments for it.

@@ -408,6 +408,30 @@
                                         "allowedValues": "[map(steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemApi.value, (item) => parse(concat('{\"label\":\"', item.name, '\",\"value\":\"', item.id, '\"}')))]",
                                         "required": true
                                     }
+                                },
+                                {
+                                    "name": "enableSqlPool",
+                                    "label": "Enable SQL Pool",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of an Azure Synapse SQL Pool (DW100).",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of an Azure Synapse SQL Pool (DW100)."
+                                    }
+                                },
+                                {
+                                    "name": "enableDataExplorerPool",
+                                    "label": "Enable Data Explorer Pool",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of an Azure Data Explorer Pool (Compute optimized, Extra small).",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of an Azure Data Explorer Pool (Compute optimized, Extra small)."
+                                    }
                                 }
                             ]
                         },
@@ -430,9 +454,21 @@
                                     }
                                 },
                                 {
+                                    "name": "enableStreamAnalytics",
+                                    "label": "Enable Azure Stream Analytics",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of Azure Stream Analytics Cluster and Job.",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of Azure Stream Analytics Cluster and Job."
+                                    }
+                                },
+                                {
                                     "name": "infoBoxStreamAnalyticsDefaultStorageAccount",
                                     "type": "Microsoft.Common.InfoBox",
-                                    "visible": true,
+                                    "visible": "[equals(steps('generalSettings').streamAnalyticsDeploymentSettings.enableStreamAnalytics, true)]",
                                     "options": {
                                         "text": "We are recommending to use a dedicated container per Data Product in the workspace Data Lake and per Data Integration in the Raw as well as Enriched & Curated Data Lake. Please select the respective Data Lake in your Data Landing Zone (e.g. Raw - '{prefix}{environment}raw', Enriched & Curated - '{prefix}{environment}encur', Workspace - '{prefix}{environment}work') and select one of the pre-existing storage account containers (e.g. 'di001', 'di002', 'dp001', 'dp002') or create and select a new one for this deployment if all of them are already in use.",
                                         "style": "Info"
@@ -450,7 +486,7 @@
                                     "name": "streamAnalyticsDefaultStorageAccountId",
                                     "label": "Storage Account",
                                     "type": "Microsoft.Common.DropDown",
-                                    "visible": true,
+                                    "visible": "[equals(steps('generalSettings').streamAnalyticsDeploymentSettings.enableStreamAnalytics, true)]",
                                     "defaultValue": "",
                                     "toolTip": "Select the Storage account to which you want to connect the Stream Analytics Cluster.",
                                     "multiselect": false,
@@ -475,7 +511,7 @@
                                     "name": "streamanalyticsDefaultStorageAccountFileSystemId",
                                     "label": "Stream Analytics Default Storage Account Container",
                                     "type": "Microsoft.Common.DropDown",
-                                    "visible": true,
+                                    "visible": "[equals(steps('generalSettings').streamAnalyticsDeploymentSettings.enableStreamAnalytics, true)]",
                                     "defaultValue": "",
                                     "toolTip": "Default storage container for the Stream Analytics Cluster. If no option is shown, please make sure that a container exists within the storage account selected above.",
                                     "multiselect": false,
@@ -542,6 +578,30 @@
                                             "label": "",
                                             "uri": ""
                                         }
+                                    }
+                                },
+                                {
+                                    "name": "enableSqlServer",
+                                    "label": "Enable Azure SQL Server",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of Azure SQL Server.",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of Azure SQL Server."
+                                    }
+                                },
+                                {
+                                    "name": "enableCosmos",
+                                    "label": "Enable Azure Cosmos DB",
+                                    "type": "Microsoft.Common.CheckBox",
+                                    "visible": true,
+                                    "defaultValue": false,
+                                    "toolTip": "Enable the deployment of Azure Cosmos DB.",
+                                    "constraints": {
+                                        "required": false,
+                                        "validationMessage": "Enable the deployment of Azure Cosmos DB."
                                     }
                                 },
                                 {
@@ -691,17 +751,17 @@
                                     "label": "DNS A-Records are deployed through Azure Policy",
                                     "type": "Microsoft.Common.OptionsGroup",
                                     "visible": true,
-                                    "toolTip": "If 'No' is selected, you will have to choose private DNS Zones that will be used for the A-Record deployment of the private DNS Zones.",
-                                    "defaultValue": "Yes",
+                                    "toolTip": "If 'Yes' is selected, Private DNS Zone Groups will not be deployed and we are assuming that this gets created through Azure Policies. If this does not get created, you will not be able to access any resources within this environment.",
+                                    "defaultValue": "No",
                                     "constraints": {
                                         "allowedValues": [
                                             {
-                                                "label": "Yes",
-                                                "value": "yes"
-                                            },
-                                            {
                                                 "label": "No",
                                                 "value": "no"
+                                            },
+                                            {
+                                                "label": "Yes",
+                                                "value": "yes"
                                             }
                                         ]
                                     }
@@ -716,11 +776,11 @@
                                 },
                                 {
                                     "name": "privateDnsZonesSub",
-                                    "label": "Private DNS Zone Subscription",
+                                    "label": "Subscription with Private DNS Zones",
                                     "type": "Microsoft.Common.DropDown",
                                     "visible": "[equals(steps('connectivitySettings').privateDnsZones.automatedPrivateDnsZoneGroups, 'no')]",
                                     "defaultValue": "",
-                                    "toolTip": "Select the Subscription of your Private DNS Zones.",
+                                    "toolTip": "Select the Subscription of your Private DNS Zones. If you have deployed the Data Management Zone with a Firewall and Private DNS Zones then select the subscription that you have used for your Data Management Zone.",
                                     "multiselect": false,
                                     "selectAll": false,
                                     "filter": true,
@@ -895,6 +955,11 @@
                 "prefix": "[if(empty(steps('basics').dataProductName.dataProductPrefix), '', steps('basics').dataProductName.dataProductPrefix)]",
                 "administratorPassword": "[if(empty(steps('generalSettings').synapseDeploymentSettings.administratorPassword.password), '', steps('generalSettings').synapseDeploymentSettings.administratorPassword.password)]",
                 "synapseDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId), '', steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId)]",
+                "enableSqlPool": "[steps('generalSettings').synapseDeploymentSettings.enableSqlPool]",
+                "enableDataExplorerPool": "[steps('generalSettings').synapseDeploymentSettings.enableDataExplorerPool]",
+                "enableSqlServer": "[steps('generalSettings').generalSettings.enableSqlServer]",
+                "enableCosmos": "[steps('generalSettings').generalSettings.enableCosmos]",
+                "enableStreamAnalytics": "[steps('generalSettings').streamAnalyticsDeploymentSettings.enableStreamAnalytics]",
                 "streamanalyticsDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId), '', steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId)]",
                 "purviewId": "[if(empty(steps('generalSettings').dataGovernanceSettings.purviewId.id), '', steps('generalSettings').dataGovernanceSettings.purviewId.id)]",
                 "enableRoleAssignments": "[steps('generalSettings').generalSettings.enableRoleAssignments]",

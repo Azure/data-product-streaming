@@ -26,8 +26,18 @@ param tags object = {}
 param administratorPassword string
 @description('Specifies the resource ID of the default storage account file system for synapse.')
 param synapseDefaultStorageAccountFileSystemId string
+@description('Specifies whether an Azure SQL Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
+param enableSqlPool bool = false
+@description('Specifies whether an Azure Data Explorer Pool should be deployed inside your Synapse workspace as part of the template. If you selected dataFactory as processingService, leave this value as is.')
+param enableDataExplorerPool bool = false
+@description('Specifies whether Azure SQL Server should be deployed as part of the template.')
+param enableSqlServer bool = false
+@description('Specifies whether Azure Cosmos DB should be deployed as part of the template.')
+param enableCosmos bool = false
+@description('Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template.')
+param enableStreamAnalytics bool = false
 @description('Specifies the resource ID of the default storage account  file system for stream analytics.')
-param streamanalyticsDefaultStorageAccountFileSystemId string
+param streamanalyticsDefaultStorageAccountFileSystemId string = ''
 @description('Specifies the resource ID of the central purview instance.')
 param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
@@ -64,11 +74,11 @@ var tagsDefault = {
 }
 var tagsJoined = union(tagsDefault, tags)
 var administratorUsername = 'SqlServerMainUser'
-var synapseDefaultStorageAccountSubscriptionId = split(synapseDefaultStorageAccountFileSystemId, '/')[2]
-var synapseDefaultStorageAccountResourceGroupName = split(synapseDefaultStorageAccountFileSystemId, '/')[4]
-var streamanalyticsDefaultStorageAccountSubscriptionId = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2]
-var streamanalyticsDefaultStorageAccountResourceGroupName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4]
-var streamanalyticsDefaultStorageAccountName = split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8]
+var synapseDefaultStorageAccountSubscriptionId = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(synapseDefaultStorageAccountFileSystemId, '/')[2] : subscription().subscriptionId
+var synapseDefaultStorageAccountResourceGroupName = length(split(synapseDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(synapseDefaultStorageAccountFileSystemId, '/')[4] : resourceGroup().name
+var streamanalyticsDefaultStorageAccountSubscriptionId = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[2] : subscription().subscriptionId
+var streamanalyticsDefaultStorageAccountResourceGroupName = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[4] : resourceGroup().name
+var streamanalyticsDefaultStorageAccountName = length(split(streamanalyticsDefaultStorageAccountFileSystemId, '/')) >= 13 ? split(streamanalyticsDefaultStorageAccountFileSystemId, '/')[8] : 'incorrectSegmentLength'
 var keyVault001Name = '${name}-vault001'
 var synapse001Name = '${name}-synapse001'
 var cosmosdb001Name = '${name}-cosmos001'
@@ -106,6 +116,8 @@ module synapse001 'modules/services/synapse.bicep' = {
     privateDnsZoneIdSynapseDev: privateDnsZoneIdSynapseDev
     privateDnsZoneIdSynapseSql: privateDnsZoneIdSynapseSql
     purviewId: purviewId
+    enableDataExplorerPool: enableDataExplorerPool
+    enableSqlPool: enableSqlPool
     synapseComputeSubnetId: ''
     synapseDefaultStorageAccountFileSystemId: synapseDefaultStorageAccountFileSystemId
   }
@@ -120,7 +132,7 @@ module synapse001RoleAssignmentStorage 'modules/auxiliary/synapseRoleAssignmentS
   }
 }
 
-module cosmosdb001 'modules/services/cosmosdb.bicep' = {
+module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
   name: 'cosmos001'
   scope: resourceGroup()
   params: {
@@ -132,7 +144,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = {
   }
 }
 
-module sql001 'modules/services/sql.bicep' = {
+module sql001 'modules/services/sql.bicep' = if(enableSqlServer) {
   name: 'sql001'
   scope: resourceGroup()
   params: {
@@ -177,14 +189,14 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
   }
 }
 
-module streamanalytics001 'modules/services/streamanalytics.bicep' = {
+module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableStreamAnalytics) {
   name: 'streamanalytics001'
   scope: resourceGroup()
   params: {
     location: location
     tags: tagsJoined
     eventhubNamespaceId: eventhubNamespace001.outputs.eventhubNamespaceId
-    sqlServerId: sql001.outputs.sqlserverId
+    sqlServerId: enableSqlServer ? sql001.outputs.sqlserverId : ''
     storageAccountId: resourceId(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName, 'Microsoft.Storage/storageAccounts', streamanalyticsDefaultStorageAccountName)
     streamanalyticsclusterName: streamanalyticscluster001Name
     streamanalyticsclusterSkuCapacity: 36
@@ -194,7 +206,7 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = {
 }
 
 @batchSize(1)
-module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): if (enableRoleAssignments) {
+module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): if (enableStreamAnalytics && enableRoleAssignments) {
   name: 'delay-${i}'
   dependsOn: [
     streamanalytics001
@@ -205,7 +217,7 @@ module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): 
   }
 }]
 
-module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalyticsRoleAssignmentStorage.bicep' = if (enableRoleAssignments) {
+module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalyticsRoleAssignmentStorage.bicep' = if (enableStreamAnalytics && enableRoleAssignments) {
   name: 'streamanalytics001RoleAssignmentStorage'
   dependsOn: [
     deploymentDelay
@@ -213,6 +225,8 @@ module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalytic
   scope: resourceGroup(streamanalyticsDefaultStorageAccountSubscriptionId, streamanalyticsDefaultStorageAccountResourceGroupName)
   params: {
     storageAccountFileSystemId: streamanalyticsDefaultStorageAccountFileSystemId
-    streamanalyticsjobId: streamanalytics001.outputs.streamanalyticsjob001Id
+    streamanalyticsjobId: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Id : ''
   }
 }
+
+// Outputs

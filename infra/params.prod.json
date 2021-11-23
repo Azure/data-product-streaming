@@ -20,6 +20,21 @@
         "synapseDefaultStorageAccountFileSystemId": {
             "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prd-storage/providers/Microsoft.Storage/storageAccounts/dlz01prdencur/blobServices/default/containers/di002"
         },
+        "enableSqlPool": {
+            "value": true
+        },
+        "enableDataExplorerPool": {
+            "value": true
+        },
+        "enableSqlServer": {
+            "value": true
+        },
+        "enableCosmos": {
+            "value": true
+        },
+        "enableStreamAnalytics": {
+            "value": true
+        },
         "streamanalyticsDefaultStorageAccountFileSystemId": {
             "value": "/subscriptions/2150d511-458f-43b9-8691-6819ba2e6c7b/resourceGroups/dlz01-prd-storage/providers/Microsoft.Storage/storageAccounts/dlz01prdencur/blobServices/default/containers/di002"
         },
