@@ -54,9 +54,10 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           region: ${{ env.AZURE_LOCATION }}
-          template: ${{ github.workspace }}/infra/main.bicep
+          template: ${{ github.workspace }}/infra/main.json
           parameters: ${{ github.workspace }}/infra/params.dev.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
           deploymentMode: Validate
+          deploymentName: "DataProduct-${{ github.sha }}"
           failOnStdErr: false
 
       # Deploy Data Product - what-if
@@ -68,9 +69,10 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           region: ${{ env.AZURE_LOCATION }}
-          template: ${{ github.workspace }}/infra/main.bicep
+          template: ${{ github.workspace }}/infra/main.json
           parameters: ${{ github.workspace }}/infra/params.dev.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
           deploymentMode: Incremental
+          deploymentName: "DataProduct-${{ github.sha }}"
           failOnStdErr: false
           additionalArguments: "--what-if --what-if-exclude-change-types Ignore NoChange Unsupported --what-if-result-format FullResourcePayloads"
 
@@ -119,9 +121,10 @@ jobs:
           subscriptionId: ${{ env.AZURE_SUBSCRIPTION_ID }}
           resourceGroupName: ${{ env.AZURE_RESOURCE_GROUP_NAME }}
           region: ${{ env.AZURE_LOCATION }}
-          template: ${{ github.workspace }}/infra/main.bicep
+          template: ${{ github.workspace }}/infra/main.json
           parameters: ${{ github.workspace }}/infra/params.dev.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
           deploymentMode: Incremental
+          deploymentName: "DataProduct-${{ github.sha }}"
           failOnStdErr: false
 
       # Log out from Azure

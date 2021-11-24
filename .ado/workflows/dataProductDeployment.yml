@@ -74,7 +74,7 @@ stages:
               resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
               location: ${{ variables.AZURE_LOCATION }}
               templateLocation: "Linked artifact"
-              csmFile: "$(System.DefaultWorkingDirectory)/infra/main.bicep"
+              csmFile: "$(System.DefaultWorkingDirectory)/infra/main.json"
               csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/params.dev.json"
               deploymentMode: "Validation"
               overrideParameters: >
@@ -98,7 +98,7 @@ stages:
                   --resource-group ${{ variables.AZURE_RESOURCE_GROUP_NAME }} `
                   --exclude-change-types Ignore NoChange Unsupported `
                   --mode "Incremental" `
-                  --template-file "$(System.DefaultWorkingDirectory)/infra/main.bicep" `
+                  --template-file "$(System.DefaultWorkingDirectory)/infra/main.json" `
                   --parameters "$(System.DefaultWorkingDirectory)/infra/params.dev.json" administratorPassword="$(password)" `
                   --result-format "FullResourcePayloads"
                 
@@ -159,7 +159,7 @@ stages:
               resourceGroupName: ${{ variables.AZURE_RESOURCE_GROUP_NAME }}
               location: ${{ variables.AZURE_LOCATION }}
               templateLocation: "Linked artifact"
-              csmFile: "$(System.DefaultWorkingDirectory)/infra/main.bicep"
+              csmFile: "$(System.DefaultWorkingDirectory)/infra/main.json"
               csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/params.dev.json"
               deploymentMode: "Incremental"
               overrideParameters: >
