@@ -70,9 +70,9 @@ jobs:
           region: ${{ env.AZURE_LOCATION }}
           template: ${{ github.workspace }}/infra/main.bicep
           parameters: ${{ github.workspace }}/infra/params.dev.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
-          deploymentMode: Validate
+          deploymentMode: Incremental
           failOnStdErr: false
-          additionalArguments: "--what-if --what-if-exclude-change-types Ignore NoChange Unsupported"
+          additionalArguments: "--what-if --what-if-exclude-change-types Ignore NoChange Unsupported --what-if-result-format FullResourcePayloads"
 
       # Log out from Azure
       - name: Log out from Azure
