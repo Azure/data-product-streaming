@@ -36,7 +36,7 @@ jobs:
   deployment_dev:
     uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
     name: "Deployment of IaC templates - Dev"
-    needs: [ validation ]
+    needs: [ validation_dev ]
     if: github.event_name == 'push'
     with:
       environment: "dev"
