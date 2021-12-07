@@ -6,7 +6,7 @@ on:
     paths:
       - "code/**"
       - "infra/**"
-      - ".github/workflows/dataProductDeployment.yml"
+      - ".github/workflows/dataProductDeploymentDev.yml"
       - ".github/workflows/validationTemplate.yml"
       - ".github/workflows/deploymentTemplate.yml"
   pull_request:
@@ -14,7 +14,7 @@ on:
     paths:
       - "code/**"
       - "infra/**"
-      - ".github/workflows/dataProductDeployment.yml"
+      - ".github/workflows/dataProductDeploymentDev.yml"
       - ".github/workflows/validationTemplate.yml"
       - ".github/workflows/deploymentTemplate.yml"
 

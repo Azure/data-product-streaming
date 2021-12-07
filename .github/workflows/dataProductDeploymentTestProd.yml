@@ -8,7 +8,7 @@ on:
     paths:
       - "code/**"
       - "infra/**"
-      - ".github/workflows/dataProductDeployment.yml"
+      - ".github/workflows/dataProductDeploymentTestProd.yml"
       - ".github/workflows/validationTemplate.yml"
       - ".github/workflows/deploymentTemplate.yml"
 
