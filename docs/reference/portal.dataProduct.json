@@ -938,7 +938,7 @@
                             "type": "Microsoft.Common.TagsByResource",
                             "visible": true,
                             "resources": [
-                                "EnterpriseScaleAnalytics"
+                                "DataManagementAnalytics"
                             ]
                         }
                     ]
@@ -971,7 +971,7 @@
                 "privateDnsZoneIdCosmosdbSql": "[if(empty(steps('connectivitySettings').privateDnsZones.privateDnsZoneIdCosmosdbSql), '', steps('connectivitySettings').privateDnsZones.privateDnsZoneIdCosmosdbSql)]",
                 "privateDnsZoneIdSqlServer": "[if(empty(steps('connectivitySettings').privateDnsZones.privateDnsZoneIdSqlServer), '', steps('connectivitySettings').privateDnsZones.privateDnsZoneIdSqlServer)]",
                 "privateDnsZoneIdIothub": "[if(empty(steps('connectivitySettings').privateDnsZones.privateDnsZoneIdIothub), '', steps('connectivitySettings').privateDnsZones.privateDnsZoneIdIothub)]",
-                "tags": "[if(not(contains(steps('tags').tagsByResource, 'EnterpriseScaleAnalytics')), parse('{}'), first(map(parse(concat('[', string(steps('tags').tagsByResource), ']')), (item) => item.EnterpriseScaleAnalytics)))]"
+                "tags": "[if(not(contains(steps('tags').tagsByResource, 'DataManagementAnalytics')), parse('{}'), first(map(parse(concat('[', string(steps('tags').tagsByResource), ']')), (item) => item.DataManagementAnalytics)))]"
             }
         }
     }
