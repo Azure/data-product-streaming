@@ -21,10 +21,6 @@ on:
         type: string
         default: "northeurope"
         description: "Specifies the location name of the deployment."
-    secrets:
-      azure_credentials:
-        required: true
-        description: "Specifies the azure credentials used for authentication."
 
 jobs:
   deployment:
@@ -45,7 +41,7 @@ jobs:
         id: azure_login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.azure_credentials }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Generate Password 001
       - name: Generate Password 001

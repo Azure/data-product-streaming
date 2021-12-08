@@ -27,19 +27,15 @@ jobs:
   validation_dev:
     uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@${{ github.ref_name }}"
     name: "Validation of IaC templates - Dev"
-    environment: "dev"
     with:
       environment: "dev"
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_DEV }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_DEV }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
-    secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_dev:
     uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
     name: "Deployment of IaC templates - Dev"
-    environment: "dev"
     needs: [ validation_dev ]
     if: github.event_name == 'push'
     with:
@@ -47,5 +43,3 @@ jobs:
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_DEV }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_DEV }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
-    secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
