@@ -6,17 +6,13 @@ on:
     paths:
       - "code/**"
       - "infra/**"
-      - ".github/workflows/dataProductDeploymentDev.yml"
-      - ".github/workflows/validationTemplate.yml"
-      - ".github/workflows/deploymentTemplate.yml"
+      - ".github/workflows/**"
   pull_request:
     branches: [ main ]
     paths:
       - "code/**"
       - "infra/**"
-      - ".github/workflows/dataProductDeploymentDev.yml"
-      - ".github/workflows/validationTemplate.yml"
-      - ".github/workflows/deploymentTemplate.yml"
+      - ".github/workflows/**"
 
 env:
   AZURE_SUBSCRIPTION_ID_DEV: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
