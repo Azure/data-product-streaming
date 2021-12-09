@@ -44,7 +44,7 @@ jobs:
         id: azure_login
         uses: azure/login@v1
         with:
-          creds: ${{ inputs.azure_credentials }}
+          creds: ${{ secrets.azure_credentials }}
 
       # Generate Password 001
       - name: Generate Password 001
