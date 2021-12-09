@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - run: |
-          echo ${{ github.ref_name }}
+          echo ${{ github.sha }}
           echo ${{ github.repository }}
         
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
