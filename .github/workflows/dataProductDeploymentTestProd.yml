@@ -28,6 +28,8 @@ jobs:
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_TEST }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_TEST }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   validation_prod:
     uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@${{ github.ref_name }}"
@@ -38,6 +40,8 @@ jobs:
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_PROD }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_PROD }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_test:
     uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
@@ -49,6 +53,8 @@ jobs:
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_TEST }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_TEST }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
   deployment_prod:
     uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
@@ -60,3 +66,5 @@ jobs:
       azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_PROD }}
       azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_PROD }}
       azure_location_name: ${{ env.AZURE_LOCATION }}
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
