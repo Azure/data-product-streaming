@@ -21,11 +21,11 @@ on:
 env:
   AZURE_SUBSCRIPTION_ID_DEV: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
   AZURE_RESOURCE_GROUP_NAME_DEV: "dlz01-dev-di002"                  # Update to '{dataLandingZoneName}-rg'
-  AZURE_LOCATION: "northeurope"                                 # Update to '{regionName}'
+  AZURE_LOCATION: "northeurope"                                     # Update to '{regionName}'
 
 jobs:
   validation_dev:
-    uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@marvinbuss/what_if"
     name: "Validation of IaC templates - Dev"
     with:
       environment: "dev"
@@ -36,7 +36,7 @@ jobs:
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_dev:
-    uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@marvinbuss/what_if"
     name: "Deployment of IaC templates - Dev"
     needs: [ validation_dev ]
     if: github.event_name == 'push'
