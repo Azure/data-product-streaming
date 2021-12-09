@@ -25,7 +25,7 @@ env:
 
 jobs:
   validation_dev:
-    uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@marvinbuss/what_if"
+    uses: "Azure/data-product-streaming/.github/workflows/validationTemplate.yml@marvinbuss/what_if"
     name: "Validation of IaC templates - Dev"
     with:
       environment: "dev"
@@ -36,7 +36,7 @@ jobs:
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_dev:
-    uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@marvinbuss/what_if"
+    uses: "Azure/data-product-streaming/.github/workflows/deploymentTemplate.yml@marvinbuss/what_if"
     name: "Deployment of IaC templates - Dev"
     needs: [ validation_dev ]
     if: github.event_name == 'push'
