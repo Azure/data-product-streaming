@@ -1,16 +1,14 @@
 # Contributor's Guide
 
-This project welcomes community contributions. The contributions could be [Issues](#issue-reports) or [Pull Requests](#pull-requests), any form of contribution is welome. Please note that by participating in this project, you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md) and the terms of the [CLA](#cla).
+This project welcomes community contributions in the form of [Issues](#issue-reports) and [Pull Requests](#pull-requests). Please note that by participating in this project, you agree to abide by the [Code of Conduct](/CODE_OF_CONDUCT.md) and the terms of the [CLA](#cla).
 
 > If you have a question, have discovered an issue or perhaps you would like to propose an enhancement or idea, please file an issue report **BEFORE** commencing work on it.
 
-## Open Development Workflow
+## Contribution scope for Enterprise-Scale Analytics
 
-The Customer Architecture Team (CAT) actively manages and contributes to this repository and carries out all the development work in the public. New issues, ideas or feature requests are filed in the repository and fixes/new implementations are implemented through pull requests that are linked to their respective issues. Code reviews can be followed as well to learn about the principles which the team follows in building and maintaining artefacts related to this repository.
+The following is the scope of contributions to this repository:
 
-All the work of the CAT team is executed in the public to ensure a high degree of transparency for the community. In addition, it allows the community to more easily contribute to the projects because everyone is aware of new features that are commited or issues that are existing within the projects.
-
-Working in the public also ensures a high-quality bar and allows open discussions about the why and how of new developments.
+As the Azure platform evolves and new services and features are validated in production with customers, the design guidelines will be updated in the overall architecture context. With new Services, Resources, Resource properties and API versions, the implementation guide and reference implementation must be updated as appropriate.
 
 ## Issue Reports
 
@@ -90,17 +88,13 @@ If you want the team to review the changes, mark the pull request as "Ready for 
 
 After the pull request has been reviewed and approved, the feature branch will be merged into the main branch and automatically closed and deleted.
 
-## Steering Committee
+## Steering Committee and Stewardship of the project
 
-The Enterprise-Scale Analytics Committee and its members (aka Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, policy oversight, and reference implementations.
+The Enterprise-Scale Analytics Committee and its members (aka Steering Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, policy oversight, and reference implementations. Membership to steering committee will be solely baesd on active contribution and thought leadership in the preject and community.
 
-Voting members may be added once approved by the Steering Committee. All members abide by all organizational polices, including the code of conduct. Voting members may be added or removed by no less than 3/4 affirmative vote of the Steering Committee. The membership of a Steering Committee member can terminate in case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
+Voting members may be added once approved by the Steering Committee. All members abide by all organizational polices, including the code of conduct. The membership of a Steering Committee member can be withdrawn in the case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
 
-The Steering Committee is bound by the Organization's code of conduct.
-
-### Committee Members
-
-The following users are Committee Members:
+The following users are Steering Committee Members:
 
 | **NAME**             | **GitHub Handle** | **Affiliated Organization** |
 |:---------------------|:------------------|:----------------------------|
@@ -112,17 +106,22 @@ The following users are Committee Members:
 | Roberto Cavalcanti   | @rocavalc         | Microsoft                   |
 | Sanem Sever          | @sasever          | Microsoft                   |
 
-### Committee Member Responsibilities
+### Steering Committee Member Responsibilities
 
 Committee Members are responsible for reviewing and approving RFCs proposing new features or design changes. The initial Committee consists of Microsoft employees. It is expected that over time, community will grow and new community members will join Committee Members. Membership is heavily dependent on the level of contribution and expertise: individuals who contribute in meaningful ways to the project will be recognized accordingly.
 
-At any point in time, a Committee Member can nominate a strong community member to join the Committee. Nominations should be submitted in the form of RFCs detailing why that individual is qualified and how they will contribute. After the RFC has been discussed, a unanimous vote will be required for the new Committee Member to be confirmed.
+At any point in time, a Committee Member can nominate a strong community member to join the Steering Committee. Nominations should be submitted in the form of RFCs detailing why that individual is qualified and how they will contribute. After the RFC has been discussed, a unanimous vote will be required for the new Committee Member to be confirmed.
 
-### Contribution scope for Enterprise-Scale Analytics
+## Community Colloboration
 
-The following is the scope of contributions to this repository:
+Established community members are expected to demonstrate their adherence to the principles in this document, familiarity with project organization, roles, policies, procedures, conventions, etc., and technical and/or writing ability. Role-specific expectations, responsibilities, and requirements are enumerated below, adhereing the principle of Opensource contribution and governance:
 
-As the Azure platform evolves and new services and features are validated in production with customers, the design guidelines will be updated in the overall architecture context. With new Services, Resources, Resource properties and API versions, the implementation guide and reference implementation must be updated as appropriate.
+| Role | Responsibilities | Requirements |
+| -----| ---------------- | ------------ |
+| Member | Active contributor in the community | Sponsored by 2 reviewers and multiple contributions to the project |
+| Reviewer | Review contributions from other members | History of review and authorship in the project |
+| Approver | Contributions acceptance approval| Highly experienced active reviewer and contributor to the project |
+| Steering Committee | Set direction and priorities for the project | Demonstrated responsibility and excellent technical judgement for the the project |
 
 ## CLA
 
