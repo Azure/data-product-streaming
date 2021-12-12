@@ -4,7 +4,7 @@ This project welcomes community contributions in the form of [Issues](#issue-rep
 
 > If you have a question, have discovered an issue or perhaps you would like to propose an enhancement or idea, please file an issue report **BEFORE** commencing work on it.
 
-## Contribution scope for Enterprise-Scale Analytics
+## Contribution scope for Data Management & Analytics Scenario
 
 The following is the scope of contributions to this repository:
 
@@ -14,7 +14,7 @@ As the Azure platform evolves and new services and features are validated in pro
 
 We are encouraging you to select between a [Bug Report](#bug-report), a [Feature Request](#feature-request), a [Documentation Issue](#documentation-issue) and a [Vulnerability Report](#vulnerability-report) when opening a new Issue in this repository. Please provide all the required information for the respective issue reports and make sure you accept the [Code of Conduct](/CODE_OF_CONDUCT.md).
 
-Before submitting a report, please search through the open and closed issues in this repository as well as through the [Known Issues](/docs/EnterpriseScaleAnalytics-KnownIssues.md). If a similar issue already exists, please upvote the existint issue comment(s) or leave a comment instead of opening a new issue. This helps us reduce the number issues and also simplifies the management on our side. Only if no existing item describes your issue report we encourage you to file a new one.
+Before submitting a report, please search through the open and closed issues in this repository as well as through the [Known Issues](/docs/DataManagementAnalytics-KnownIssues.md). If a similar issue already exists, please upvote the existint issue comment(s) or leave a comment instead of opening a new issue. This helps us reduce the number issues and also simplifies the management on our side. Only if no existing item describes your issue report we encourage you to file a new one.
 
 ### Bug Report
 
@@ -90,7 +90,7 @@ After the pull request has been reviewed and approved, the feature branch will b
 
 ## Steering Committee and Stewardship of the project
 
-The Enterprise-Scale Analytics Committee and its members (aka Steering Committee Members) are the primary caretakers of the Enterprise-Scale Analytics repos including language, design, policy oversight, and reference implementations. Membership to steering committee will be solely baesd on active contribution and thought leadership in the preject and community.
+The Data Management & Analytics Scenario Committee and its members (aka Steering Committee Members) are the primary caretakers of the Data Management & Analytics Scenario repos including language, design, policy oversight, and reference implementations. Membership to steering committee will be solely baesd on active contribution and thought leadership in the preject and community.
 
 Voting members may be added once approved by the Steering Committee. All members abide by all organizational polices, including the code of conduct. The membership of a Steering Committee member can be withdrawn in the case of written notice of resignation or if the member is unreachable or unresponsive for more than three months.
 
