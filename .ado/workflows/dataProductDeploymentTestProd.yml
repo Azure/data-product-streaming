@@ -7,7 +7,7 @@ trigger:
       - releases/*
   tags:
     include:
-    - '*'
+      - v*
   paths:
     include:
       - code/*
