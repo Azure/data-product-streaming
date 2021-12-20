@@ -8,20 +8,16 @@ on:
         type: string
         default: "dev"
         description: "Specifies the environment of the deployment."
+    secrets:
       azure_subscription_id:
         required: true
-        type: string
         description: "Specifies the subscription id of the deployment."
       azure_resource_group_name:
         required: true
-        type: string
         description: "Specifies the resource group name of the deployment."
       azure_location_name:
         required: true
-        type: string
-        default: "northeurope"
         description: "Specifies the location name of the deployment."
-    secrets:
       azure_credentials:
         required: true
         description: "Specifies the azure credentials used for authentication."
@@ -60,9 +56,9 @@ jobs:
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
-          subscriptionId: ${{ inputs.azure_subscription_id }}
-          resourceGroupName: ${{ inputs.azure_resource_group_name }}
-          region: ${{ inputs.azure_location_name }}
+          subscriptionId: ${{ secrets.azure_subscription_id }}
+          resourceGroupName: ${{ secrets.azure_resource_group_name }}
+          region: ${{ secrets.azure_location_name }}
           template: ${{ github.workspace }}/infra/main.json
           parameters: ${{ github.workspace }}/infra/params.${{ inputs.environment }}.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
           deploymentMode: Incremental

@@ -13,58 +13,55 @@ on:
       - ".github/workflows/deploymentTemplate.yml"
 
 env:
-  AZURE_SUBSCRIPTION_ID_TEST: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME_TEST: "dlz01-dev-di002"                  # Update to '{dataLandingZoneName}-rg'
-  AZURE_SUBSCRIPTION_ID_PROD: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME_PROD: "dlz01-dev-di002"                  # Update to '{dataLandingZoneName}-rg'
-  AZURE_LOCATION: "northeurope"                                      # Update to '{regionName}'
+  TEST_ENVIRONMENT_NAME: "test"  # Update to '{testEnvironmentName}'
+  PROD_ENVIRONMENT_NAME: "prod"  # Update to '{prodEnvironmentName}'
 
 jobs:
   validation_test:
-    uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/templates/validation.yml@${{ github.ref_name }}"
     name: "Validation of IaC templates - Test"
     with:
-      environment: "test"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_TEST }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_TEST }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.TEST_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   validation_prod:
-    uses: "${{ github.repository }}/.github/workflows/validationTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/templates/validation.yml@${{ github.ref_name }}"
     name: "Validation of IaC templates - Prod"
     needs: [ validation_test ]
     with:
-      environment: "prod"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_PROD }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_PROD }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.PROD_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_test:
-    uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/templates/deployment.yml@${{ github.ref_name }}"
     name: "Deployment of IaC templates - Test"
     needs: [ validation_prod ]
     if: github.event_name == 'release'
     with:
-      environment: "test"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_TEST }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_TEST }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.TEST_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
 
   deployment_prod:
-    uses: "${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{ github.ref_name }}"
+    uses: "${{ github.repository }}/.github/workflows/templates/deployment.yml@${{ github.ref_name }}"
     name: "Deployment of IaC templates - Prod"
     needs: [ deployment_test ]
     if: github.event_name == 'release'
     with:
-      environment: "prod"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_PROD }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_PROD }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.PROD_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}

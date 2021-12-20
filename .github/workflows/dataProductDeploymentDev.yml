@@ -15,31 +15,29 @@ on:
       - ".github/workflows/**"
 
 env:
-  AZURE_SUBSCRIPTION_ID_DEV: "2150d511-458f-43b9-8691-6819ba2e6c7b" # Update to '{dataLandingZoneSubscriptionId}'
-  AZURE_RESOURCE_GROUP_NAME_DEV: "dlz01-dev-di002"                  # Update to '{dataLandingZoneName}-rg'
-  AZURE_LOCATION: "northeurope"                                     # Update to '{regionName}'
+  DEV_ENVIRONMENT_NAME: "dev"  # Update to '{devEnvironmentName}'
 
 jobs:
   validation_dev:
-    uses: ${{ github.repository }}/.github/workflows/validationTemplate.yml@${{github.sha}}
+    uses: ${{ github.repository }}/.github/workflows/templates/validation.yml@${{github.sha}}
     name: "Validation of IaC templates - Dev"
     with:
-      environment: "dev"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_DEV }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_DEV }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.DEV_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_dev:
-    uses: ${{ github.repository }}/.github/workflows/deploymentTemplate.yml@${{github.sha}}
+    uses: ${{ github.repository }}/.github/workflows/templates/deployment.yml@${{github.sha}}
     name: "Deployment of IaC templates - Dev"
     needs: [ validation_dev ]
     if: github.event_name == 'push'
     with:
-      environment: "dev"
-      azure_subscription_id: ${{ env.AZURE_SUBSCRIPTION_ID_DEV }}
-      azure_resource_group_name: ${{ env.AZURE_RESOURCE_GROUP_NAME_DEV }}
-      azure_location_name: ${{ env.AZURE_LOCATION }}
+      environment: ${{ env.DEV_ENVIRONMENT_NAME }}
     secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
