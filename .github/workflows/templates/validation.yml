@@ -24,7 +24,7 @@ on:
 
 jobs:
   validation:
-    name: Validation in ${{ inputs.environment }}
+    name: Validation of ${{ inputs.environment }}
     runs-on: ubuntu-latest
     continue-on-error: false
     environment: ${{ inputs.environment }}

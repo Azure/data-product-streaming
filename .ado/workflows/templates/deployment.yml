@@ -7,8 +7,8 @@ parameters:
     type: string
 
 jobs:
-  - job: Validation
-    displayName: "Validation of ${{ parameters.environment_name }}"
+  - job: Deployment
+    displayName: "Deployment to ${{ parameters.environment_name }}"
     continueOnError: false
     pool:
       vmImage: "ubuntu-latest"
@@ -40,10 +40,10 @@ jobs:
           ignoreLASTEXITCODE: false
           pwsh: true
 
-      # Deploy Data Product - validation
+      # Deploy Data Product
       - task: AzureResourceManagerTemplateDeployment@3
-        name: data_product_validation
-        displayName: Deploy Data Product - validation
+        name: data_product_deployment
+        displayName: Deploy Data Product
         enabled: true
         continueOnError: false
         inputs:
@@ -56,34 +56,6 @@ jobs:
           templateLocation: "Linked artifact"
           csmFile: "$(System.DefaultWorkingDirectory)/infra/main.json"
           csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/params.${{ parameters.environment_name }}.json"
-          deploymentMode: "Validation"
+          deploymentMode: "Incremental"
           overrideParameters: >
             -administratorPassword "$(password)"
-
-      # Deploy Data Product - what-if
-      - task: AzureCLI@2
-        name: data_product_whatif
-        displayName: Deploy Data Product - what-if
-        enabled: true
-        continueOnError: false
-        inputs:
-          azureSubscription: $(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)
-          scriptType: pscore
-          scriptLocation: inlineScript
-          inlineScript: |
-            az account set `
-              --subscription $(AZURE_SUBSCRIPTION_ID)
-
-            az deployment group what-if `
-              --resource-group $(AZURE_RESOURCE_GROUP_NAME) `
-              --exclude-change-types Ignore NoChange Unsupported `
-              --mode "Incremental" `
-              --template-file "$(System.DefaultWorkingDirectory)/infra/main.json" `
-              --parameters "$(System.DefaultWorkingDirectory)/infra/params.${{ parameters.environment_name }}.json" administratorPassword="$(password)" `
-              --result-format "FullResourcePayloads"
-
-          powerShellErrorActionPreference: "stop"
-          addSpnToEnvironment: false
-          useGlobalConfig: false
-          failOnStandardError: false
-          powerShellIgnoreLASTEXITCODE: false

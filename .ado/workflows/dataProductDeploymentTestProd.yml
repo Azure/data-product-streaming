@@ -1,0 +1,61 @@
+name: Data Product Deployment - Test/Prod
+
+trigger:
+  branches:
+    include:
+      - main
+      - releases/*
+  tags:
+    include:
+    - '*'
+  paths:
+    include:
+      - code/*
+      - infra/*
+      - .ado/workflows/*
+
+variables:
+  TEST_ENVIRONMENT_NAME: "test"                       # Update to '{testEnvironmentName}'
+  TEST_VARIABLE_GROUP_NAME: "test-product-streaming"  # Update to '{testVariableGroupName}'
+  PROD_ENVIRONMENT_NAME: "prod"                       # Update to '{prodEnvironmentName}'
+  PROD_VARIABLE_GROUP_NAME: "prod-product-streaming"  # Update to '{prodVariableGroupName}'
+
+stages:
+  - stage: Validation_Test
+    displayName: "Validation of IaC templates - Test"
+    continue-on-error: false
+    jobs:
+      - template: templates/validation.yml
+        parameters:
+          environment_name: ${{ variables.TEST_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.TEST_VARIABLE_GROUP_NAME }}
+  
+  - stage: Validation_Prod
+    displayName: "Validation of IaC templates - Prod"
+    jobs:
+      - template: templates/validation.yml
+        parameters:
+          environment_name: ${{ variables.PROD_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.PROD_VARIABLE_GROUP_NAME }}
+
+  - stage: Deployment_Test
+    displayName: "Deployment of IaC templates - Test"
+    dependsOn: [ Validation_Test, Validation_Prod ]
+    # condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
+
+    jobs:
+      - template: templates/deployment.yml
+        parameters:
+          environment_name: ${{ variables.TEST_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.TEST_VARIABLE_GROUP_NAME }}
+
+  - stage: Deployment_Prod
+    displayName: "Deployment of IaC templates - Prod"
+    dependsOn: [ Deployment_Test ]
+    # condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
+
+    jobs:
+      - template: templates/deployment.yml
+        parameters:
+          environment_name: ${{ variables.PROD_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.PROD_VARIABLE_GROUP_NAME }}

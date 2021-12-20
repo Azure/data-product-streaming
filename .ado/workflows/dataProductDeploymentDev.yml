@@ -1,0 +1,44 @@
+name: Data Product Deployment - Dev
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - code/*
+      - infra/*
+      - .ado/workflows/*
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - code/*
+      - infra/*
+      - .ado/workflows/*
+
+variables:
+  DEV_ENVIRONMENT_NAME: "dev"                       # Update to '{devEnvironmentName}'
+  DEV_VARIABLE_GROUP_NAME: "dev-product-streaming"  # Update to '{devVariableGroupName}'
+
+stages:
+  - stage: Validation_Dev
+    displayName: "Validation of IaC templates - Dev"
+    jobs:
+      - template: templates/validation.yml
+        parameters:
+          environment_name: ${{ variables.DEV_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.DEV_VARIABLE_GROUP_NAME }}
+
+  - stage: Deployment_Dev
+    displayName: "Deployment of IaC templates - Dev"
+    dependsOn: [ Validation_Dev ]
+    # condition: and(succeeded(), in(variables['Build.Reason'], 'IndividualCI', 'BatchedCI'))
+
+    jobs:
+      - template: templates/deployment.yml
+        parameters:
+          environment_name: ${{ variables.DEV_ENVIRONMENT_NAME }}
+          variable_group_name: ${{ variables.DEV_VARIABLE_GROUP_NAME }}
