@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.4.1008.15138",
-      "templateHash": "3274734219816902579"
+      "version": "0.4.1124.51302",
+      "templateHash": "8152636657952711514"
     }
   },
   "parameters": {
@@ -165,7 +165,6 @@
       }
     }
   },
-  "functions": [],
   "variables": {
     "name": "[toLower(format('{0}-{1}', parameters('prefix'), parameters('environment')))]",
     "tagsDefault": {
@@ -194,7 +193,7 @@
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "keyVault001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -224,8 +223,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "6717429930577625102"
+              "version": "0.4.1124.51302",
+              "templateHash": "12660131753967436973"
             }
           },
           "parameters": {
@@ -246,7 +245,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "keyVaultPrivateEndpointName": "[format('{0}-private-endpoint', parameters('keyvaultName'))]"
           },
@@ -339,7 +337,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "synapse001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -399,8 +397,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "3729296254687081623"
+              "version": "0.4.1124.51302",
+              "templateHash": "721877921391071084"
             }
           },
           "parameters": {
@@ -459,7 +457,6 @@
               "defaultValue": false
             }
           },
-          "functions": [],
           "variables": {
             "synapseDefaultStorageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), last(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
             "synapseDefaultStorageAccountName": "[if(greaterOrEquals(length(split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')), 13), split(parameters('synapseDefaultStorageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
@@ -760,7 +757,7 @@
     {
       "condition": "[parameters('enableRoleAssignments')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "synapse001RoleAssignmentStorage",
       "subscriptionId": "[variables('synapseDefaultStorageAccountSubscriptionId')]",
       "resourceGroup": "[variables('synapseDefaultStorageAccountResourceGroupName')]",
@@ -774,7 +771,7 @@
             "value": "[parameters('synapseDefaultStorageAccountFileSystemId')]"
           },
           "synapseId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-06-01').outputs.synapseId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseId.value]"
           }
         },
         "template": {
@@ -783,8 +780,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "7805977499282852672"
+              "version": "0.4.1124.51302",
+              "templateHash": "17584063900477479467"
             }
           },
           "parameters": {
@@ -795,7 +792,6 @@
               "type": "string"
             }
           },
-          "functions": [],
           "variables": {
             "storageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), last(split(parameters('storageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
             "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), split(parameters('storageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
@@ -824,7 +820,7 @@
     {
       "condition": "[parameters('enableCosmos')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "cosmos001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -854,8 +850,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "16511519182590012378"
+              "version": "0.4.1124.51302",
+              "templateHash": "16996002725669682873"
             }
           },
           "parameters": {
@@ -876,7 +872,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "cosmosdbPrivateEndpointName": "[format('{0}-private-endpoint', parameters('cosmosdbName'))]"
           },
@@ -978,7 +973,7 @@
     {
       "condition": "[parameters('enableSqlServer')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "sql001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -1020,8 +1015,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "13767433193285895410"
+              "version": "0.4.1124.51302",
+              "templateHash": "11874715996889691059"
             }
           },
           "parameters": {
@@ -1057,7 +1052,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "sqlserverPrivateEndpointName": "[format('{0}-private-endpoint', parameters('sqlserverName'))]"
           },
@@ -1182,7 +1176,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "iothub001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -1221,8 +1215,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "4192373109637241853"
+              "version": "0.4.1124.51302",
+              "templateHash": "475421815734143439"
             }
           },
           "parameters": {
@@ -1257,7 +1251,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "iothubPrivateEndpointName": "[format('{0}-private-endpoint', parameters('iothubName'))]"
           },
@@ -1390,7 +1383,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "eventhubNamespace001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -1426,8 +1419,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "16911628907097731293"
+              "version": "0.4.1124.51302",
+              "templateHash": "8620290496367236972"
             }
           },
           "parameters": {
@@ -1458,7 +1451,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "eventhubNamespacePrivateEndpointName": "[format('{0}-private-endpoint', parameters('eventhubnamespaceName'))]"
           },
@@ -1560,7 +1552,7 @@
     {
       "condition": "[parameters('enableStreamAnalytics')]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "streamanalytics001",
       "properties": {
         "expressionEvaluationOptions": {
@@ -1575,10 +1567,10 @@
             "value": "[variables('tagsJoined')]"
           },
           "eventhubNamespaceId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-06-01').outputs.eventhubNamespaceId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-10-01').outputs.eventhubNamespaceId.value]"
           },
           "sqlServerId": {
-            "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-06-01').outputs.sqlserverId.value, '')]"
+            "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-10-01').outputs.sqlserverId.value, '')]"
           },
           "storageAccountId": {
             "value": "[resourceId(variables('streamanalyticsDefaultStorageAccountSubscriptionId'), variables('streamanalyticsDefaultStorageAccountResourceGroupName'), 'Microsoft.Storage/storageAccounts', variables('streamanalyticsDefaultStorageAccountName'))]"
@@ -1602,8 +1594,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "8756340499582912466"
+              "version": "0.4.1124.51302",
+              "templateHash": "17174678349468735380"
             }
           },
           "parameters": {
@@ -1654,7 +1646,6 @@
               "defaultValue": ""
             }
           },
-          "functions": [],
           "variables": {
             "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountId'), '/')), 9), last(split(parameters('storageAccountId'), '/')), 'incorrectSegmentLength')]",
             "sqlServerName": "[if(greaterOrEquals(length(split(parameters('sqlServerId'), '/')), 9), last(split(parameters('sqlServerId'), '/')), 'incorrectSegmentLength')]",
@@ -1807,7 +1798,7 @@
         "batchSize": 1
       },
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "[format('delay-{0}', range(0, 20)[copyIndex()])]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -1825,8 +1816,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "13546439864548302355"
+              "version": "0.4.1124.51302",
+              "templateHash": "701382971037194322"
             }
           },
           "parameters": {
@@ -1834,7 +1825,6 @@
               "type": "int"
             }
           },
-          "functions": [],
           "resources": [],
           "outputs": {
             "deploymentDelayIndex": {
@@ -1851,7 +1841,7 @@
     {
       "condition": "[and(parameters('enableStreamAnalytics'), parameters('enableRoleAssignments'))]",
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2020-06-01",
+      "apiVersion": "2020-10-01",
       "name": "streamanalytics001RoleAssignmentStorage",
       "subscriptionId": "[variables('streamanalyticsDefaultStorageAccountSubscriptionId')]",
       "resourceGroup": "[variables('streamanalyticsDefaultStorageAccountResourceGroupName')]",
@@ -1865,7 +1855,7 @@
             "value": "[parameters('streamanalyticsDefaultStorageAccountFileSystemId')]"
           },
           "streamanalyticsjobId": {
-            "value": "[if(parameters('enableStreamAnalytics'), reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-06-01').outputs.streamanalyticsjob001Id.value, '')]"
+            "value": "[if(parameters('enableStreamAnalytics'), reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-10-01').outputs.streamanalyticsjob001Id.value, '')]"
           }
         },
         "template": {
@@ -1874,8 +1864,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.4.1008.15138",
-              "templateHash": "10020094560130771138"
+              "version": "0.4.1124.51302",
+              "templateHash": "13352207208611742177"
             }
           },
           "parameters": {
@@ -1886,7 +1876,6 @@
               "type": "string"
             }
           },
-          "functions": [],
           "variables": {
             "storageAccountFileSystemName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), last(split(parameters('storageAccountFileSystemId'), '/')), 'incorrectSegmentLength')]",
             "storageAccountName": "[if(greaterOrEquals(length(split(parameters('storageAccountFileSystemId'), '/')), 13), split(parameters('storageAccountFileSystemId'), '/')[8], 'incorrectSegmentLength')]",
