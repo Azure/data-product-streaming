@@ -62,6 +62,7 @@ resource streamanalyticsclusterManagedPrivateEndpointStorageAccount 'Microsoft.S
             'blob'
           ]
           privateLinkServiceConnectionState: {}
+          #disable-next-line BCP073
           requestMessage: requestMessage
         }
       }
@@ -81,6 +82,7 @@ resource streamanalyticsclusterManagedPrivateEndpointSqlServer 'Microsoft.Stream
             'sqlServer'
           ]
           privateLinkServiceConnectionState: {}
+          #disable-next-line BCP073
           requestMessage: requestMessage
         }
       }
@@ -100,6 +102,7 @@ resource streamanalyticsclusterManagedPrivateEndpointEventhubNamespace 'Microsof
             'namespace'
           ]
           privateLinkServiceConnectionState: {}
+          #disable-next-line BCP073
           requestMessage: requestMessage
         }
       }
