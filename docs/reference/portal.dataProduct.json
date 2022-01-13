@@ -949,7 +949,7 @@
                 "location": "[if(empty(steps('basics').deploymentDetails.locationName), '', steps('basics').deploymentDetails.locationName)]",
                 "environment": "[if(empty(steps('basics').dataProductName.environment), '', steps('basics').dataProductName.environment)]",
                 "prefix": "[if(empty(steps('basics').dataProductName.dataProductPrefix), '', steps('basics').dataProductName.dataProductPrefix)]",
-                "administratorPassword": "[if(empty(steps('generalSettings').synapseDeploymentSettings.administratorPassword.password), '', steps('generalSettings').synapseDeploymentSettings.administratorPassword.password)]",
+                "administratorPassword": "[if(empty(steps('generalSettings').synapseDeploymentSettings.administratorPassword), '', steps('generalSettings').synapseDeploymentSettings.administratorPassword)]",
                 "synapseDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId), '', steps('generalSettings').synapseDeploymentSettings.synapseDefaultStorageAccountFileSystemId)]",
                 "enableSqlPool": "[steps('generalSettings').synapseDeploymentSettings.enableSqlPool]",
                 "enableDataExplorerPool": "[steps('generalSettings').synapseDeploymentSettings.enableDataExplorerPool]",
