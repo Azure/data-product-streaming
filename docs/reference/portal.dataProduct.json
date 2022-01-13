@@ -334,21 +334,17 @@
                                         "password": "Password",
                                         "confirmPassword": "Confirm password"
                                     },
-                                    "type": "Microsoft.Compute.CredentialsCombo",
+                                    "type": "Microsoft.Common.PasswordBox",
                                     "visible": true,
-                                    "defaultValue": "",
-                                    "toolTip": {
-                                        "password": "Specify an administrator password for the Synapse workspace."
-                                    },
+                                    "toolTip": "Specify an administrator password for the Synapse workspace.",
                                     "constraints": {
                                         "required": true,
-                                        "customPasswordRegex": "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,128}$",
-                                        "customValidationMessage": "The password must be alphanumeric, contain at least 8 characters, and have at least 1 letter, 1 number and one special character."
+                                        "regex": "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,128}$",
+                                        "validationMessage": "The password must be alphanumeric, contain at least 8 characters, and have at least 1 letter, 1 number and one special character."
                                     },
                                     "options": {
                                         "hideConfirmation": false
-                                    },
-                                    "osPlatform": "Windows"
+                                    }
                                 },
                                 {
                                     "name": "infoBoxSynapseDefaultStorageAccount",
