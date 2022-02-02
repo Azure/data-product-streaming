@@ -62,7 +62,7 @@ jobs:
 
       # Deploy Data Product - validation
       - name: Deploy Data Product - validation
-        id: data_product_validation
+        id: data_product_whatif
         uses: azure/arm-deploy@v1
         with:
           scope: resourcegroup
