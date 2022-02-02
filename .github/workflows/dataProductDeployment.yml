@@ -60,8 +60,8 @@ jobs:
           deploymentName: "DataProduct-${{ github.sha }}"
           failOnStdErr: false
 
-      # Deploy Data Product - validation
-      - name: Deploy Data Product - validation
+      # Deploy Data Product - what-if
+      - name: Deploy Data Product - what-if
         id: data_product_whatif
         uses: azure/arm-deploy@v1
         with:
