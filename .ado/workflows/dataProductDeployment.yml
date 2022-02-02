@@ -98,6 +98,7 @@ stages:
                 az deployment group what-if `
                   --resource-group ${{ variables.AZURE_RESOURCE_GROUP_NAME }} `
                   --exclude-change-types Ignore NoChange Unsupported `
+                  --name "DataProduct-$(Build.SourceVersion)" `
                   --mode "Incremental" `
                   --template-file "$(System.DefaultWorkingDirectory)/infra/main.bicep" `
                   --parameters "$(System.DefaultWorkingDirectory)/infra/params.dev.json" administratorPassword="$(password)" `
