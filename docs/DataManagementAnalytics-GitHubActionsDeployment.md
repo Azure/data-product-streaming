@@ -73,6 +73,8 @@ To begin, please open the [infra/params.dev.json](/infra/params.dev.json). In th
 | `enableSqlServer` | Specifies whether Azure SQL Server should be deployed as part of the template. | `true` or `false` |
 | `enableCosmos` | Specifies whether Azure Cosmos DB should be deployed as part of the template. | `true` or `false` |
 | `enableStreamAnalytics` | Specifies whether Azure Stream Analytics Cluster and Job should be deployed as part of the template. | `true` or `false` |
+| `enableMonitoring` | Specifies whether key monitoring components like Azure Dashboard, metrics and alerts are enabled. | `true` or `false` |
+| `dataProductTeamEmail` | Email ID of the group to receive monitoring alerts. | `email@domian.com` |
 | `streamanalyticsDefaultStorageAccountFileSystemId` | Specifies the resource ID of the default Storage Account  file system for Stream Analytics. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Storage/storageAccounts/{storage-name}/blobServices/default/containers/{container-name}` |
 | `subnetId` | Specifies the Resource ID of the subnet to which all services will connect. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Network/virtualNetworks/{vnet-name}/subnets/{subnet-name}` |
 | `purviewId` | Specifies the Resource ID of the central Purview instance. | `/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.Purview/accounts/{purview-name}` |

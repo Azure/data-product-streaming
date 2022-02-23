@@ -42,6 +42,10 @@ param streamanalyticsDefaultStorageAccountFileSystemId string = ''
 param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
 param enableRoleAssignments bool = false
+@description('Specifies whether observability capabilities should be enabled.')
+param enableObservability bool = true
+@description('Specifies the email address of the Data Product SRE team.')
+param dataProductTeamEmail string = ''
 
 // Network parameters
 @description('Specifies the resource ID of the subnet to which all services will connect.')
@@ -87,6 +91,10 @@ var iothub001Name = '${name}-iothub001'
 var eventhubNamespace001Name = '${name}-eventhub001'
 var streamanalytics001Name = '${name}-streamanalytics001'
 var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
+var loganalyticsName = '${name}-loganalytics'
+var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
+var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
+var dashboardName= '${name}-dashboard'
 
 // Resources
 module keyVault001 'modules/services/keyvault.bicep' = {
@@ -99,6 +107,55 @@ module keyVault001 'modules/services/keyvault.bicep' = {
     subnetId: subnetId
     privateDnsZoneIdKeyVault: privateDnsZoneIdKeyVault
   }
+}
+
+module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableObservability) {
+  name: 'logAnalytics001'
+  scope: resourceGroup()
+  params: {
+    location: location
+    tags: tagsJoined
+    loganalyticsName: loganalyticsName
+    processingService: processingService  
+  }
+}
+
+module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
+  name: 'diagnosticSettings'  
+  scope: resourceGroup()
+  params: {
+    datafactoryName: datafactory001Name    
+    loganalyticsName: loganalyticsName
+    processingService: processingService
+    synapseName: synapse001Name
+    synapseSqlPoolName: synapse001.outputs.synapseSqlPool001Name
+    synapseSparkPoolName: synapse001.outputs.synapseBigDataPool001Name
+    }
+}
+
+module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
+  name: 'alerts'  
+  scope: resourceGroup()
+  params: {
+    dataEmailActionGroup: dataEmailActionGroup    
+    dataProductTeamEmail: dataProductTeamEmail
+    location: location
+    synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
+    synapseScope:synapseScope
+    tags: tagsJoined
+    }
+}
+
+module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
+  name: 'dashboard'  
+  scope: resourceGroup()
+  params: {
+    dashboardName: dashboardName
+    location: location
+    synapse001Name: synapse001Name
+    synapseScope: synapseScope
+    tags: tagsJoined    
+    }
 }
 
 module synapse001 'modules/services/synapse.bicep' = {
