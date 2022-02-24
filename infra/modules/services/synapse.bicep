@@ -280,3 +280,5 @@ resource synapsePrivateEndpointDevARecord 'Microsoft.Network/privateEndpoints/pr
 
 // Outputs
 output synapseId string = synapse.id
+output synapseBigDataPool001Name string = synapseBigDataPool001.name
+output synapseSqlPool001Name string = synapseSqlPool001.name

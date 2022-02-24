@@ -8,14 +8,13 @@ targetScope = 'resourceGroup'
 param location string
 param dashboardName string
 param tags object
-param processingService string
 param synapseScope string
 param synapse001Name string
 
 // Variables
 
 // Resources
-resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = if (processingService == 'synapse') {
+resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
   name: '${dashboardName}-synapse'
   location: location
   tags: tags
@@ -42,7 +41,7 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = if 
                               isOptional: true
                             }
                         ]  
-                          type  : 'Extension/HubsExtension/PartType/MonitorChartPart'
+                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
                           settings  : {
                               content  : {
                                 options: {
@@ -106,7 +105,7 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = if 
                           isOptional: true
                         }
                     ]  
-                      type  :   'Extension/HubsExtension/PartType/MonitorChartPart'    
+                      type  :   'Extension/HubsExtension/PartType/MarkdownPart'    
                       settings  : {
                           content  : {
                             options: {

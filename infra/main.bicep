@@ -43,7 +43,7 @@ param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
 param enableRoleAssignments bool = false
 @description('Specifies whether observability capabilities should be enabled.')
-param enableObservability bool = true
+param enableMonitoring bool = true
 @description('Specifies the email address of the Data Product SRE team.')
 param dataProductTeamEmail string = ''
 
@@ -92,6 +92,7 @@ var eventhubNamespace001Name = '${name}-eventhub001'
 var streamanalytics001Name = '${name}-streamanalytics001'
 var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
 var loganalyticsName = '${name}-loganalytics'
+var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
 var dashboardName= '${name}-dashboard'
@@ -109,24 +110,21 @@ module keyVault001 'modules/services/keyvault.bicep' = {
   }
 }
 
-module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableObservability) {
+module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitoring) {
   name: 'logAnalytics001'
   scope: resourceGroup()
   params: {
     location: location
     tags: tagsJoined
-    loganalyticsName: loganalyticsName
-    processingService: processingService  
+    loganalyticsName: loganalyticsName  
   }
 }
 
 module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
   name: 'diagnosticSettings'  
   scope: resourceGroup()
-  params: {
-    datafactoryName: datafactory001Name    
+  params: {    
     loganalyticsName: loganalyticsName
-    processingService: processingService
     synapseName: synapse001Name
     synapseSqlPoolName: synapse001.outputs.synapseSqlPool001Name
     synapseSparkPoolName: synapse001.outputs.synapseBigDataPool001Name

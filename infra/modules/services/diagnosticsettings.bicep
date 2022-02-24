@@ -11,7 +11,7 @@ param synapseSqlPoolName string
 param synapseSparkPoolName string
 
 //Resources
-resource synapseworkspace 'Microsoft.Synapse/workspaces@2021-06-01' existing = if (processingService == 'synapse') {
+resource synapseworkspace 'Microsoft.Synapse/workspaces@2021-06-01' existing = {
   name: synapseName
 }
 

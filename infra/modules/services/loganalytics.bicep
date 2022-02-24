@@ -7,14 +7,14 @@ targetScope = 'resourceGroup'
 // Parameters
 param location string
 param tags object
-param processingService string
+param loganalyticsName string
 
 // Variables
 var dataFactoryAnalyticsName = 'AzureDataFactoryAnalytics(${loganalyticsName})'
 
 // Resources
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2020-10-01' = {
-  name: logAnanalyticsName
+  name: loganalyticsName
   location: location
   tags: tags
   properties: {
@@ -28,7 +28,7 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2020-10-01' = {
   }
 }
 
-resource dataFactoryAnalytics 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = if (processingService == 'dataFactory') {
+resource dataFactoryAnalytics 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = {
   name: dataFactoryAnalyticsName
   location: location
   tags: tags
