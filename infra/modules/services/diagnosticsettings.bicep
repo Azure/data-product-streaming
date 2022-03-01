@@ -9,6 +9,11 @@ param loganalyticsName string
 param synapseName string
 param synapseSqlPoolName string
 param synapseSparkPoolName string
+param cosmosdbName string
+param iothubName string
+param sqlserverName string
+param eventhubnamespaceName string
+param streamanalyticsName string
 
 //Resources
 resource synapseworkspace 'Microsoft.Synapse/workspaces@2021-06-01' existing = {
@@ -27,6 +32,31 @@ resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-0
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' existing = {
   name: loganalyticsName
+}
+
+resource cosmosdb 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' existing = {
+  name: cosmosdbName
+}
+
+resource iothub 'Microsoft.Devices/IotHubs@2021-03-31' existing = {
+  name: iothubName
+}
+
+resource sqlserver 'Microsoft.Sql/servers@2020-11-01-preview' existing = {
+  name: sqlserverName
+}
+
+resource sqlserverDatabase001 'Microsoft.Sql/servers/databases@2020-11-01-preview' existing = {
+  parent: sqlserver
+  name: 'Database001'
+}
+
+resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-06-01-preview' existing = {
+  name: eventhubnamespaceName
+}
+
+resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2020-03-01' existing = {
+  name: streamanalyticsName
 }
 
 resource diagnosticSetting1 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
@@ -93,7 +123,7 @@ resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }
 
-resource diagnosticSetting3'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: synapsebigdatapool
   name: 'diagnostic-${synapseworkspace.name}-${synapsebigdatapool.name}'
   properties: {
@@ -102,6 +132,166 @@ resource diagnosticSetting3'Microsoft.Insights/diagnosticSettings@2021-05-01-pre
       {
         category: 'BigDataPoolAppsEnded'
         enabled: true
+      }
+    ]
+  }
+}
+
+resource diagnosticSetting4 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  scope: cosmosdb
+  name: 'diagnostic-${cosmosdb.name}'
+  properties: {
+    workspaceId: logAnalyticsWorkspace.id
+    logs: [
+      {
+          category: 'DataPlaneRequests'
+          enabled: true
+      }
+      {
+          category: 'QueryRuntimeStatistics'
+          enabled: true
+      }
+      {
+          category: 'PartitionKeyStatistics'
+          enabled: true
+      }
+      {
+          category: 'PartitionKeyRUConsumption'
+          enabled: true
+      }
+      {
+          category: 'ControlPlaneRequests'
+          enabled: true
+      }
+    ]
+  }
+}
+
+resource diagnosticSetting5 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  scope: iothub
+  name: 'diagnostic-${iothub.name}'
+  properties: {
+    workspaceId: logAnalyticsWorkspace.id
+    logs: [
+      {
+          category: 'Connections'
+          enabled: true
+      }
+      {
+          category: 'DeviceTelemetry'
+          enabled: true
+      }
+      {
+          category: 'C2DCommands'
+          enabled: true
+      }
+      {
+          category: 'DeviceIdentityOperations'
+          enabled: true
+      }
+      {
+          category: 'FileUploadOperations'
+          enabled: true
+      }
+      {
+          category: 'Routes'
+          enabled: true
+      }
+      {
+          category: 'D2CTwinOperations'
+          enabled: true
+      }
+      {
+          category: 'C2DTwinOperations'
+          enabled: true
+      }
+      {
+          category: 'TwinQueries'
+          enabled: true
+      }
+      {
+          category: 'JobsOperations'
+          enabled: true
+      }
+      {
+          category: 'DirectMethods'
+          enabled: true
+      }
+      {
+          category: 'DistributedTracing'
+          enabled: true
+      }
+      {
+          category: 'Configurations'
+          enabled: true
+      }
+      {
+          category: 'DeviceStreams'
+          enabled: true
+      }
+    ]
+  }
+}
+
+resource diagnosticSetting6 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  scope: eventhubNamespace
+  name: 'diagnostic-${eventhubNamespace.name}'
+  properties: {
+    workspaceId: logAnalyticsWorkspace.id
+    logs: [
+      {
+          category: 'ArchiveLogs'
+          enabled: true
+      }
+      {
+          category: 'OperationalLogs'
+          enabled: true
+      }
+      {
+          category: 'AutoScaleLogs'
+          enabled: true
+      }
+      {
+          category: 'KafkaCoordinatorLogs'
+          enabled: true
+      }
+      {
+          category: 'KafkaUserErrorLogs'
+          enabled: true
+      }
+      {
+          category: 'EventHubVNetConnectionEvent'
+          enabled: true
+      }
+      {
+          category: 'CustomerManagedKeyUserLogs'
+          enabled: true
+      }
+      {
+          category: 'RuntimeAuditLogs'
+          enabled: true
+      }
+      {
+          category: 'ApplicationMetricsLogs'
+          enabled: true
+      }
+    ]
+  }
+}
+
+resource diagnosticSetting8 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+  scope: streamanalyticsjob001
+  name: 'diagnostic-${streamanalyticsjob001.name}'
+  properties: {
+    workspaceId: logAnalyticsWorkspace.id
+    logs: [
+      {
+          category: 'Execution'
+          enabled: true
+      }
+      {
+          category: 'Authoring'
+          enabled: true
       }
     ]
   }

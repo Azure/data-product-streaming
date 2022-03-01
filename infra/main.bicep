@@ -95,6 +95,7 @@ var loganalyticsName = '${name}-loganalytics'
 var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
+var cosmosdbScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${cosmosdb001Name}'
 var dashboardName= '${name}-dashboard'
 
 // Resources
@@ -120,17 +121,6 @@ module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitori
   }
 }
 
-module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
-  name: 'diagnosticSettings'  
-  scope: resourceGroup()
-  params: {    
-    loganalyticsName: loganalyticsName
-    synapseName: synapse001Name
-    synapseSqlPoolName: synapse001.outputs.synapseSqlPool001Name
-    synapseSparkPoolName: synapse001.outputs.synapseBigDataPool001Name
-    }
-}
-
 module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
   name: 'alerts'  
   scope: resourceGroup()
@@ -141,7 +131,7 @@ module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
     synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
     synapseScope:synapseScope
     tags: tagsJoined
-    }
+  }
 }
 
 module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
@@ -152,8 +142,10 @@ module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
     location: location
     synapse001Name: synapse001Name
     synapseScope: synapseScope
+    cosmosdb001Name: cosmosdb001Name
+    cosmosdbScope: cosmosdbScope
     tags: tagsJoined    
-    }
+  }
 }
 
 module synapse001 'modules/services/synapse.bicep' = {
@@ -257,6 +249,22 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableSt
     streamanalyticsclusterSkuCapacity: 36
     streamanalyticsName: streamanalytics001Name
     streamanalyticsjobSkuCapacity: 1
+  }
+}
+
+module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
+  name: 'diagnosticSettings'  
+  scope: resourceGroup()
+  params: {    
+    loganalyticsName: loganalyticsName
+    synapseName: synapse001Name
+    synapseSqlPoolName: synapse001.outputs.synapseSqlPool001Name
+    synapseSparkPoolName: synapse001.outputs.synapseBigDataPool001Name
+    cosmosdbName: cosmosdb001Name
+    iothubName: iothub001Name
+    sqlserverName: sql001Name
+    eventhubnamespaceName: eventhubNamespace001Name
+    streamanalyticsName: streamanalytics001Name
   }
 }
 
