@@ -95,7 +95,11 @@ var loganalyticsName = '${name}-loganalytics'
 var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
-var cosmosdbScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${cosmosdb001Name}'
+var cosmosdbScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosdb001Name}'
+var sqlScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Sql/servers/databases/${sql001Name}'
+var iothubScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Devices/IotHubs/${iothub001Name}'
+var eventhubnamespaceScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.EventHub/namespaces/${eventhubNamespace001Name}'
+var streamanalyticsScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.StreamAnalytics/streamingjobs/${streamanalytics001Name}'
 var dashboardName= '${name}-dashboard'
 
 // Resources
@@ -144,6 +148,14 @@ module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
     synapseScope: synapseScope
     cosmosdb001Name: cosmosdb001Name
     cosmosdbScope: cosmosdbScope
+    iothub001Name: iothub001Name
+    iothubScope: iothubScope
+    sql001Name: sql001Name
+    sqlScope: sqlScope
+    eventhubnamespace001Name: eventhubNamespace001Name
+    eventhubnamespaceScope: eventhubnamespaceScope
+    streamanalytics001Name: streamanalytics001Name
+    streamanalyticsScope: streamanalyticsScope
     tags: tagsJoined    
   }
 }
