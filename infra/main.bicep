@@ -94,6 +94,9 @@ var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
 var loganalyticsName = '${name}-loganalytics'
 var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
+var iothubFailedAlertName = '${iothub001Name}-failedalert'
+var eventhubnamespaceErrorAlertName = '${eventhubNamespace001Name}-erroralert'
+var streamanalyticsErrorAlertName = '${streamanalytics001Name}-erroralert'
 var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
 var cosmosdbScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosdb001Name}'
 var sqlScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Sql/servers/databases/${sql001Name}'
@@ -134,6 +137,12 @@ module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
     location: location
     synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
     synapseScope:synapseScope
+    iothubFailedAlertName: iothubFailedAlertName
+    iothubScope: iothubScope
+    eventhubnamespaceErrorAlertName: eventhubnamespaceErrorAlertName
+    eventhubnamespaceScope: eventhubnamespaceScope
+    streamanalyticsErrorAlertName: streamanalyticsErrorAlertName
+    streamanalyticsScope: streamanalyticsScope
     tags: tagsJoined
   }
 }
