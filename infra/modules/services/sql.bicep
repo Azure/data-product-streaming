@@ -136,3 +136,4 @@ resource sqlserverPrivateEndpointARecord 'Microsoft.Network/privateEndpoints/pri
 
 // Outputs
 output sqlserverId string = sqlserver.id
+output sqlId string = sqlserverDatabase001.id

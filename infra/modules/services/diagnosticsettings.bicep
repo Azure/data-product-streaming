@@ -7,28 +7,32 @@ targetScope = 'resourceGroup'
 // Parameters
 param loganalyticsName string
 param synapseName string
-param synapseSqlPoolName string
-param synapseSparkPoolName string
 param cosmosdbName string
 param iothubName string
 param sqlserverName string
 param eventhubnamespaceName string
 param streamanalyticsName string
+param synapseSqlPools array
+param synapseSparkPools array
+
+//variables
+var synapseSqlPoolsCount = length(synapseSqlPools)
+var synapseSparkPoolCount = length(synapseSparkPools)
 
 //Resources
 resource synapseworkspace 'Microsoft.Synapse/workspaces@2021-06-01' existing = {
   name: synapseName
 }
 
-resource synapsesqlpool 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' existing = {
+resource synapsesqlpool 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' existing = [ for sqlPool in synapseSqlPools:{
   parent: synapseworkspace
-  name: synapseSqlPoolName
-}
+  name: sqlPool
+}]
 
-resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-01' existing = {
+resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-01' existing = [ for sparkPool in synapseSparkPools: {
   parent: synapseworkspace
-  name: synapseSparkPoolName
-}
+  name: sparkPool
+}]
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' existing = {
   name: loganalyticsName
@@ -93,9 +97,9 @@ resource diagnosticSetting1 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }
 
-resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
-  scope: synapsesqlpool
-  name: 'diagnostic-${synapseworkspace.name}-${synapsesqlpool.name}'
+resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount) : {
+  scope: synapsesqlpool[i]
+  name: 'diagnostic-${synapseworkspace.name}-${synapsesqlpool[i].name}'
   properties: {
     workspaceId: logAnalyticsWorkspace.id
     logs: [
@@ -121,11 +125,11 @@ resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
       }
     ]
   }
-}
+}]
 
-resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
-  scope: synapsebigdatapool
-  name: 'diagnostic-${synapseworkspace.name}-${synapsebigdatapool.name}'
+resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSparkPoolCount) : {
+  scope: synapsebigdatapool[i]
+  name: 'diagnostic-${synapseworkspace.name}-${synapsebigdatapool[i].name}'
   properties: {
     workspaceId: logAnalyticsWorkspace.id
     logs: [
@@ -135,7 +139,7 @@ resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
       }
     ]
   }
-}
+}]
 
 resource diagnosticSetting4 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: cosmosdb

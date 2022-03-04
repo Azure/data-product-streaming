@@ -14,7 +14,6 @@ param cosmosdbScope string
 param cosmosdb001Name string
 param iothubScope string
 param iothub001Name string
-param sqlScope string
 param sql001Name string
 param eventhubnamespaceScope string
 param eventhubnamespace001Name string

@@ -97,12 +97,6 @@ var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var iothubFailedAlertName = '${iothub001Name}-failedalert'
 var eventhubnamespaceErrorAlertName = '${eventhubNamespace001Name}-erroralert'
 var streamanalyticsErrorAlertName = '${streamanalytics001Name}-erroralert'
-var synapseScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Synapse/workspaces/${synapse001Name}'
-var cosmosdbScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.DocumentDB/databaseAccounts/${cosmosdb001Name}'
-var sqlScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Sql/servers/databases/${sql001Name}'
-var iothubScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.Devices/IotHubs/${iothub001Name}'
-var eventhubnamespaceScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.EventHub/namespaces/${eventhubNamespace001Name}'
-var streamanalyticsScope = '${subscription().id}/resourceGroups/${resourceGroup().name}/providers/Microsoft.StreamAnalytics/streamingjobs/${streamanalytics001Name}'
 var dashboardName= '${name}-dashboard'
 
 // Resources
@@ -128,7 +122,7 @@ module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitori
   }
 }
 
-module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
+module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring){
   name: 'alerts'  
   scope: resourceGroup()
   params: {
@@ -136,13 +130,13 @@ module alerts './modules/services/alerts.bicep' = if (enableMonitoring) {
     dataProductTeamEmail: dataProductTeamEmail
     location: location
     synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
-    synapseScope:synapseScope
+    synapseScope:synapse001.outputs.synapseId
     iothubFailedAlertName: iothubFailedAlertName
-    iothubScope: iothubScope
+    iothubScope: iothub001.outputs.iothubId
     eventhubnamespaceErrorAlertName: eventhubnamespaceErrorAlertName
-    eventhubnamespaceScope: eventhubnamespaceScope
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
     streamanalyticsErrorAlertName: streamanalyticsErrorAlertName
-    streamanalyticsScope: streamanalyticsScope
+    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
     tags: tagsJoined
   }
 }
@@ -154,17 +148,16 @@ module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
     dashboardName: dashboardName
     location: location
     synapse001Name: synapse001Name
-    synapseScope: synapseScope
+    synapseScope: synapse001.outputs.synapseId
     cosmosdb001Name: cosmosdb001Name
-    cosmosdbScope: cosmosdbScope
+    cosmosdbScope: cosmosdb001.outputs.cosmosdbId
     iothub001Name: iothub001Name
-    iothubScope: iothubScope
+    iothubScope: iothub001.outputs.iothubId
     sql001Name: sql001Name
-    sqlScope: sqlScope
     eventhubnamespace001Name: eventhubNamespace001Name
-    eventhubnamespaceScope: eventhubnamespaceScope
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
     streamanalytics001Name: streamanalytics001Name
-    streamanalyticsScope: streamanalyticsScope
+    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
     tags: tagsJoined    
   }
 }
@@ -279,8 +272,12 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
   params: {    
     loganalyticsName: loganalyticsName
     synapseName: synapse001Name
-    synapseSqlPoolName: synapse001.outputs.synapseSqlPool001Name
-    synapseSparkPoolName: synapse001.outputs.synapseBigDataPool001Name
+    synapseSqlPools: [
+      synapse001.outputs.synapseSqlPool001Name
+    ]
+    synapseSparkPools: [
+      synapse001.outputs.synapseBigDataPool001Name
+    ]
     cosmosdbName: cosmosdb001Name
     iothubName: iothub001Name
     sqlserverName: sql001Name
