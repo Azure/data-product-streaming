@@ -19,7 +19,7 @@ env:
 
 jobs:
   validation_dev:
-    uses: ${{ github.repository }}/.github/workflows/templates/validation.yml@${{github.sha}}
+    uses: ./.github/workflows/templates/validation.yml
     name: "Validation of IaC templates - Dev"
     with:
       environment: ${{ env.DEV_ENVIRONMENT_NAME }}
@@ -30,7 +30,7 @@ jobs:
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
   
   deployment_dev:
-    uses: ${{ github.repository }}/.github/workflows/templates/deployment.yml@${{github.sha}}
+    uses: ./.github/workflows/templates/deployment.yml
     name: "Deployment of IaC templates - Dev"
     needs: [ validation_dev ]
     if: github.event_name == 'push'
