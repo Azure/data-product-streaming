@@ -22,7 +22,7 @@ jobs:
     uses: ./.github/workflows/validation.yml
     name: "Validation of IaC templates - Dev"
     with:
-      environment: ${{ env.DEV_ENVIRONMENT_NAME }}
+      environment: "dev"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
@@ -35,7 +35,7 @@ jobs:
     needs: [ validation_dev ]
     if: github.event_name == 'push'
     with:
-      environment: ${{ env.DEV_ENVIRONMENT_NAME }}
+      environment: "dev"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
