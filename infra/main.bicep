@@ -124,7 +124,7 @@ module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitori
   params: {
     location: location
     tags: tagsJoined
-    loganalyticsName: loganalyticsName  
+    logAnalyticsName: loganAlytics001Name  
   }
 }
 
