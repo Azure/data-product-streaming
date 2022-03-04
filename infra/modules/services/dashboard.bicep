@@ -52,7 +52,7 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
                               isOptional: true
                             }
                         ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
+                          type  : 'Extension/HubsExtension/PartType/MonitorChartPart'
                           settings  : {
                               content  : {
                                 options: {
@@ -112,11 +112,11 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
                           isOptional: true
                         }
                         {
-                          name: 'sharedTimeRange'
+                          name: ''
                           isOptional: true
                         }
                     ]  
-                      type  :   'Extension/HubsExtension/PartType/MarkdownPart'    
+                      type  :  'Extension/HubsExtension/PartType/MonitorChartPart'    
                       settings  : {
                           content  : {
                             options: {
@@ -161,7 +161,357 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
                          }
                     }
                 }
-            }         
+            }
+            {
+              position: {
+                x: 0
+                y: 4
+                colSpan: 6
+                rowSpan: 4
+              }
+              metadata: {
+                inputs: [
+                  {
+                    name: 'options'
+                    isOptional: true
+                  }
+                  {
+                    name: 'sharedTimeRange'
+                    isOptional: true
+                  }
+                ]
+                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
+                settings: {
+                  content: {
+                    options: {
+                      chart: {
+                        metrics: [
+                          {
+                            resourceMetadata: {
+                              id: cosmosdbScope
+                            }
+                            name: 'ServerSideLatency'
+                            aggregationType: 4
+                            namespace: 'Microsoft.DocumentDB/databaseAccounts'
+                            metricVisualization: {
+                              displayName: 'Server Side Latency'
+                              resourceDisplayName: cosmosdb001Name
+                            }
+                          }
+                        ]
+                        title: 'Avg Server Side Latency for ${cosmosdb001Name}'
+                        titleKind: 1
+                        visualization: {
+                          chartType: 2
+                          legendVisualization: {
+                            isVisible: true
+                            position: 2
+                            hideSubtitle: false
+                          }
+                          axisVisualization: {
+                            x: {
+                              isVisible: true
+                              axisType: 2
+                            }
+                            y: {
+                              isVisible: true
+                              axisType: 1
+                            }
+                          }
+                          disablePinning: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            {
+              position: {
+                x: 6
+                y: 4
+                colSpan: 6
+                rowSpan: 4
+              }
+              metadata: {
+                inputs: [
+                  {
+                    name: 'options'
+                    isOptional: true
+                  }
+                  {
+                    name: 'sharedTimeRange'
+                    isOptional: true
+                  }
+                ]
+                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
+                settings: {
+                  content: {
+                    options: {
+                      chart: {
+                        metrics: [
+                          {
+                            resourceMetadata: {
+                              id: iothubScope
+                            }
+                            name: 'jobs.failed'
+                            aggregationType: 1
+                            namespace: 'Microsoft.Devices/IotHubs'
+                            metricVisualization: {
+                              displayName: 'Failed jobs'
+                              resourceDisplayName: iothub001Name
+                            }
+                          }
+                        ]
+                        title: 'Sum Failed jobs for ${iothub001Name}'
+                        titleKind: 1
+                        visualization: {
+                          chartType: 2
+                          legendVisualization: {
+                            isVisible: true
+                            position: 2
+                            hideSubtitle: false
+                          }
+                          axisVisualization: {
+                            x: {
+                              isVisible: true
+                              axisType: 2
+                            }
+                            y: {
+                              isVisible: true
+                              axisType: 1
+                            }
+                          }
+                          disablePinning: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            {
+              position: {
+                x: 0
+                y: 8
+                colSpan: 6
+                rowSpan: 4
+              }
+              metadata: {
+                inputs: [
+                  {
+                    name: 'options'
+                    isOptional: true
+                  }
+                  {
+                    name: 'sharedTimeRange'
+                    isOptional: true
+                  }
+                ]
+                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
+                settings: {
+                  content: {
+                    options: {
+                      chart: {
+                        metrics: [
+                          {
+                            resourceMetadata: {
+                              region: 'eastus2' 
+                              resourceType: 'Microsoft.Sql/servers/databases'
+                              subscription: {
+                                subscriptionId: subscription().id
+                                displayName: subscription().displayName
+                                resourceDisplayName: subscription().displayName
+                              }
+                            }
+                            name: 'connection_failed'
+                            aggregationType: 1
+                            namespace: 'Microsoft.Sql/servers/databases'
+                            metricVisualization: {
+                              displayName: 'Failed Connections'
+                              resourceDisplayName: subscription().displayName
+                            }
+                          }
+                        ]
+                        title: 'Sum Failed Connections for ${sql001Name}'
+                        titleKind: 1
+                        visualization: {
+                          chartType: 2
+                          legendVisualization: {
+                            isVisible: true
+                            position: 2
+                            hideSubtitle: false
+                          }
+                          axisVisualization: {
+                            x: {
+                              isVisible: true
+                              axisType: 2
+                            }
+                            y: {
+                              isVisible: true
+                              axisType: 1
+                            }
+                          }
+                          disablePinning: true
+                        }
+                        filterCollection: {
+                          filters: [
+                            {
+                              key: 'Microsoft.ResourceGroupName'
+                              operator: 0
+                              values: [
+                                resourceGroup().name
+                              ]
+                            }
+                          ]
+                        }
+                        grouping: {
+                          dimension: 'Microsoft.ResourceId'
+                        }
+                      }
+                    }
+                  }
+                }
+                filters: {
+                  'Microsoft.ResourceGroupName': {
+                    model: {
+                      operator: 'equals'
+                      values: [
+                        resourceGroup().name
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+            {
+              position: {
+                x: 6
+                y: 8
+                colSpan: 6
+                rowSpan: 4
+              }
+              metadata: {
+                inputs: [
+                  {
+                    name: 'options'
+                    isOptional: true
+                  }
+                  {
+                    name: 'sharedTimeRange'
+                    isOptional: true
+                  }
+                ]
+                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
+                settings: {
+                  content: {
+                    options: {
+                      chart: {
+                        metrics: [
+                          {
+                            resourceMetadata: {
+                              id: eventhubnamespaceScope
+                            }
+                            name: 'ServerErrors'
+                            aggregationType: 1
+                            namespace: 'Microsoft.EventHub/namespaces'
+                            metricVisualization: {
+                              displayName: 'Server Errors.'
+                              resourceDisplayName: eventhubnamespace001Name
+                            }
+                          }
+                        ]
+                        title: 'Sum Server Errors for ${eventhubnamespace001Name}'
+                        titleKind: 1
+                        visualization: {
+                          chartType: 2
+                          legendVisualization: {
+                            isVisible: true
+                            position: 2
+                            hideSubtitle: false
+                          }
+                          axisVisualization: {
+                            x: {
+                              isVisible: true
+                              axisType: 2
+                            }
+                            y: {
+                              isVisible: true
+                              axisType: 1
+                            }
+                          }
+                          disablePinning: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            {
+              position: {
+                x: 0
+                y: 12
+                colSpan: 6
+                rowSpan: 4
+              }
+              metadata: {
+                inputs: [
+                  {
+                    name: 'options'
+                    isOptional: true
+                  }
+                  {
+                    name: 'sharedTimeRange'
+                    isOptional: true
+                  }
+                ]
+                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
+                settings: {
+                  content: {
+                    options: {
+                      chart: {
+                        metrics: [
+                          {
+                            resourceMetadata: {
+                              id: streamanalyticsScope
+                            }
+                            name: 'Errors'
+                            aggregationType: 1
+                            namespace: 'microsoft.streamanalytics/streamingjobs'
+                            metricVisualization: {
+                              displayName: 'Runtime Errors'
+                              resourceDisplayName: streamanalytics001Name
+                            }
+                          }
+                        ]
+                        title: 'Sum Runtime Errors for ${streamanalytics001Name}'
+                        titleKind: 1
+                        visualization: {
+                          chartType: 2
+                          legendVisualization: {
+                            isVisible: true
+                            position: 2
+                            hideSubtitle: false
+                          }
+                          axisVisualization: {
+                            x: {
+                              isVisible: true
+                              axisType: 2
+                            }
+                            y: {
+                              isVisible: true
+                              axisType: 1
+                            }
+                          }
+                          disablePinning: true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
             ]
         }
     ]  
@@ -171,169 +521,7 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
 }
 }
 
-resource dashboardCosmosDB 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: '${dashboardName}-cosmosdb'
-  location: location
-  tags: tags
-    properties  : {
-      lenses  : [
-        {
-              order  : 0  
-              parts  : [
-                {
-                      position  : {
-                          x  : 0  
-                          y  : 0  
-                          rowSpan  : 4  
-                          colSpan  : 6
-                    }  
-                      metadata  : {
-                          inputs  : [
-                            {
-                              name: 'options'
-                              isOptional: true
-                            }
-                            {
-                              name: 'sharedTimeRange'
-                              isOptional: true
-                            }
-                        ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
-                          settings  : {
-                              content  : {
-                                options: {
-                                 chart: {
-                                   metrics: [
-                                     {
-                                       resourceMetadata: {
-                                          id : cosmosdbScope
-                                       }
-                                        name :  'Server Side Latency' 
-                                        aggregationType : 1
-                                        namespace :  'Microsoft.DocumentDB/databaseAccounts' 
-                                        metricVisualization : {
-                                          displayName :  'Time taken to process requests (Server)' 
-                                          resourceDisplayName : cosmosdb001Name
-                                       }
-                                     }
-                                   ]
-                                    title :  'Sum of Server Side Latency for ${cosmosdb001Name}' 
-                                    titleKind : 1
-                                    visualization : {
-                                      chartType : 2
-                                      legendVisualization : {
-                                        isVisible : true
-                                        position : 2
-                                        hideSubtitle : false
-                                     }
-                                      axisVisualization : {
-                                        x : {
-                                          isVisible : true
-                                          axisType : 2
-                                       }
-                                        y : {
-                                          isVisible : true
-                                          axisType : 1
-                                       }
-                                     }
-                                      disablePinning : true
-                                   }
-                                 }
-                               }
-                             }
-                        }
-                    }
-                }        
-            ]
-        }
-    ]  
-      metadata  : {
-          model  : {}
-    }
-}
-}
-
-resource dashboardIoTHub 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: '${dashboardName}-iothub'
-  location: location
-  tags: tags
-    properties  : {
-      lenses  : [
-        {
-              order  : 0  
-              parts  : [
-                {
-                      position  : {
-                          x  : 0  
-                          y  : 0  
-                          rowSpan  : 4  
-                          colSpan  : 6
-                    }  
-                      metadata  : {
-                          inputs  : [
-                            {
-                              name: 'options'
-                              isOptional: true
-                            }
-                            {
-                              name: 'sharedTimeRange'
-                              isOptional: true
-                            }
-                        ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
-                          settings  : {
-                              content  : {
-                                options: {
-                                 chart: {
-                                   metrics: [
-                                     {
-                                       resourceMetadata: {
-                                          id : iothubScope
-                                       }
-                                        name :  'Failed direct method invocations' 
-                                        aggregationType : 1
-                                        namespace :  'Microsoft.Devices/IotHubs' 
-                                        metricVisualization : {
-                                          displayName :  'Count of all failed direct method calls' 
-                                          resourceDisplayName : iothub001Name
-                                       }
-                                     }
-                                   ]
-                                    title :  'Sum of all failed direct method calls for ${iothub001Name}' 
-                                    titleKind : 1
-                                    visualization : {
-                                      chartType : 2
-                                      legendVisualization : {
-                                        isVisible : true
-                                        position : 2
-                                        hideSubtitle : false
-                                     }
-                                      axisVisualization : {
-                                        x : {
-                                          isVisible : true
-                                          axisType : 2
-                                       }
-                                        y : {
-                                          isVisible : true
-                                          axisType : 1
-                                       }
-                                     }
-                                      disablePinning : true
-                                   }
-                                 }
-                               }
-                             }
-                        }
-                    }
-                }        
-            ]
-        }
-    ]  
-      metadata  : {
-          model  : {}
-    }
-}
-}
+/*
 
 resource dashboardSql 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
   name: '${dashboardName}-sql'
@@ -415,170 +603,6 @@ resource dashboardSql 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
           model  : {}
     }
 }
-}
-
-resource dashboardEventHub 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: '${dashboardName}-eventhub'
-  location: location
-  tags: tags
-    properties  : {
-      lenses  : [
-        {
-              order  : 0  
-              parts  : [
-                {
-                      position  : {
-                          x  : 0  
-                          y  : 0  
-                          rowSpan  : 4  
-                          colSpan  : 6
-                    }  
-                      metadata  : {
-                          inputs  : [
-                            {
-                              name: 'options'
-                              isOptional: true
-                            }
-                            {
-                              name: 'sharedTimeRange'
-                              isOptional: true
-                            }
-                        ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
-                          settings  : {
-                              content  : {
-                                options: {
-                                 chart: {
-                                   metrics: [
-                                     {
-                                       resourceMetadata: {
-                                          id : eventhubnamespaceScope
-                                       }
-                                        name :  'Server Errors' 
-                                        aggregationType : 1
-                                        namespace :  'Microsoft.EventHub/namespaces' 
-                                        metricVisualization : {
-                                          displayName :  'Number of unprocessed requests because of error' 
-                                          resourceDisplayName : eventhubnamespace001Name
-                                       }
-                                     }
-                                   ]
-                                    title :  'Sum of Server Errors for ${eventhubnamespace001Name}' 
-                                    titleKind : 1
-                                    visualization : {
-                                      chartType : 2
-                                      legendVisualization : {
-                                        isVisible : true
-                                        position : 2
-                                        hideSubtitle : false
-                                     }
-                                      axisVisualization : {
-                                        x : {
-                                          isVisible : true
-                                          axisType : 2
-                                       }
-                                        y : {
-                                          isVisible : true
-                                          axisType : 1
-                                       }
-                                     }
-                                      disablePinning : true
-                                   }
-                                 }
-                               }
-                             }
-                        }
-                    }
-                }        
-            ]
-        }
-    ]  
-      metadata  : {
-          model  : {}
-    }
-}
-}
-
-resource dashboardStreamAnalytics 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: '${dashboardName}-streamanalytics'
-  location: location
-  tags: tags
-    properties  : {
-      lenses  : [
-        {
-              order  : 0  
-              parts  : [
-                {
-                      position  : {
-                          x  : 0  
-                          y  : 0  
-                          rowSpan  : 4  
-                          colSpan  : 6
-                    }  
-                      metadata  : {
-                          inputs  : [
-                            {
-                              name: 'options'
-                              isOptional: true
-                            }
-                            {
-                              name: 'sharedTimeRange'
-                              isOptional: true
-                            }
-                        ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
-                          settings  : {
-                              content  : {
-                                options: {
-                                 chart: {
-                                   metrics: [
-                                     {
-                                       resourceMetadata: {
-                                          id : streamanalyticsScope
-                                       }
-                                        name :  'Runtime Errors' 
-                                        aggregationType : 1
-                                        namespace :  'Microsoft.StreamAnalytics/streamingjobs' 
-                                        metricVisualization : {
-                                          displayName :  'Query processing errors' 
-                                          resourceDisplayName : streamanalytics001Name
-                                       }
-                                     }
-                                   ]
-                                    title :  'Sum of Runtime Errors for ${streamanalytics001Name}' 
-                                    titleKind : 1
-                                    visualization : {
-                                      chartType : 2
-                                      legendVisualization : {
-                                        isVisible : true
-                                        position : 2
-                                        hideSubtitle : false
-                                     }
-                                      axisVisualization : {
-                                        x : {
-                                          isVisible : true
-                                          axisType : 2
-                                       }
-                                        y : {
-                                          isVisible : true
-                                          axisType : 1
-                                       }
-                                     }
-                                      disablePinning : true
-                                   }
-                                 }
-                               }
-                             }
-                        }
-                    }
-                }        
-            ]
-        }
-    ]  
-      metadata  : {
-          model  : {}
-    }
-}
-}
+}*/
 
 // Outputs
