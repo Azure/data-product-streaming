@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/validation.yml
     name: "Validation of IaC templates - Test"
     with:
-      environment: ${{ env.TEST_ENVIRONMENT_NAME }}
+      environment: "test"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
@@ -33,7 +33,7 @@ jobs:
     name: "Validation of IaC templates - Prod"
     needs: [ validation_test ]
     with:
-      environment: ${{ env.PROD_ENVIRONMENT_NAME }}
+      environment: "prod"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
@@ -46,7 +46,7 @@ jobs:
     needs: [ validation_prod ]
     if: github.event_name == 'release'
     with:
-      environment: ${{ env.TEST_ENVIRONMENT_NAME }}
+      environment: "test"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
@@ -59,7 +59,7 @@ jobs:
     needs: [ deployment_test ]
     if: github.event_name == 'release'
     with:
-      environment: ${{ env.PROD_ENVIRONMENT_NAME }}
+      environment: "prod"
     secrets:
       azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}

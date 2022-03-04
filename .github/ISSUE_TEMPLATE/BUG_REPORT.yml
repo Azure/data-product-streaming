@@ -39,7 +39,7 @@ body:
       label: Error Message
       description: If possible, please share the error message that you received.
       placeholder: Error Messages
-      render: json
+      render: JSON
     validations:
       required: false
 
