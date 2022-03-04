@@ -17,8 +17,6 @@ param streamanalyticsErrorAlertName string
 param streamanalyticsScope string
 param dataEmailActionGroup string
 param dataProductTeamEmail string
-
-
 // Variables
 
 // Resources

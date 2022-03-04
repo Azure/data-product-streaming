@@ -91,7 +91,7 @@ var iothub001Name = '${name}-iothub001'
 var eventhubNamespace001Name = '${name}-eventhub001'
 var streamanalytics001Name = '${name}-streamanalytics001'
 var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
-var loganalyticsName = '${name}-loganalytics'
+var logAnalytics001Name = '${name}-loganalytics001'
 var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var iothubFailedAlertName = '${iothub001Name}-failedalert'
@@ -118,7 +118,7 @@ module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitori
   params: {
     location: location
     tags: tagsJoined
-    loganalyticsName: loganalyticsName  
+    logAnalyticsName: loganAlytics001Name  
   }
 }
 

@@ -5,7 +5,7 @@
 targetScope = 'resourceGroup'
 
 // Parameters
-param loganalyticsName string
+param logAnalyticsName string
 param synapseName string
 param cosmosdbName string
 param iothubName string
@@ -63,7 +63,7 @@ resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2020-03-
   name: streamanalyticsName
 }
 
-resource diagnosticSetting1 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting001 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: synapseworkspace
   name: 'diagnostic-${synapseworkspace.name}'  
   properties: {
