@@ -5,7 +5,7 @@
 targetScope = 'resourceGroup'
 
 // Parameters
-param loganalyticsName string
+param logAnalyticsName string
 param synapseName string
 param synapseSqlPoolName string
 param synapseSparkPoolName string
