@@ -35,7 +35,7 @@ resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-0
 }]
 
 resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2020-08-01' existing = {
-  name: loganalyticsName
+  name: logAnalyticsName
 }
 
 resource cosmosdb 'Microsoft.DocumentDB/databaseAccounts@2021-03-15' existing = {

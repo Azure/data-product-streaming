@@ -7,14 +7,14 @@ targetScope = 'resourceGroup'
 // Parameters
 param location string
 param tags object
-param loganalyticsName string
+param logAnalyticsName string
 
 // Variables
-var dataFactoryAnalyticsName = 'AzureDataFactoryAnalytics(${loganalyticsName})'
+var dataFactoryAnalyticsName = 'AzureDataFactoryAnalytics(${logAnalyticsName})'
 
 // Resources
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2020-10-01' = {
-  name: loganalyticsName
+  name: logAnalyticsName
   location: location
   tags: tags
   properties: {

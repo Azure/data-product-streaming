@@ -118,7 +118,7 @@ module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitori
   params: {
     location: location
     tags: tagsJoined
-    logAnalyticsName: loganAlytics001Name  
+    logAnalyticsName: logAnalytics001Name  
   }
 }
 
@@ -270,7 +270,7 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
   name: 'diagnosticSettings'  
   scope: resourceGroup()
   params: {    
-    loganalyticsName: loganalyticsName
+    logAnalyticsName: logAnalytics001Name
     synapseName: synapse001Name
     synapseSqlPools: [
       synapse001.outputs.synapseSqlPool001Name
