@@ -315,100 +315,6 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
                         metrics: [
                           {
                             resourceMetadata: {
-                              region: 'eastus2' 
-                              resourceType: 'Microsoft.Sql/servers/databases'
-                              subscription: {
-                                subscriptionId: subscription().id
-                                displayName: subscription().displayName
-                                resourceDisplayName: subscription().displayName
-                              }
-                            }
-                            name: 'connection_failed'
-                            aggregationType: 1
-                            namespace: 'Microsoft.Sql/servers/databases'
-                            metricVisualization: {
-                              displayName: 'Failed Connections'
-                              resourceDisplayName: subscription().displayName
-                            }
-                          }
-                        ]
-                        title: 'Sum Failed Connections for ${sql001Name}'
-                        titleKind: 1
-                        visualization: {
-                          chartType: 2
-                          legendVisualization: {
-                            isVisible: true
-                            position: 2
-                            hideSubtitle: false
-                          }
-                          axisVisualization: {
-                            x: {
-                              isVisible: true
-                              axisType: 2
-                            }
-                            y: {
-                              isVisible: true
-                              axisType: 1
-                            }
-                          }
-                          disablePinning: true
-                        }
-                        filterCollection: {
-                          filters: [
-                            {
-                              key: 'Microsoft.ResourceGroupName'
-                              operator: 0
-                              values: [
-                                resourceGroup().name
-                              ]
-                            }
-                          ]
-                        }
-                        grouping: {
-                          dimension: 'Microsoft.ResourceId'
-                        }
-                      }
-                    }
-                  }
-                }
-                filters: {
-                  'Microsoft.ResourceGroupName': {
-                    model: {
-                      operator: 'equals'
-                      values: [
-                        resourceGroup().name
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-            {
-              position: {
-                x: 6
-                y: 8
-                colSpan: 6
-                rowSpan: 4
-              }
-              metadata: {
-                inputs: [
-                  {
-                    name: 'options'
-                    isOptional: true
-                  }
-                  {
-                    name: 'sharedTimeRange'
-                    isOptional: true
-                  }
-                ]
-                type: 'Extension/HubsExtension/PartType/MonitorChartPart'
-                settings: {
-                  content: {
-                    options: {
-                      chart: {
-                        metrics: [
-                          {
-                            resourceMetadata: {
                               id: eventhubnamespaceScope
                             }
                             name: 'ServerErrors'
@@ -449,8 +355,8 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
             }
             {
               position: {
-                x: 0
-                y: 12
+                x: 6
+                y: 8
                 colSpan: 6
                 rowSpan: 4
               }
@@ -519,89 +425,5 @@ resource dashboardSynapse 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
     }
 }
 }
-
-/*
-
-resource dashboardSql 'Microsoft.Portal/dashboards@2020-09-01-preview' = {
-  name: '${dashboardName}-sql'
-  location: location
-  tags: tags
-    properties  : {
-      lenses  : [
-        {
-              order  : 0  
-              parts  : [
-                {
-                      position  : {
-                          x  : 0  
-                          y  : 0  
-                          rowSpan  : 4  
-                          colSpan  : 6
-                    }  
-                      metadata  : {
-                          inputs  : [
-                            {
-                              name: 'options'
-                              isOptional: true
-                            }
-                            {
-                              name: 'sharedTimeRange'
-                              isOptional: true
-                            }
-                        ]  
-                          type  : 'Extension/HubsExtension/PartType/MarkdownPart'
-                          settings  : {
-                              content  : {
-                                options: {
-                                 chart: {
-                                   metrics: [
-                                     {
-                                       resourceMetadata: {
-                                          id : sqlScope
-                                       }
-                                        name :  'CPU percentage' 
-                                        aggregationType : 1
-                                        namespace :  'Microsoft.Sql/servers/databases' 
-                                        metricVisualization : {
-                                          displayName :  'Percent of CPU utilization' 
-                                          resourceDisplayName : sql001Name
-                                       }
-                                     }
-                                   ]
-                                    title :  'Total Percent of CPU utilization for ${sql001Name}' 
-                                    titleKind : 1
-                                    visualization : {
-                                      chartType : 2
-                                      legendVisualization : {
-                                        isVisible : true
-                                        position : 2
-                                        hideSubtitle : false
-                                     }
-                                      axisVisualization : {
-                                        x : {
-                                          isVisible : true
-                                          axisType : 2
-                                       }
-                                        y : {
-                                          isVisible : true
-                                          axisType : 1
-                                       }
-                                     }
-                                      disablePinning : true
-                                   }
-                                 }
-                               }
-                             }
-                        }
-                    }
-                }        
-            ]
-        }
-    ]  
-      metadata  : {
-          model  : {}
-    }
-}
-}*/
 
 // Outputs
