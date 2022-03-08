@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1272.37030",
-      "templateHash": "10758335520773766664"
+      "templateHash": "10913150091782705828"
     }
   },
   "parameters": {
@@ -203,7 +203,7 @@
     "eventhubNamespace001Name": "[format('{0}-eventhub001', variables('name'))]",
     "streamanalytics001Name": "[format('{0}-streamanalytics001', variables('name'))]",
     "streamanalyticscluster001Name": "[format('{0}-streamanalyticscluster001', variables('name'))]",
-    "loganalyticsName": "[format('{0}-loganalytics', variables('name'))]",
+    "logAnalytics001Name": "[format('{0}-loganalytics001', variables('name'))]",
     "dataEmailActionGroup": "[format('{0}-emailactiongroup', variables('name'))]",
     "synapsePipelineFailedAlertName": "[format('{0}-failedalert', variables('synapse001Name'))]",
     "iothubFailedAlertName": "[format('{0}-failedalert', variables('iothub001Name'))]",
@@ -373,8 +373,8 @@
           "tags": {
             "value": "[variables('tagsJoined')]"
           },
-          "loganalyticsName": {
-            "value": "[variables('loganalyticsName')]"
+          "logAnalyticsName": {
+            "value": "[variables('logAnalytics001Name')]"
           }
         },
         "template": {
@@ -394,18 +394,18 @@
             "tags": {
               "type": "object"
             },
-            "loganalyticsName": {
+            "logAnalyticsName": {
               "type": "string"
             }
           },
           "variables": {
-            "dataFactoryAnalyticsName": "[format('AzureDataFactoryAnalytics({0})', parameters('loganalyticsName'))]"
+            "dataFactoryAnalyticsName": "[format('AzureDataFactoryAnalytics({0})', parameters('logAnalyticsName'))]"
           },
           "resources": [
             {
               "type": "Microsoft.OperationalInsights/workspaces",
               "apiVersion": "2020-10-01",
-              "name": "[parameters('loganalyticsName')]",
+              "name": "[parameters('logAnalyticsName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
               "properties": {
@@ -431,17 +431,17 @@
                 "publisher": "Microsoft"
               },
               "properties": {
-                "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]"
+                "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
               },
               "dependsOn": [
-                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]"
+                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
               ]
             }
           ],
           "outputs": {
             "logAnalyticsWorkspaceId": {
               "type": "string",
-              "value": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]"
+              "value": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
             }
           }
         }
@@ -810,7 +810,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "4910842601394192282"
+              "templateHash": "6197790550022719861"
             }
           },
           "parameters": {
@@ -1151,100 +1151,6 @@
                                   "metrics": [
                                     {
                                       "resourceMetadata": {
-                                        "region": "eastus2",
-                                        "resourceType": "Microsoft.Sql/servers/databases",
-                                        "subscription": {
-                                          "subscriptionId": "[subscription().id]",
-                                          "displayName": "[subscription().displayName]",
-                                          "resourceDisplayName": "[subscription().displayName]"
-                                        }
-                                      },
-                                      "name": "connection_failed",
-                                      "aggregationType": 1,
-                                      "namespace": "Microsoft.Sql/servers/databases",
-                                      "metricVisualization": {
-                                        "displayName": "Failed Connections",
-                                        "resourceDisplayName": "[subscription().displayName]"
-                                      }
-                                    }
-                                  ],
-                                  "title": "[format('Sum Failed Connections for {0}', parameters('sql001Name'))]",
-                                  "titleKind": 1,
-                                  "visualization": {
-                                    "chartType": 2,
-                                    "legendVisualization": {
-                                      "isVisible": true,
-                                      "position": 2,
-                                      "hideSubtitle": false
-                                    },
-                                    "axisVisualization": {
-                                      "x": {
-                                        "isVisible": true,
-                                        "axisType": 2
-                                      },
-                                      "y": {
-                                        "isVisible": true,
-                                        "axisType": 1
-                                      }
-                                    },
-                                    "disablePinning": true
-                                  },
-                                  "filterCollection": {
-                                    "filters": [
-                                      {
-                                        "key": "Microsoft.ResourceGroupName",
-                                        "operator": 0,
-                                        "values": [
-                                          "[resourceGroup().name]"
-                                        ]
-                                      }
-                                    ]
-                                  },
-                                  "grouping": {
-                                    "dimension": "Microsoft.ResourceId"
-                                  }
-                                }
-                              }
-                            }
-                          },
-                          "filters": {
-                            "Microsoft.ResourceGroupName": {
-                              "model": {
-                                "operator": "equals",
-                                "values": [
-                                  "[resourceGroup().name]"
-                                ]
-                              }
-                            }
-                          }
-                        }
-                      },
-                      {
-                        "position": {
-                          "x": 6,
-                          "y": 8,
-                          "colSpan": 6,
-                          "rowSpan": 4
-                        },
-                        "metadata": {
-                          "inputs": [
-                            {
-                              "name": "options",
-                              "isOptional": true
-                            },
-                            {
-                              "name": "sharedTimeRange",
-                              "isOptional": true
-                            }
-                          ],
-                          "type": "Extension/HubsExtension/PartType/MonitorChartPart",
-                          "settings": {
-                            "content": {
-                              "options": {
-                                "chart": {
-                                  "metrics": [
-                                    {
-                                      "resourceMetadata": {
                                         "id": "[parameters('eventhubnamespaceScope')]"
                                       },
                                       "name": "ServerErrors",
@@ -1285,8 +1191,8 @@
                       },
                       {
                         "position": {
-                          "x": 0,
-                          "y": 12,
+                          "x": 6,
+                          "y": 8,
                           "colSpan": 6,
                           "rowSpan": 4
                         },
@@ -1890,7 +1796,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "14228636177564402860"
+              "templateHash": "17021463925113681839"
             }
           },
           "parameters": {
@@ -1953,7 +1859,7 @@
                   {
                     "locationName": "[parameters('location')]",
                     "failoverPriority": 0,
-                    "isZoneRedundant": true
+                    "isZoneRedundant": false
                   }
                 ]
               }
@@ -2855,8 +2761,8 @@
         },
         "mode": "Incremental",
         "parameters": {
-          "loganalyticsName": {
-            "value": "[variables('loganalyticsName')]"
+          "logAnalyticsName": {
+            "value": "[variables('logAnalytics001Name')]"
           },
           "synapseName": {
             "value": "[variables('synapse001Name')]"
@@ -2898,7 +2804,7 @@
             }
           },
           "parameters": {
-            "loganalyticsName": {
+            "logAnalyticsName": {
               "type": "string"
             },
             "synapseName": {
@@ -2937,7 +2843,7 @@
               "scope": "[format('Microsoft.Synapse/workspaces/{0}', parameters('synapseName'))]",
               "name": "[format('diagnostic-{0}', parameters('synapseName'))]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "SynapseRbacOperations",
@@ -2976,7 +2882,7 @@
               "scope": "[format('Microsoft.Synapse/workspaces/{0}/sqlPools/{1}', parameters('synapseName'), parameters('synapseSqlPools')[range(0, variables('synapseSqlPoolsCount'))[copyIndex()]])]",
               "name": "[format('diagnostic-{0}-{1}', parameters('synapseName'), parameters('synapseSqlPools')[range(0, variables('synapseSqlPoolsCount'))[copyIndex()]])]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "SqlRequests",
@@ -3011,7 +2917,7 @@
               "scope": "[format('Microsoft.Synapse/workspaces/{0}/bigDataPools/{1}', parameters('synapseName'), parameters('synapseSparkPools')[range(0, variables('synapseSparkPoolCount'))[copyIndex()]])]",
               "name": "[format('diagnostic-{0}-{1}', parameters('synapseName'), parameters('synapseSparkPools')[range(0, variables('synapseSparkPoolCount'))[copyIndex()]])]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "BigDataPoolAppsEnded",
@@ -3026,7 +2932,7 @@
               "scope": "[format('Microsoft.DocumentDB/databaseAccounts/{0}', parameters('cosmosdbName'))]",
               "name": "[format('diagnostic-{0}', parameters('cosmosdbName'))]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "DataPlaneRequests",
@@ -3057,7 +2963,7 @@
               "scope": "[format('Microsoft.Devices/IotHubs/{0}', parameters('iothubName'))]",
               "name": "[format('diagnostic-{0}', parameters('iothubName'))]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "Connections",
@@ -3124,7 +3030,7 @@
               "scope": "[format('Microsoft.EventHub/namespaces/{0}', parameters('eventhubnamespaceName'))]",
               "name": "[format('diagnostic-{0}', parameters('eventhubnamespaceName'))]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "ArchiveLogs",
@@ -3171,7 +3077,7 @@
               "scope": "[format('Microsoft.StreamAnalytics/streamingjobs/{0}', parameters('streamanalyticsName'))]",
               "name": "[format('diagnostic-{0}', parameters('streamanalyticsName'))]",
               "properties": {
-                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('loganalyticsName'))]",
+                "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]",
                 "logs": [
                   {
                     "category": "Execution",
