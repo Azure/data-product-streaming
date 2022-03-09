@@ -1012,7 +1012,7 @@
                 "enableCosmos": "[steps('generalSettings').generalSettings.enableCosmos]",
                 "enableStreamAnalytics": "[steps('generalSettings').streamAnalyticsDeploymentSettings.enableStreamAnalytics]",
                 "enableMonitoring": "[equals(steps('generalSettings').monitoringSettings.enableMonitoring,'yes')]",
-                "dataProductTeamEmail": "[if(empty(steps('generalSettings').monitoringSettings.dataProductTeamEmail,'',steps('generalSettings').monitoringSettings.dataProductTeamEmail)]",
+                "dataProductTeamEmail": "[if(empty(steps('generalSettings').monitoringSettings.dataProductTeamEmail),'',steps('generalSettings').monitoringSettings.dataProductTeamEmail)]",
                 "streamanalyticsDefaultStorageAccountFileSystemId": "[if(empty(steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId), '', steps('generalSettings').streamAnalyticsDeploymentSettings.streamanalyticsDefaultStorageAccountFileSystemId)]",
                 "purviewId": "[if(empty(steps('generalSettings').dataGovernanceSettings.purviewId.id), '', steps('generalSettings').dataGovernanceSettings.purviewId.id)]",
                 "enableRoleAssignments": "[equals(steps('generalSettings').generalSettings.enableRoleAssignments, 'yes')]",
