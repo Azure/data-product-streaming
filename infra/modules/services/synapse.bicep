@@ -61,7 +61,7 @@ resource synapse 'Microsoft.Synapse/workspaces@2021-06-01' = {
   }
 }
 
-resource synapseSqlPool001 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = if(enableSqlPool) {
+resource synapseSqlPool001 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = if (enableSqlPool) {
   parent: synapse
   name: 'sqlPool001'
   location: location
@@ -76,7 +76,7 @@ resource synapseSqlPool001 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' = 
   }
 }
 
-resource dataExplorerPool001 'Microsoft.Synapse/workspaces/kustoPools@2021-06-01-preview' = if(enableDataExplorerPool) {
+resource dataExplorerPool001 'Microsoft.Synapse/workspaces/kustoPools@2021-06-01-preview' = if (enableDataExplorerPool) {
   parent: synapse
   name: 'dataexplorerpool001'
   location: location
@@ -150,7 +150,7 @@ resource synapseManagedIdentitySqlControlSettings 'Microsoft.Synapse/workspaces/
   }
 }
 
-resource synapseAadAdministrators 'Microsoft.Synapse/workspaces/administrators@2021-06-01' = if (!empty(synapseSqlAdminGroupName)&& !empty(synapseSqlAdminGroupObjectID)) {
+resource synapseAadAdministrators 'Microsoft.Synapse/workspaces/administrators@2021-06-01' = if (!empty(synapseSqlAdminGroupName) && !empty(synapseSqlAdminGroupObjectID)) {
   parent: synapse
   name: 'activeDirectory'
   properties: {

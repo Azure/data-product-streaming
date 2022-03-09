@@ -97,7 +97,7 @@ var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var iothubFailedAlertName = '${iothub001Name}-failedalert'
 var eventhubnamespaceErrorAlertName = '${eventhubNamespace001Name}-erroralert'
 var streamanalyticsErrorAlertName = '${streamanalytics001Name}-erroralert'
-var dashboardName= '${name}-dashboard'
+var dashboardName = '${name}-dashboard'
 
 // Resources
 module keyVault001 'modules/services/keyvault.bicep' = {
@@ -112,25 +112,25 @@ module keyVault001 'modules/services/keyvault.bicep' = {
   }
 }
 
-module logAnalytics001 'modules/services/loganalytics.bicep' = if(enableMonitoring) {
+module logAnalytics001 'modules/services/loganalytics.bicep' = if (enableMonitoring) {
   name: 'logAnalytics001'
   scope: resourceGroup()
   params: {
     location: location
     tags: tagsJoined
-    logAnalyticsName: logAnalytics001Name  
+    logAnalyticsName: logAnalytics001Name
   }
 }
 
-module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring){
-  name: 'alerts'  
+module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring) {
+  name: 'alerts'
   scope: resourceGroup()
   params: {
-    dataEmailActionGroup: dataEmailActionGroup    
+    dataEmailActionGroup: dataEmailActionGroup
     dataProductTeamEmail: dataProductTeamEmail
     location: location
     synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
-    synapseScope:synapse001.outputs.synapseId
+    synapseScope: synapse001.outputs.synapseId
     iothubFailedAlertName: iothubFailedAlertName
     iothubScope: iothub001.outputs.iothubId
     eventhubnamespaceErrorAlertName: eventhubnamespaceErrorAlertName
@@ -142,7 +142,7 @@ module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmai
 }
 
 module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
-  name: 'dashboard'  
+  name: 'dashboard'
   scope: resourceGroup()
   params: {
     dashboardName: dashboardName
@@ -158,7 +158,7 @@ module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
     eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
     streamanalytics001Name: streamanalytics001Name
     streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
-    tags: tagsJoined    
+    tags: tagsJoined
   }
 }
 
@@ -193,7 +193,7 @@ module synapse001RoleAssignmentStorage 'modules/auxiliary/synapseRoleAssignmentS
   }
 }
 
-module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
+module cosmosdb001 'modules/services/cosmosdb.bicep' = if (enableCosmos) {
   name: 'cosmos001'
   scope: resourceGroup()
   params: {
@@ -205,7 +205,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
   }
 }
 
-module sql001 'modules/services/sql.bicep' = if(enableSqlServer) {
+module sql001 'modules/services/sql.bicep' = if (enableSqlServer) {
   name: 'sql001'
   scope: resourceGroup()
   params: {
@@ -250,7 +250,7 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
   }
 }
 
-module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableStreamAnalytics) {
+module streamanalytics001 'modules/services/streamanalytics.bicep' = if (enableStreamAnalytics) {
   name: 'streamanalytics001'
   scope: resourceGroup()
   params: {
@@ -267,9 +267,9 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableSt
 }
 
 module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
-  name: 'diagnosticSettings'  
+  name: 'diagnosticSettings'
   scope: resourceGroup()
-  params: {    
+  params: {
     logAnalyticsName: logAnalytics001Name
     synapseName: synapse001Name
     synapseSqlPools: [
@@ -287,7 +287,7 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
 }
 
 @batchSize(1)
-module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): if (enableStreamAnalytics && enableRoleAssignments) {
+module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0, 20): if (enableStreamAnalytics && enableRoleAssignments) {
   name: 'delay-${i}'
   dependsOn: [
     streamanalytics001

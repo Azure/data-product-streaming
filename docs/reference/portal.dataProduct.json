@@ -674,8 +674,8 @@
                                     "type": "Microsoft.Common.TextBox",
                                     "visible": "[equals(steps('generalSettings').monitoringSettings.enableMonitoring, 'yes')]",
                                     "defaultValue": "",
-                                    "toolTip": "Specify Email ID to receive monitoring alerts."                                    
-                                }                                
+                                    "toolTip": "Specify Email ID to receive monitoring alerts."
+                                }
                             ]
                         }
                     ]

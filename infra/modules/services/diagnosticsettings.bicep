@@ -24,12 +24,12 @@ resource synapseworkspace 'Microsoft.Synapse/workspaces@2021-06-01' existing = {
   name: synapseName
 }
 
-resource synapsesqlpool 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' existing = [ for sqlPool in synapseSqlPools:{
+resource synapsesqlpool 'Microsoft.Synapse/workspaces/sqlPools@2021-06-01' existing = [for sqlPool in synapseSqlPools: {
   parent: synapseworkspace
   name: sqlPool
 }]
 
-resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-01' existing = [ for sparkPool in synapseSparkPools: {
+resource synapsebigdatapool 'Microsoft.Synapse/workspaces/bigDataPools@2021-06-01' existing = [for sparkPool in synapseSparkPools: {
   parent: synapseworkspace
   name: sparkPool
 }]
@@ -65,7 +65,7 @@ resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2020-03-
 
 resource diagnosticSetting001 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: synapseworkspace
-  name: 'diagnostic-${synapseworkspace.name}'  
+  name: 'diagnostic-${synapseworkspace.name}'
   properties: {
     workspaceId: logAnalyticsWorkspace.id
     logs: [
@@ -97,7 +97,7 @@ resource diagnosticSetting001 'Microsoft.Insights/diagnosticSettings@2021-05-01-
   }
 }
 
-resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount) : {
+resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount): {
   scope: synapsesqlpool[i]
   name: 'diagnostic-${synapseworkspace.name}-${synapsesqlpool[i].name}'
   properties: {
@@ -127,7 +127,7 @@ resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }]
 
-resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSparkPoolCount) : {
+resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSparkPoolCount): {
   scope: synapsebigdatapool[i]
   name: 'diagnostic-${synapseworkspace.name}-${synapsebigdatapool[i].name}'
   properties: {
@@ -148,24 +148,24 @@ resource diagnosticSetting4 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
     workspaceId: logAnalyticsWorkspace.id
     logs: [
       {
-          category: 'DataPlaneRequests'
-          enabled: true
+        category: 'DataPlaneRequests'
+        enabled: true
       }
       {
-          category: 'QueryRuntimeStatistics'
-          enabled: true
+        category: 'QueryRuntimeStatistics'
+        enabled: true
       }
       {
-          category: 'PartitionKeyStatistics'
-          enabled: true
+        category: 'PartitionKeyStatistics'
+        enabled: true
       }
       {
-          category: 'PartitionKeyRUConsumption'
-          enabled: true
+        category: 'PartitionKeyRUConsumption'
+        enabled: true
       }
       {
-          category: 'ControlPlaneRequests'
-          enabled: true
+        category: 'ControlPlaneRequests'
+        enabled: true
       }
     ]
   }
@@ -178,60 +178,60 @@ resource diagnosticSetting5 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
     workspaceId: logAnalyticsWorkspace.id
     logs: [
       {
-          category: 'Connections'
-          enabled: true
+        category: 'Connections'
+        enabled: true
       }
       {
-          category: 'DeviceTelemetry'
-          enabled: true
+        category: 'DeviceTelemetry'
+        enabled: true
       }
       {
-          category: 'C2DCommands'
-          enabled: true
+        category: 'C2DCommands'
+        enabled: true
       }
       {
-          category: 'DeviceIdentityOperations'
-          enabled: true
+        category: 'DeviceIdentityOperations'
+        enabled: true
       }
       {
-          category: 'FileUploadOperations'
-          enabled: true
+        category: 'FileUploadOperations'
+        enabled: true
       }
       {
-          category: 'Routes'
-          enabled: true
+        category: 'Routes'
+        enabled: true
       }
       {
-          category: 'D2CTwinOperations'
-          enabled: true
+        category: 'D2CTwinOperations'
+        enabled: true
       }
       {
-          category: 'C2DTwinOperations'
-          enabled: true
+        category: 'C2DTwinOperations'
+        enabled: true
       }
       {
-          category: 'TwinQueries'
-          enabled: true
+        category: 'TwinQueries'
+        enabled: true
       }
       {
-          category: 'JobsOperations'
-          enabled: true
+        category: 'JobsOperations'
+        enabled: true
       }
       {
-          category: 'DirectMethods'
-          enabled: true
+        category: 'DirectMethods'
+        enabled: true
       }
       {
-          category: 'DistributedTracing'
-          enabled: true
+        category: 'DistributedTracing'
+        enabled: true
       }
       {
-          category: 'Configurations'
-          enabled: true
+        category: 'Configurations'
+        enabled: true
       }
       {
-          category: 'DeviceStreams'
-          enabled: true
+        category: 'DeviceStreams'
+        enabled: true
       }
     ]
   }
@@ -244,40 +244,40 @@ resource diagnosticSetting6 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
     workspaceId: logAnalyticsWorkspace.id
     logs: [
       {
-          category: 'ArchiveLogs'
-          enabled: true
+        category: 'ArchiveLogs'
+        enabled: true
       }
       {
-          category: 'OperationalLogs'
-          enabled: true
+        category: 'OperationalLogs'
+        enabled: true
       }
       {
-          category: 'AutoScaleLogs'
-          enabled: true
+        category: 'AutoScaleLogs'
+        enabled: true
       }
       {
-          category: 'KafkaCoordinatorLogs'
-          enabled: true
+        category: 'KafkaCoordinatorLogs'
+        enabled: true
       }
       {
-          category: 'KafkaUserErrorLogs'
-          enabled: true
+        category: 'KafkaUserErrorLogs'
+        enabled: true
       }
       {
-          category: 'EventHubVNetConnectionEvent'
-          enabled: true
+        category: 'EventHubVNetConnectionEvent'
+        enabled: true
       }
       {
-          category: 'CustomerManagedKeyUserLogs'
-          enabled: true
+        category: 'CustomerManagedKeyUserLogs'
+        enabled: true
       }
       {
-          category: 'RuntimeAuditLogs'
-          enabled: true
+        category: 'RuntimeAuditLogs'
+        enabled: true
       }
       {
-          category: 'ApplicationMetricsLogs'
-          enabled: true
+        category: 'ApplicationMetricsLogs'
+        enabled: true
       }
     ]
   }
@@ -290,12 +290,12 @@ resource diagnosticSetting8 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
     workspaceId: logAnalyticsWorkspace.id
     logs: [
       {
-          category: 'Execution'
-          enabled: true
+        category: 'Execution'
+        enabled: true
       }
       {
-          category: 'Authoring'
-          enabled: true
+        category: 'Authoring'
+        enabled: true
       }
     ]
   }
