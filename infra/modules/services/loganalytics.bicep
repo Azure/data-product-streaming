@@ -9,9 +9,6 @@ param location string
 param tags object
 param logAnalyticsName string
 
-// Variables
-var dataFactoryAnalyticsName = 'AzureDataFactoryAnalytics(${logAnalyticsName})'
-
 // Resources
 resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2020-10-01' = {
   name: logAnalyticsName
@@ -25,21 +22,6 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2020-10-01' = {
     sku: {
       name: 'PerGB2018'
     }
-  }
-}
-
-resource dataFactoryAnalytics 'Microsoft.OperationsManagement/solutions@2015-11-01-preview' = {
-  name: dataFactoryAnalyticsName
-  location: location
-  tags: tags
-  plan: {
-    name: dataFactoryAnalyticsName
-    product: 'OMSGallery/AzureDataFactoryAnalytics'
-    promotionCode: ''
-    publisher: 'Microsoft'
-  }
-  properties: {
-    workspaceResourceId: logAnalytics.id
   }
 }
 
