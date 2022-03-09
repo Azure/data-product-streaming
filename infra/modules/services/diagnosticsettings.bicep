@@ -97,7 +97,7 @@ resource diagnosticSetting001 'Microsoft.Insights/diagnosticSettings@2021-05-01-
   }
 }
 
-resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount): {
+resource diagnosticSetting002 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount): {
   scope: synapsesqlpool[i]
   name: 'diagnostic-${synapseworkspace.name}-${synapsesqlpool[i].name}'
   properties: {
@@ -127,7 +127,7 @@ resource diagnosticSetting2 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }]
 
-resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSparkPoolCount): {
+resource diagnosticSetting003 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSparkPoolCount): {
   scope: synapsebigdatapool[i]
   name: 'diagnostic-${synapseworkspace.name}-${synapsebigdatapool[i].name}'
   properties: {
@@ -141,7 +141,7 @@ resource diagnosticSetting3 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }]
 
-resource diagnosticSetting4 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting004 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: cosmosdb
   name: 'diagnostic-${cosmosdb.name}'
   properties: {
@@ -171,7 +171,7 @@ resource diagnosticSetting4 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }
 
-resource diagnosticSetting5 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting005 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: iothub
   name: 'diagnostic-${iothub.name}'
   properties: {
@@ -237,7 +237,7 @@ resource diagnosticSetting5 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }
 
-resource diagnosticSetting6 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting006 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
   scope: eventhubNamespace
   name: 'diagnostic-${eventhubNamespace.name}'
   properties: {
@@ -283,7 +283,7 @@ resource diagnosticSetting6 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
   }
 }
 
-resource diagnosticSetting8 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting007 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = if (enableStreamAnalytics) {
   scope: streamanalyticsjob001
   name: 'diagnostic-${streamanalyticsjob001.name}'
   properties: {
