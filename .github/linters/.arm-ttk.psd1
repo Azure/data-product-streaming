@@ -11,6 +11,7 @@
         'IDs Should Be Derived From ResourceIDs'
         'apiVersions Should Be Recent'
         'Parameters Must Be Referenced'
+        'apiVersions Should Be Recent In Reference Functions'
         'Variables Must Be Referenced'
     )
 }
