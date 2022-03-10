@@ -14,6 +14,8 @@ param eventhubnamespaceName string
 param streamanalyticsName string
 param synapseSqlPools array
 param synapseSparkPools array
+param enableCosmos bool
+param enableStreamAnalytics bool
 
 //variables
 var synapseSqlPoolsCount = length(synapseSqlPools)
@@ -141,7 +143,7 @@ resource diagnosticSetting003 'Microsoft.Insights/diagnosticSettings@2021-05-01-
   }
 }]
 
-resource diagnosticSetting004 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = {
+resource diagnosticSetting004 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = if (enableCosmos) {
   scope: cosmosdb
   name: 'diagnostic-${cosmosdb.name}'
   properties: {

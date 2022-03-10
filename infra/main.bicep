@@ -153,7 +153,6 @@ module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
     cosmosdbScope: cosmosdb001.outputs.cosmosdbId
     iothub001Name: iothub001Name
     iothubScope: iothub001.outputs.iothubId
-    sql001Name: sql001Name
     eventhubnamespace001Name: eventhubNamespace001Name
     eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
     streamanalytics001Name: streamanalytics001Name
@@ -283,6 +282,8 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
     sqlserverName: sql001Name
     eventhubnamespaceName: eventhubNamespace001Name
     streamanalyticsName: streamanalytics001Name
+    enableCosmos: enableCosmos
+    enableStreamAnalytics: enableStreamAnalytics
   }
 }
 
