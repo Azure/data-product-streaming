@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1272.37030",
-      "templateHash": "10913150091782705828"
+      "templateHash": "17429512067304680048"
     }
   },
   "parameters": {
@@ -384,7 +384,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "8241426365046569051"
+              "templateHash": "16762611115511679341"
             }
           },
           "parameters": {
@@ -397,9 +397,6 @@
             "logAnalyticsName": {
               "type": "string"
             }
-          },
-          "variables": {
-            "dataFactoryAnalyticsName": "[format('AzureDataFactoryAnalytics({0})', parameters('logAnalyticsName'))]"
           },
           "resources": [
             {
@@ -417,25 +414,6 @@
                   "name": "PerGB2018"
                 }
               }
-            },
-            {
-              "type": "Microsoft.OperationsManagement/solutions",
-              "apiVersion": "2015-11-01-preview",
-              "name": "[variables('dataFactoryAnalyticsName')]",
-              "location": "[parameters('location')]",
-              "tags": "[parameters('tags')]",
-              "plan": {
-                "name": "[variables('dataFactoryAnalyticsName')]",
-                "product": "OMSGallery/AzureDataFactoryAnalytics",
-                "promotionCode": "",
-                "publisher": "Microsoft"
-              },
-              "properties": {
-                "workspaceResourceId": "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
-              },
-              "dependsOn": [
-                "[resourceId('Microsoft.OperationalInsights/workspaces', parameters('logAnalyticsName'))]"
-              ]
             }
           ],
           "outputs": {
@@ -784,9 +762,6 @@
           "iothubScope": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001')).outputs.iothubId.value]"
           },
-          "sql001Name": {
-            "value": "[variables('sql001Name')]"
-          },
           "eventhubnamespace001Name": {
             "value": "[variables('eventhubNamespace001Name')]"
           },
@@ -810,7 +785,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "6197790550022719861"
+              "templateHash": "4065039396237099199"
             }
           },
           "parameters": {
@@ -839,9 +814,6 @@
               "type": "string"
             },
             "iothub001Name": {
-              "type": "string"
-            },
-            "sql001Name": {
               "type": "string"
             },
             "eventhubnamespaceScope": {
@@ -2791,6 +2763,12 @@
           },
           "streamanalyticsName": {
             "value": "[variables('streamanalytics001Name')]"
+          },
+          "enableCosmos": {
+            "value": "[parameters('enableCosmos')]"
+          },
+          "enableStreamAnalytics": {
+            "value": "[parameters('enableStreamAnalytics')]"
           }
         },
         "template": {
@@ -2800,7 +2778,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "5522856172821774567"
+              "templateHash": "5081633248712483143"
             }
           },
           "parameters": {
@@ -2830,6 +2808,12 @@
             },
             "synapseSparkPools": {
               "type": "array"
+            },
+            "enableCosmos": {
+              "type": "bool"
+            },
+            "enableStreamAnalytics": {
+              "type": "bool"
             }
           },
           "variables": {
@@ -2874,7 +2858,7 @@
             },
             {
               "copy": {
-                "name": "diagnosticSetting2",
+                "name": "diagnosticSetting002",
                 "count": "[length(range(0, variables('synapseSqlPoolsCount')))]"
               },
               "type": "Microsoft.Insights/diagnosticSettings",
@@ -2909,7 +2893,7 @@
             },
             {
               "copy": {
-                "name": "diagnosticSetting3",
+                "name": "diagnosticSetting003",
                 "count": "[length(range(0, variables('synapseSparkPoolCount')))]"
               },
               "type": "Microsoft.Insights/diagnosticSettings",
@@ -2927,6 +2911,7 @@
               }
             },
             {
+              "condition": "[parameters('enableCosmos')]",
               "type": "Microsoft.Insights/diagnosticSettings",
               "apiVersion": "2021-05-01-preview",
               "scope": "[format('Microsoft.DocumentDB/databaseAccounts/{0}', parameters('cosmosdbName'))]",
@@ -3072,6 +3057,7 @@
               }
             },
             {
+              "condition": "[parameters('enableStreamAnalytics')]",
               "type": "Microsoft.Insights/diagnosticSettings",
               "apiVersion": "2021-05-01-preview",
               "scope": "[format('Microsoft.StreamAnalytics/streamingjobs/{0}', parameters('streamanalyticsName'))]",
