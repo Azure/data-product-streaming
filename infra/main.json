@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1272.37030",
-      "templateHash": "17429512067304680048"
+      "templateHash": "12674327202152849054"
     }
   },
   "parameters": {
@@ -209,7 +209,8 @@
     "iothubFailedAlertName": "[format('{0}-failedalert', variables('iothub001Name'))]",
     "eventhubnamespaceErrorAlertName": "[format('{0}-erroralert', variables('eventhubNamespace001Name'))]",
     "streamanalyticsErrorAlertName": "[format('{0}-erroralert', variables('streamanalytics001Name'))]",
-    "dashboardName": "[format('{0}-dashboard', variables('name'))]"
+    "dashboardName": "[format('{0}-dashboard', variables('name'))]",
+    "database001Name": "Database001"
   },
   "resources": [
     {
@@ -1930,6 +1931,9 @@
           },
           "sqlserverAdminGroupObjectID": {
             "value": ""
+          },
+          "database001Name": {
+            "value": "[variables('database001Name')]"
           }
         },
         "template": {
@@ -1939,7 +1943,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "3984863818734653136"
+              "templateHash": "4365320429338208181"
             }
           },
           "parameters": {
@@ -1953,6 +1957,9 @@
               "type": "string"
             },
             "sqlserverName": {
+              "type": "string"
+            },
+            "database001Name": {
               "type": "string"
             },
             "administratorUsername": {
@@ -2015,7 +2022,7 @@
             {
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2020-11-01-preview",
-              "name": "[format('{0}/{1}', parameters('sqlserverName'), 'Database001')]",
+              "name": "[format('{0}/{1}', parameters('sqlserverName'), parameters('database001Name'))]",
               "location": "[parameters('location')]",
               "tags": "[parameters('tags')]",
               "sku": {
@@ -2095,7 +2102,7 @@
             },
             "sqlId": {
               "type": "string",
-              "value": "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlserverName'), 'Database001')]"
+              "value": "[resourceId('Microsoft.Sql/servers/databases', parameters('sqlserverName'), parameters('database001Name'))]"
             }
           }
         }
@@ -2769,6 +2776,9 @@
           },
           "enableStreamAnalytics": {
             "value": "[parameters('enableStreamAnalytics')]"
+          },
+          "database001Name": {
+            "value": "[variables('database001Name')]"
           }
         },
         "template": {
@@ -2778,7 +2788,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "5081633248712483143"
+              "templateHash": "6729821452980633947"
             }
           },
           "parameters": {
@@ -2814,6 +2824,9 @@
             },
             "enableStreamAnalytics": {
               "type": "bool"
+            },
+            "database001Name": {
+              "type": "string"
             }
           },
           "variables": {
