@@ -98,6 +98,7 @@ var iothubFailedAlertName = '${iothub001Name}-failedalert'
 var eventhubnamespaceErrorAlertName = '${eventhubNamespace001Name}-erroralert'
 var streamanalyticsErrorAlertName = '${streamanalytics001Name}-erroralert'
 var dashboardName = '${name}-dashboard'
+var database001Name = 'Database001'
 
 // Resources
 module keyVault001 'modules/services/keyvault.bicep' = {
@@ -217,6 +218,7 @@ module sql001 'modules/services/sql.bicep' = if (enableSqlServer) {
     privateDnsZoneIdSqlServer: privateDnsZoneIdSqlServer
     sqlserverAdminGroupName: ''
     sqlserverAdminGroupObjectID: ''
+    database001Name: database001Name
   }
 }
 
@@ -284,6 +286,7 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
     streamanalyticsName: streamanalytics001Name
     enableCosmos: enableCosmos
     enableStreamAnalytics: enableStreamAnalytics
+    database001Name: database001Name
   }
 }
 

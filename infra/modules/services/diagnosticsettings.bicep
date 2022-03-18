@@ -16,6 +16,7 @@ param synapseSqlPools array
 param synapseSparkPools array
 param enableCosmos bool
 param enableStreamAnalytics bool
+param database001Name string
 
 //variables
 var synapseSqlPoolsCount = length(synapseSqlPools)
@@ -54,7 +55,7 @@ resource sqlserver 'Microsoft.Sql/servers@2020-11-01-preview' existing = {
 
 resource sqlserverDatabase001 'Microsoft.Sql/servers/databases@2020-11-01-preview' existing = {
   parent: sqlserver
-  name: 'Database001'
+  name: database001Name
 }
 
 resource eventhubNamespace 'Microsoft.EventHub/namespaces@2021-06-01-preview' existing = {
