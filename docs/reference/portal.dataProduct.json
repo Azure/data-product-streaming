@@ -614,6 +614,7 @@
                                     "label": "Enable role assignments",
                                     "type": "Microsoft.Common.OptionsGroup",
                                     "visible": true,
+                                    "defaultValue": "Yes (recommended)",
                                     "toolTip": "Enable role assignments.",
                                     "constraints": {
                                         "allowedValues": [
@@ -654,11 +655,11 @@
                                     "type": "Microsoft.Common.OptionsGroup",
                                     "visible": true,
                                     "toolTip": "Deploy monitoring components like Log Analytics, Azure dashboards, alerts, and diagnostic settings.",
-                                    "defaultValue": "No",
+                                    "defaultValue": "Yes (recommended)",
                                     "constraints": {
                                         "allowedValues": [
                                             {
-                                                "label": "Yes",
+                                                "label": "Yes (recommended)",
                                                 "value": "yes"
                                             },
                                             {
