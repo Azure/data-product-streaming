@@ -95,8 +95,8 @@ var logAnalytics001Name = '${name}-loganalytics001'
 var dataEmailActionGroup = '${name}-emailactiongroup'
 var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
 var iothubFailedAlertName = '${iothub001Name}-failedalert'
-var eventhubnamespaceErrorAlertName = '${eventhubNamespace001Name}-erroralert'
-var streamanalyticsErrorAlertName = '${streamanalytics001Name}-erroralert'
+var eventhubnamespaceFailedAlertName = '${eventhubNamespace001Name}-failedalert'
+var streamanalyticsFailedAlertName = '${streamanalytics001Name}-failedalert'
 var dashboardName = '${name}-dashboard'
 var database001Name = 'Database001'
 
@@ -134,9 +134,9 @@ module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmai
     synapseScope: synapse001.outputs.synapseId
     iothubFailedAlertName: iothubFailedAlertName
     iothubScope: iothub001.outputs.iothubId
-    eventhubnamespaceErrorAlertName: eventhubnamespaceErrorAlertName
+    eventhubnamespaceFailedAlertName: eventhubnamespaceFailedAlertName
     eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
-    streamanalyticsErrorAlertName: streamanalyticsErrorAlertName
+    streamanalyticsFailedAlertName: streamanalyticsFailedAlertName
     streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
     tags: tagsJoined
   }

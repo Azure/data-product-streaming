@@ -11,9 +11,9 @@ param synapsePipelineFailedAlertName string
 param synapseScope string
 param iothubFailedAlertName string
 param iothubScope string
-param eventhubnamespaceErrorAlertName string
+param eventhubnamespaceFailedAlertName string
 param eventhubnamespaceScope string
-param streamanalyticsErrorAlertName string
+param streamanalyticsFailedAlertName string
 param streamanalyticsScope string
 param dataEmailActionGroup string
 param dataProductTeamEmail string
@@ -122,8 +122,8 @@ resource iothubFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
   }
 }
 
-resource eventhubnamespaceErrorAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
-  name: eventhubnamespaceErrorAlertName
+resource eventhubnamespaceFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
+  name: eventhubnamespaceFailedAlertName
   location: 'global'
   tags: tags
   properties: {
@@ -160,8 +160,8 @@ resource eventhubnamespaceErrorAlert 'Microsoft.Insights/metricAlerts@2018-03-01
   }
 }
 
-resource streamanalyticsErrorAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
-  name: streamanalyticsErrorAlertName
+resource streamanalyticsFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
+  name: streamanalyticsFailedAlertName
   location: 'global'
   tags: tags
   properties: {

@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.4.1272.37030",
-      "templateHash": "12674327202152849054"
+      "templateHash": "16229750337386140636"
     }
   },
   "parameters": {
@@ -207,8 +207,8 @@
     "dataEmailActionGroup": "[format('{0}-emailactiongroup', variables('name'))]",
     "synapsePipelineFailedAlertName": "[format('{0}-failedalert', variables('synapse001Name'))]",
     "iothubFailedAlertName": "[format('{0}-failedalert', variables('iothub001Name'))]",
-    "eventhubnamespaceErrorAlertName": "[format('{0}-erroralert', variables('eventhubNamespace001Name'))]",
-    "streamanalyticsErrorAlertName": "[format('{0}-erroralert', variables('streamanalytics001Name'))]",
+    "eventhubnamespaceFailedAlertName": "[format('{0}-failedalert', variables('eventhubNamespace001Name'))]",
+    "streamanalyticsFailedAlertName": "[format('{0}-failedalert', variables('streamanalytics001Name'))]",
     "dashboardName": "[format('{0}-dashboard', variables('name'))]",
     "database001Name": "Database001"
   },
@@ -458,14 +458,14 @@
           "iothubScope": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001')).outputs.iothubId.value]"
           },
-          "eventhubnamespaceErrorAlertName": {
-            "value": "[variables('eventhubnamespaceErrorAlertName')]"
+          "eventhubnamespaceFailedAlertName": {
+            "value": "[variables('eventhubnamespaceFailedAlertName')]"
           },
           "eventhubnamespaceScope": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001')).outputs.eventhubNamespaceId.value]"
           },
-          "streamanalyticsErrorAlertName": {
-            "value": "[variables('streamanalyticsErrorAlertName')]"
+          "streamanalyticsFailedAlertName": {
+            "value": "[variables('streamanalyticsFailedAlertName')]"
           },
           "streamanalyticsScope": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001')).outputs.streamanalyticsjob001Id.value]"
@@ -481,7 +481,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.4.1272.37030",
-              "templateHash": "11657865554886961051"
+              "templateHash": "2352537062598811429"
             }
           },
           "parameters": {
@@ -503,13 +503,13 @@
             "iothubScope": {
               "type": "string"
             },
-            "eventhubnamespaceErrorAlertName": {
+            "eventhubnamespaceFailedAlertName": {
               "type": "string"
             },
             "eventhubnamespaceScope": {
               "type": "string"
             },
-            "streamanalyticsErrorAlertName": {
+            "streamanalyticsFailedAlertName": {
               "type": "string"
             },
             "streamanalyticsScope": {
@@ -637,7 +637,7 @@
             {
               "type": "Microsoft.Insights/metricAlerts",
               "apiVersion": "2018-03-01",
-              "name": "[parameters('eventhubnamespaceErrorAlertName')]",
+              "name": "[parameters('eventhubnamespaceFailedAlertName')]",
               "location": "global",
               "tags": "[parameters('tags')]",
               "properties": {
@@ -679,7 +679,7 @@
             {
               "type": "Microsoft.Insights/metricAlerts",
               "apiVersion": "2018-03-01",
-              "name": "[parameters('streamanalyticsErrorAlertName')]",
+              "name": "[parameters('streamanalyticsFailedAlertName')]",
               "location": "global",
               "tags": "[parameters('tags')]",
               "properties": {
