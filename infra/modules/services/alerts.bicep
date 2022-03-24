@@ -17,6 +17,7 @@ param streamanalyticsFailedAlertName string
 param streamanalyticsScope string
 param dataEmailActionGroup string
 param dataProductTeamEmail string
+param enableStreamAnalytics bool
 // Variables
 
 // Resources
@@ -160,7 +161,7 @@ resource eventhubnamespaceFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-0
   }
 }
 
-resource streamanalyticsFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
+resource streamanalyticsFailedAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = if (enableStreamAnalytics) {
   name: streamanalyticsFailedAlertName
   location: 'global'
   tags: tags

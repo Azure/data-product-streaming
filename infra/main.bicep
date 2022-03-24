@@ -139,6 +139,7 @@ module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmai
     streamanalyticsFailedAlertName: streamanalyticsFailedAlertName
     streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
     tags: tagsJoined
+    enableStreamAnalytics: enableStreamAnalytics
   }
 }
 
