@@ -614,6 +614,7 @@
                                     "label": "Enable role assignments",
                                     "type": "Microsoft.Common.OptionsGroup",
                                     "visible": true,
+                                    "defaultValue": "Yes (recommended)",
                                     "toolTip": "Enable role assignments.",
                                     "constraints": {
                                         "allowedValues": [
