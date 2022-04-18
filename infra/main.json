@@ -568,7 +568,7 @@
                       "name": "Metric1",
                       "metricNamespace": "Microsoft.Synapse/workspaces",
                       "metricName": "IntegrationPipelineRunsEnded",
-                      "operator": "GreaterThan",
+                      "operator": "GreaterThanOrEqual",
                       "timeAggregation": "Total",
                       "criterionType": "StaticThresholdCriterion",
                       "dimensions": [
@@ -619,7 +619,7 @@
                       "name": "Metric1",
                       "metricNamespace": "Microsoft.Devices/IotHubs",
                       "metricName": "c2d.methods.failure",
-                      "operator": "GreaterThan",
+                      "operator": "GreaterThanOrEqual",
                       "timeAggregation": "Total",
                       "criterionType": "StaticThresholdCriterion"
                     }
@@ -661,7 +661,7 @@
                       "name": "Metric1",
                       "metricNamespace": "Microsoft.EventHub/namespaces",
                       "metricName": "ServerErrors",
-                      "operator": "GreaterThan",
+                      "operator": "GreaterThanOrEqual",
                       "timeAggregation": "Total",
                       "criterionType": "StaticThresholdCriterion"
                     }
@@ -704,7 +704,7 @@
                       "name": "Metric1",
                       "metricNamespace": "Microsoft.StreamAnalytics/streamingjobs",
                       "metricName": "Errors",
-                      "operator": "GreaterThan",
+                      "operator": "GreaterThanOrEqual",
                       "timeAggregation": "Total",
                       "criterionType": "StaticThresholdCriterion"
                     }
