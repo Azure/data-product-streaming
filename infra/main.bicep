@@ -42,6 +42,10 @@ param streamanalyticsDefaultStorageAccountFileSystemId string = ''
 param purviewId string = ''
 @description('Specifies whether role assignments should be enabled.')
 param enableRoleAssignments bool = false
+@description('Specifies whether observability capabilities should be enabled.')
+param enableMonitoring bool = true
+@description('Specifies the email address of the Data Product SRE team.')
+param dataProductTeamEmail string = ''
 
 // Network parameters
 @description('Specifies the resource ID of the subnet to which all services will connect.')
@@ -87,6 +91,14 @@ var iothub001Name = '${name}-iothub001'
 var eventhubNamespace001Name = '${name}-eventhub001'
 var streamanalytics001Name = '${name}-streamanalytics001'
 var streamanalyticscluster001Name = '${name}-streamanalyticscluster001'
+var logAnalytics001Name = '${name}-loganalytics001'
+var dataEmailActionGroup = '${name}-emailactiongroup'
+var synapsePipelineFailedAlertName = '${synapse001Name}-failedalert'
+var iothubFailedAlertName = '${iothub001Name}-failedalert'
+var eventhubnamespaceFailedAlertName = '${eventhubNamespace001Name}-failedalert'
+var streamanalyticsFailedAlertName = '${streamanalytics001Name}-failedalert'
+var dashboardName = '${name}-dashboard'
+var database001Name = 'Database001'
 
 // Resources
 module keyVault001 'modules/services/keyvault.bicep' = {
@@ -98,6 +110,56 @@ module keyVault001 'modules/services/keyvault.bicep' = {
     tags: tagsJoined
     subnetId: subnetId
     privateDnsZoneIdKeyVault: privateDnsZoneIdKeyVault
+  }
+}
+
+module logAnalytics001 'modules/services/loganalytics.bicep' = if (enableMonitoring) {
+  name: 'logAnalytics001'
+  scope: resourceGroup()
+  params: {
+    location: location
+    tags: tagsJoined
+    logAnalyticsName: logAnalytics001Name
+  }
+}
+
+module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring) {
+  name: 'alerts'
+  scope: resourceGroup()
+  params: {
+    dataEmailActionGroup: dataEmailActionGroup
+    dataProductTeamEmail: dataProductTeamEmail
+    location: location
+    synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
+    synapseScope: synapse001.outputs.synapseId
+    iothubFailedAlertName: iothubFailedAlertName
+    iothubScope: iothub001.outputs.iothubId
+    eventhubnamespaceFailedAlertName: eventhubnamespaceFailedAlertName
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
+    streamanalyticsFailedAlertName: streamanalyticsFailedAlertName
+    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
+    tags: tagsJoined
+    enableStreamAnalytics: enableStreamAnalytics
+  }
+}
+
+module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
+  name: 'dashboard'
+  scope: resourceGroup()
+  params: {
+    dashboardName: dashboardName
+    location: location
+    synapse001Name: synapse001Name
+    synapseScope: synapse001.outputs.synapseId
+    cosmosdb001Name: cosmosdb001Name
+    cosmosdbScope: cosmosdb001.outputs.cosmosdbId
+    iothub001Name: iothub001Name
+    iothubScope: iothub001.outputs.iothubId
+    eventhubnamespace001Name: eventhubNamespace001Name
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
+    streamanalytics001Name: streamanalytics001Name
+    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
+    tags: tagsJoined
   }
 }
 
@@ -132,7 +194,7 @@ module synapse001RoleAssignmentStorage 'modules/auxiliary/synapseRoleAssignmentS
   }
 }
 
-module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
+module cosmosdb001 'modules/services/cosmosdb.bicep' = if (enableCosmos) {
   name: 'cosmos001'
   scope: resourceGroup()
   params: {
@@ -144,7 +206,7 @@ module cosmosdb001 'modules/services/cosmosdb.bicep' = if(enableCosmos) {
   }
 }
 
-module sql001 'modules/services/sql.bicep' = if(enableSqlServer) {
+module sql001 'modules/services/sql.bicep' = if (enableSqlServer) {
   name: 'sql001'
   scope: resourceGroup()
   params: {
@@ -157,6 +219,7 @@ module sql001 'modules/services/sql.bicep' = if(enableSqlServer) {
     privateDnsZoneIdSqlServer: privateDnsZoneIdSqlServer
     sqlserverAdminGroupName: ''
     sqlserverAdminGroupObjectID: ''
+    database001Name: database001Name
   }
 }
 
@@ -189,7 +252,7 @@ module eventhubNamespace001 'modules/services/eventhubnamespace.bicep' = {
   }
 }
 
-module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableStreamAnalytics) {
+module streamanalytics001 'modules/services/streamanalytics.bicep' = if (enableStreamAnalytics) {
   name: 'streamanalytics001'
   scope: resourceGroup()
   params: {
@@ -205,8 +268,31 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = if(enableSt
   }
 }
 
+module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
+  name: 'diagnosticSettings'
+  scope: resourceGroup()
+  params: {
+    logAnalyticsName: logAnalytics001Name
+    synapseName: synapse001Name
+    synapseSqlPools: [
+      synapse001.outputs.synapseSqlPool001Name
+    ]
+    synapseSparkPools: [
+      synapse001.outputs.synapseBigDataPool001Name
+    ]
+    cosmosdbName: cosmosdb001Name
+    iothubName: iothub001Name
+    sqlserverName: sql001Name
+    eventhubnamespaceName: eventhubNamespace001Name
+    streamanalyticsName: streamanalytics001Name
+    enableCosmos: enableCosmos
+    enableStreamAnalytics: enableStreamAnalytics
+    database001Name: database001Name
+  }
+}
+
 @batchSize(1)
-module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0,20): if (enableStreamAnalytics && enableRoleAssignments) {
+module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0, 20): if (enableStreamAnalytics && enableRoleAssignments) {
   name: 'delay-${i}'
   dependsOn: [
     streamanalytics001

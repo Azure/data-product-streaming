@@ -135,3 +135,4 @@ resource iothubPrivateEndpointIotHubARecord 'Microsoft.Network/privateEndpoints/
 }
 
 // Outputs
+output iothubId string = iothub.id

@@ -9,6 +9,7 @@ param location string
 param tags object
 param subnetId string
 param sqlserverName string
+param database001Name string
 param administratorUsername string = 'SqlServerMainUser'
 @secure()
 param administratorPassword string
@@ -71,7 +72,7 @@ resource sqlserverAdministrators 'Microsoft.Sql/servers/administrators@2020-11-0
 
 resource sqlserverDatabase001 'Microsoft.Sql/servers/databases@2020-11-01-preview' = {
   parent: sqlserver
-  name: 'Database001'
+  name: database001Name
   location: location
   tags: tags
   sku: {
@@ -136,3 +137,4 @@ resource sqlserverPrivateEndpointARecord 'Microsoft.Network/privateEndpoints/pri
 
 // Outputs
 output sqlserverId string = sqlserver.id
+output sqlserverDatabaseId string = sqlserverDatabase001.id
