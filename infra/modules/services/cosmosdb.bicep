@@ -117,3 +117,4 @@ resource cosmosdbPrivateEndpointARecord 'Microsoft.Network/privateEndpoints/priv
 
 // Outputs
 output cosmosdbId string = cosmosdb.id
+output cosmosdbName string = cosmosdb.name

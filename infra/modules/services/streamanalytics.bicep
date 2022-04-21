@@ -156,3 +156,4 @@ resource streamanalyticsjob001 'Microsoft.StreamAnalytics/streamingjobs@2020-03-
 
 // Outputs
 output streamanalyticsjob001Id string = streamanalyticsjob001.id
+output streamanalyticsjob001Name string = streamanalyticsjob001.name

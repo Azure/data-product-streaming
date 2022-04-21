@@ -113,56 +113,6 @@ module keyVault001 'modules/services/keyvault.bicep' = {
   }
 }
 
-module logAnalytics001 'modules/services/loganalytics.bicep' = if (enableMonitoring) {
-  name: 'logAnalytics001'
-  scope: resourceGroup()
-  params: {
-    location: location
-    tags: tagsJoined
-    logAnalyticsName: logAnalytics001Name
-  }
-}
-
-module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring) {
-  name: 'alerts'
-  scope: resourceGroup()
-  params: {
-    dataEmailActionGroup: dataEmailActionGroup
-    dataProductTeamEmail: dataProductTeamEmail
-    location: location
-    synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
-    synapseScope: synapse001.outputs.synapseId
-    iothubFailedAlertName: iothubFailedAlertName
-    iothubScope: iothub001.outputs.iothubId
-    eventhubnamespaceFailedAlertName: eventhubnamespaceFailedAlertName
-    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
-    streamanalyticsFailedAlertName: streamanalyticsFailedAlertName
-    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
-    tags: tagsJoined
-    enableStreamAnalytics: enableStreamAnalytics
-  }
-}
-
-module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
-  name: 'dashboard'
-  scope: resourceGroup()
-  params: {
-    dashboardName: dashboardName
-    location: location
-    synapse001Name: synapse001Name
-    synapseScope: synapse001.outputs.synapseId
-    cosmosdb001Name: cosmosdb001Name
-    cosmosdbScope: cosmosdb001.outputs.cosmosdbId
-    iothub001Name: iothub001Name
-    iothubScope: iothub001.outputs.iothubId
-    eventhubnamespace001Name: eventhubNamespace001Name
-    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
-    streamanalytics001Name: streamanalytics001Name
-    streamanalyticsScope: streamanalytics001.outputs.streamanalyticsjob001Id
-    tags: tagsJoined
-  }
-}
-
 module synapse001 'modules/services/synapse.bicep' = {
   name: 'synapse001'
   scope: resourceGroup()
@@ -268,29 +218,6 @@ module streamanalytics001 'modules/services/streamanalytics.bicep' = if (enableS
   }
 }
 
-module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
-  name: 'diagnosticSettings'
-  scope: resourceGroup()
-  params: {
-    logAnalyticsName: logAnalytics001Name
-    synapseName: synapse001Name
-    synapseSqlPools: [
-      synapse001.outputs.synapseSqlPool001Name
-    ]
-    synapseSparkPools: [
-      synapse001.outputs.synapseBigDataPool001Name
-    ]
-    cosmosdbName: cosmosdb001Name
-    iothubName: iothub001Name
-    sqlserverName: sql001Name
-    eventhubnamespaceName: eventhubNamespace001Name
-    streamanalyticsName: streamanalytics001Name
-    enableCosmos: enableCosmos
-    enableStreamAnalytics: enableStreamAnalytics
-    database001Name: database001Name
-  }
-}
-
 @batchSize(1)
 module deploymentDelay 'modules/auxiliary/delay.bicep' = [for i in range(0, 20): if (enableStreamAnalytics && enableRoleAssignments) {
   name: 'delay-${i}'
@@ -312,6 +239,80 @@ module streamanalytics001RoleAssignmentStorage 'modules/auxiliary/streamanalytic
   params: {
     storageAccountFileSystemId: streamanalyticsDefaultStorageAccountFileSystemId
     streamanalyticsjobId: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Id : ''
+  }
+}
+
+module logAnalytics001 'modules/services/loganalytics.bicep' = if (enableMonitoring) {
+  name: 'logAnalytics001'
+  scope: resourceGroup()
+  params: {
+    location: location
+    tags: tagsJoined
+    logAnalyticsName: logAnalytics001Name
+  }
+}
+
+module alerts './modules/services/alerts.bicep' = if (!empty(dataProductTeamEmail) && enableMonitoring) {
+  name: 'alerts'
+  scope: resourceGroup()
+  params: {
+    dataEmailActionGroup: dataEmailActionGroup
+    dataProductTeamEmail: dataProductTeamEmail
+    location: location
+    synapsePipelineFailedAlertName: synapsePipelineFailedAlertName
+    synapseScope: synapse001.outputs.synapseId
+    iothubFailedAlertName: iothubFailedAlertName
+    iothubScope: iothub001.outputs.iothubId
+    eventhubnamespaceFailedAlertName: eventhubnamespaceFailedAlertName
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
+    streamanalyticsFailedAlertName: streamanalyticsFailedAlertName
+    streamanalyticsScope: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Id : ''
+    tags: tagsJoined
+    enableStreamAnalytics: enableStreamAnalytics
+  }
+}
+
+module dashboard './modules/services/dashboard.bicep' = if (enableMonitoring) {
+  name: 'dashboard'
+  scope: resourceGroup()
+  params: {
+    dashboardName: dashboardName
+    location: location
+    synapse001Name: synapse001Name
+    synapseScope: synapse001.outputs.synapseId
+    cosmosdb001Name: enableCosmos ? cosmosdb001.outputs.cosmosdbName : ''
+    cosmosdbScope: enableCosmos ? cosmosdb001.outputs.cosmosdbId : ''
+    iothub001Name: iothub001Name
+    iothubScope: iothub001.outputs.iothubId
+    eventhubnamespace001Name: eventhubNamespace001Name
+    eventhubnamespaceScope: eventhubNamespace001.outputs.eventhubNamespaceId
+    streamanalytics001Name: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Name : ''
+    streamanalyticsScope: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Id : ''
+    tags: tagsJoined
+  }
+}
+
+
+module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (enableMonitoring) {
+  name: 'diagnosticSettings'
+  scope: resourceGroup()
+  params: {
+    logAnalyticsName: enableMonitoring ? logAnalytics001.outputs.logAnalyticsWorkspaceName: ''
+    synapseName: synapse001Name
+    synapseSqlPools: [
+      synapse001.outputs.synapseSqlPool001Name
+    ]
+    synapseSparkPools: [
+      synapse001.outputs.synapseBigDataPool001Name
+    ]
+    cosmosdbName: enableCosmos ? cosmosdb001.outputs.cosmosdbName : ''
+    iothubName: iothub001Name
+    sqlserverName: sql001Name
+    eventhubnamespaceName: eventhubNamespace001Name
+    streamanalyticsName: enableStreamAnalytics ? streamanalytics001.outputs.streamanalyticsjob001Name : ''
+    enableCosmos: enableCosmos
+    enableStreamAnalytics: enableStreamAnalytics
+    database001Name: enableSqlServer ? sql001.outputs.sqlserverDatabaseName : ''
   }
 }
 
