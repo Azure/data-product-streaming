@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.6.18.56646",
-      "templateHash": "2663060488207563581"
+      "templateHash": "4324431836675752140"
     }
   },
   "parameters": {
@@ -2887,7 +2887,9 @@
             "value": "[variables('synapse001Name')]"
           },
           "synapseSqlPools": {
-            "value": "[if(parameters('enableSqlPool'), createArray(reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseSqlPool001Name.value), createArray())]"
+            "value": [
+              "[if(parameters('enableSqlPool'), reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseSqlPool001Name.value, null())]"
+            ]
           },
           "synapseSparkPools": {
             "value": [
@@ -2917,6 +2919,9 @@
           },
           "database001Name": {
             "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-10-01').outputs.sqlserverDatabaseName.value, '')]"
+          },
+          "enableSqlPool": {
+            "value": "[parameters('enableSqlPool')]"
           }
         },
         "template": {
@@ -2926,7 +2931,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.6.18.56646",
-              "templateHash": "14294519281051335689"
+              "templateHash": "1440835219639044614"
             }
           },
           "parameters": {
@@ -2965,6 +2970,9 @@
             },
             "database001Name": {
               "type": "string"
+            },
+            "enableSqlPool": {
+              "type": "bool"
             }
           },
           "variables": {
@@ -3008,6 +3016,7 @@
               }
             },
             {
+              "condition": "[parameters('enableSqlPool')]",
               "copy": {
                 "name": "diagnosticSetting002",
                 "count": "[length(range(0, variables('synapseSqlPoolsCount')))]"

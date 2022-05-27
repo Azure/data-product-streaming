@@ -17,6 +17,7 @@ param synapseSparkPools array
 param enableCosmos bool
 param enableStreamAnalytics bool
 param database001Name string
+param enableSqlPool bool
 
 //variables
 var synapseSqlPoolsCount = length(synapseSqlPools)
@@ -100,7 +101,7 @@ resource diagnosticSetting001 'Microsoft.Insights/diagnosticSettings@2021-05-01-
   }
 }
 
-resource diagnosticSetting002 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount): {
+resource diagnosticSetting002 'Microsoft.Insights/diagnosticSettings@2021-05-01-preview' = [for i in range(0, synapseSqlPoolsCount): if(enableSqlPool) {
   scope: synapsesqlpool[i]
   name: 'diagnostic-${synapseworkspace.name}-${synapsesqlpool[i].name}'
   properties: {
