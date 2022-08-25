@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: |
+          echo ${{ github.sha }}
+          echo ${{ github.repository }}
+        
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Check Out Repository
         id: checkout_repository
@@ -29,4 +33,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_JSCPD: false
           VALIDATE_JSON: false
+          VALIDATE_GITHUB_ACTIONS: false
           FILTER_REGEX_EXCLUDE: (/.devcontainer/|/reference/)

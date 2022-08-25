@@ -1,0 +1,67 @@
+name: Data Product Deployment - Test/Prod
+
+on:
+  release:
+    types: [ published ]
+  push:
+    branches: [ main ]
+    paths:
+      - "code/**"
+      - "infra/**"
+      - ".github/workflows/dataProductDeploymentTestProd.yml"
+      - ".github/workflows/validationTemplate.yml"
+      - ".github/workflows/deploymentTemplate.yml"
+
+env:
+  TEST_ENVIRONMENT_NAME: "test"  # Update to '{testEnvironmentName}'
+  PROD_ENVIRONMENT_NAME: "prod"  # Update to '{prodEnvironmentName}'
+
+jobs:
+  validation_test:
+    uses: ./.github/workflows/validation.yml
+    name: "Validation of IaC templates - Test"
+    with:
+      environment: "test"
+    secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+  
+  validation_prod:
+    uses: ./.github/workflows/validation.yml
+    name: "Validation of IaC templates - Prod"
+    needs: [ validation_test ]
+    with:
+      environment: "prod"
+    secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+  
+  deployment_test:
+    uses: ./.github/workflows/deployment.yml
+    name: "Deployment of IaC templates - Test"
+    needs: [ validation_prod ]
+    if: github.event_name == 'release'
+    with:
+      environment: "test"
+    secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+
+  deployment_prod:
+    uses: ./.github/workflows/deployment.yml
+    name: "Deployment of IaC templates - Prod"
+    needs: [ deployment_test ]
+    if: github.event_name == 'release'
+    with:
+      environment: "prod"
+    secrets:
+      azure_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      azure_resource_group_name: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
+      azure_location_name: ${{ secrets.AZURE_LOCATION }}
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}

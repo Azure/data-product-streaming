@@ -1,0 +1,90 @@
+name: Deployment Template
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        default: "dev"
+        description: "Specifies the environment of the deployment."
+    secrets:
+      azure_subscription_id:
+        required: true
+        description: "Specifies the subscription id of the deployment."
+      azure_resource_group_name:
+        required: true
+        description: "Specifies the resource group name of the deployment."
+      azure_location_name:
+        required: true
+        description: "Specifies the location name of the deployment."
+      azure_credentials:
+        required: true
+        description: "Specifies the azure credentials used for authentication."
+
+jobs:
+  validation:
+    name: Validation of ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    continue-on-error: false
+    environment: ${{ inputs.environment }}
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v2
+
+      # Login to Azure
+      - name: Azure Login
+        id: azure_login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.azure_credentials }}
+
+      # Generate Password 001
+      - name: Generate Password 001
+        id: generate_password_001
+        run: |
+          echo "Generating Password"
+          pwsh "${GITHUB_WORKSPACE}/code/GeneratePassword.ps1" -GitHub
+
+      # Deploy Data Product - validation
+      - name: Deploy Data Product - validation
+        id: data_product_validation
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ secrets.azure_subscription_id }}
+          resourceGroupName: ${{ secrets.azure_resource_group_name }}
+          region: ${{ secrets.azure_location_name }}
+          template: ${{ github.workspace }}/infra/main.json
+          parameters: ${{ github.workspace }}/infra/params.${{ inputs.environment }}.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
+          deploymentMode: Validate
+          deploymentName: "DataProduct-${{ github.sha }}"
+          failOnStdErr: false
+
+      # Deploy Data Product - what-if
+      - name: Deploy Data Product - what-if
+        id: data_product_whatif
+        uses: azure/arm-deploy@v1
+        with:
+          scope: resourcegroup
+          subscriptionId: ${{ secrets.azure_subscription_id }}
+          resourceGroupName: ${{ secrets.azure_resource_group_name }}
+          region: ${{ secrets.azure_location_name }}
+          template: ${{ github.workspace }}/infra/main.json
+          parameters: ${{ github.workspace }}/infra/params.${{ inputs.environment }}.json administratorPassword="${{ steps.generate_password_001.outputs.password }}"
+          deploymentMode: Incremental
+          deploymentName: "DataProduct-${{ github.sha }}"
+          failOnStdErr: false
+          additionalArguments: "--what-if --what-if-exclude-change-types Ignore NoChange Unsupported --what-if-result-format FullResourcePayloads"
+
+      # Log out from Azure
+      - name: Log out from Azure
+        id: azure_logout
+        uses: azure/cli@v1
+        with:
+          azcliversion: "agentazcliversion"
+          inlineScript: |
+            az logout

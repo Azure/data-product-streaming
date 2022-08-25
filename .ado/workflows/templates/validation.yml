@@ -1,0 +1,89 @@
+parameters:
+  - name: environment_name
+    displayName: Environment Name
+    type: string
+  - name: variable_group_name
+    displayName: Variable Group Name
+    type: string
+
+jobs:
+  - job: Validation
+    displayName: "Validation of ${{ parameters.environment_name }}"
+    continueOnError: false
+    pool:
+      vmImage: "ubuntu-latest"
+    variables:
+      - group: ${{ parameters.variable_group_name }}
+
+    steps:
+      # Checkout code
+      - checkout: self
+        name: checkout_repository
+        displayName: "Checkout repository"
+        submodules: true
+        lfs: false
+        clean: true
+        continueOnError: false
+        enabled: true
+
+      # Generate Password 001
+      - task: PowerShell@2
+        name: generate_password_001
+        displayName: Generate Password 001
+        enabled: true
+        continueOnError: false
+        inputs:
+          targetType: "filePath"
+          filePath: "$(System.DefaultWorkingDirectory)/code/GeneratePassword.ps1"
+          errorActionPreference: "stop"
+          failOnStderr: false
+          ignoreLASTEXITCODE: false
+          pwsh: true
+
+      # Deploy Data Product - validation
+      - task: AzureResourceManagerTemplateDeployment@3
+        name: data_product_validation
+        displayName: Deploy Data Product - validation
+        enabled: true
+        continueOnError: false
+        inputs:
+          deploymentScope: "Resource Group"
+          azureResourceManagerConnection: $(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)
+          subscriptionId: $(AZURE_SUBSCRIPTION_ID)
+          action: "Create Or Update Resource Group"
+          resourceGroupName: $(AZURE_RESOURCE_GROUP_NAME)
+          location: $(AZURE_LOCATION)
+          templateLocation: "Linked artifact"
+          csmFile: "$(System.DefaultWorkingDirectory)/infra/main.json"
+          csmParametersFile: "$(System.DefaultWorkingDirectory)/infra/params.${{ parameters.environment_name }}.json"
+          deploymentMode: "Validation"
+          overrideParameters: >
+            -administratorPassword "$(password)"
+
+      # Deploy Data Product - what-if
+      - task: AzureCLI@2
+        name: data_product_whatif
+        displayName: Deploy Data Product - what-if
+        enabled: true
+        continueOnError: false
+        inputs:
+          azureSubscription: $(AZURE_RESOURCE_MANAGER_CONNECTION_NAME)
+          scriptType: pscore
+          scriptLocation: inlineScript
+          inlineScript: |
+            az account set `
+              --subscription $(AZURE_SUBSCRIPTION_ID)
+
+            az deployment group what-if `
+              --resource-group $(AZURE_RESOURCE_GROUP_NAME) `
+              --exclude-change-types Ignore NoChange Unsupported `
+              --mode "Incremental" `
+              --template-file "$(System.DefaultWorkingDirectory)/infra/main.json" `
+              --parameters "$(System.DefaultWorkingDirectory)/infra/params.${{ parameters.environment_name }}.json" administratorPassword="$(password)" `
+              --result-format "FullResourcePayloads"
+
+          powerShellErrorActionPreference: "stop"
+          addSpnToEnvironment: false
+          useGlobalConfig: false
+          failOnStandardError: false
+          powerShellIgnoreLASTEXITCODE: false
