@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.6.18.56646",
-      "templateHash": "4324431836675752140"
+      "version": "0.12.40.16777",
+      "templateHash": "17358088311522229630"
     }
   },
   "parameters": {
@@ -245,8 +245,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "2137339623028800250"
+              "version": "0.12.40.16777",
+              "templateHash": "15797637048712885311"
             }
           },
           "parameters": {
@@ -419,8 +419,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "3370534922365207839"
+              "version": "0.12.40.16777",
+              "templateHash": "11586303874459389276"
             }
           },
           "parameters": {
@@ -509,9 +509,7 @@
                   "preventDataExfiltration": true
                 },
                 "publicNetworkAccess": "Disabled",
-                "purviewConfiguration": {
-                  "purviewResourceId": "[parameters('purviewId')]"
-                },
+                "purviewConfiguration": "[if(empty(parameters('purviewId')), createObject(), createObject('purviewResourceId', parameters('purviewId')))]",
                 "sqlAdministratorLogin": "[parameters('administratorUsername')]",
                 "sqlAdministratorLoginPassword": "[parameters('administratorPassword')]",
                 "virtualNetworkProfile": {
@@ -558,7 +556,7 @@
                   "minimum": 2,
                   "maximum": 4
                 },
-                "workspaceUID": "[reference(resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))).workspaceUID]"
+                "workspaceUID": "[reference(resourceId('Microsoft.Synapse/workspaces', parameters('synapseName')), '2021-06-01').workspaceUID]"
               },
               "dependsOn": [
                 "[resourceId('Microsoft.Synapse/workspaces', parameters('synapseName'))]"
@@ -805,7 +803,7 @@
             "value": "[parameters('synapseDefaultStorageAccountFileSystemId')]"
           },
           "synapseId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseId.value]"
           }
         },
         "template": {
@@ -814,8 +812,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "11777320246719941401"
+              "version": "0.12.40.16777",
+              "templateHash": "13602656477775353919"
             }
           },
           "parameters": {
@@ -884,8 +882,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "12225808885047446501"
+              "version": "0.12.40.16777",
+              "templateHash": "12746317022903297568"
             }
           },
           "parameters": {
@@ -1062,8 +1060,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "15503827282400239776"
+              "version": "0.12.40.16777",
+              "templateHash": "15749355047454176097"
             }
           },
           "parameters": {
@@ -1273,8 +1271,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "5849602801157066754"
+              "version": "0.12.40.16777",
+              "templateHash": "17591850449907183936"
             }
           },
           "parameters": {
@@ -1483,8 +1481,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "7619706970470924050"
+              "version": "0.12.40.16777",
+              "templateHash": "14719186006568002366"
             }
           },
           "parameters": {
@@ -1631,7 +1629,7 @@
             "value": "[variables('tagsJoined')]"
           },
           "eventhubNamespaceId": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001')).outputs.eventhubNamespaceId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-10-01').outputs.eventhubNamespaceId.value]"
           },
           "sqlServerId": {
             "value": "[if(parameters('enableSqlServer'), reference(resourceId('Microsoft.Resources/deployments', 'sql001'), '2020-10-01').outputs.sqlserverId.value, '')]"
@@ -1658,8 +1656,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "306077570428717387"
+              "version": "0.12.40.16777",
+              "templateHash": "4961041212754097067"
             }
           },
           "parameters": {
@@ -1884,8 +1882,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "2416999249299521171"
+              "version": "0.12.40.16777",
+              "templateHash": "9261396028486652289"
             }
           },
           "parameters": {
@@ -1932,8 +1930,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "16462056567281495985"
+              "version": "0.12.40.16777",
+              "templateHash": "457337203961297518"
             }
           },
           "parameters": {
@@ -1997,8 +1995,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "14569720860284274173"
+              "version": "0.12.40.16777",
+              "templateHash": "14722009268800272701"
             }
           },
           "parameters": {
@@ -2067,19 +2065,19 @@
             "value": "[variables('synapsePipelineFailedAlertName')]"
           },
           "synapseScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseId.value]"
           },
           "iothubFailedAlertName": {
             "value": "[variables('iothubFailedAlertName')]"
           },
           "iothubScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001')).outputs.iothubId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001'), '2020-10-01').outputs.iothubId.value]"
           },
           "eventhubnamespaceFailedAlertName": {
             "value": "[variables('eventhubnamespaceFailedAlertName')]"
           },
           "eventhubnamespaceScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001')).outputs.eventhubNamespaceId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-10-01').outputs.eventhubNamespaceId.value]"
           },
           "streamanalyticsFailedAlertName": {
             "value": "[variables('streamanalyticsFailedAlertName')]"
@@ -2100,8 +2098,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "10078687579678822209"
+              "version": "0.12.40.16777",
+              "templateHash": "3381918841558833257"
             }
           },
           "parameters": {
@@ -2373,7 +2371,7 @@
             "value": "[variables('synapse001Name')]"
           },
           "synapseScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseId.value]"
           },
           "cosmosdb001Name": {
             "value": "[if(parameters('enableCosmos'), reference(resourceId('Microsoft.Resources/deployments', 'cosmos001'), '2020-10-01').outputs.cosmosdbName.value, '')]"
@@ -2385,13 +2383,13 @@
             "value": "[variables('iothub001Name')]"
           },
           "iothubScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001')).outputs.iothubId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'iothub001'), '2020-10-01').outputs.iothubId.value]"
           },
           "eventhubnamespace001Name": {
             "value": "[variables('eventhubNamespace001Name')]"
           },
           "eventhubnamespaceScope": {
-            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001')).outputs.eventhubNamespaceId.value]"
+            "value": "[reference(resourceId('Microsoft.Resources/deployments', 'eventhubNamespace001'), '2020-10-01').outputs.eventhubNamespaceId.value]"
           },
           "streamanalytics001Name": {
             "value": "[if(parameters('enableStreamAnalytics'), reference(resourceId('Microsoft.Resources/deployments', 'streamanalytics001'), '2020-10-01').outputs.streamanalyticsjob001Name.value, '')]"
@@ -2409,8 +2407,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "11124615429170797822"
+              "version": "0.12.40.16777",
+              "templateHash": "5319113977325430597"
             }
           },
           "parameters": {
@@ -2888,12 +2886,12 @@
           },
           "synapseSqlPools": {
             "value": [
-              "[if(parameters('enableSqlPool'), reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseSqlPool001Name.value, null())]"
+              "[if(parameters('enableSqlPool'), reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseSqlPool001Name.value, null())]"
             ]
           },
           "synapseSparkPools": {
             "value": [
-              "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001')).outputs.synapseBigDataPool001Name.value]"
+              "[reference(resourceId('Microsoft.Resources/deployments', 'synapse001'), '2020-10-01').outputs.synapseBigDataPool001Name.value]"
             ]
           },
           "cosmosdbName": {
@@ -2930,8 +2928,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.6.18.56646",
-              "templateHash": "1440835219639044614"
+              "version": "0.12.40.16777",
+              "templateHash": "13746696680236980375"
             }
           },
           "parameters": {

@@ -50,7 +50,7 @@ resource synapse 'Microsoft.Synapse/workspaces@2021-06-01' = {
       preventDataExfiltration: true
     }
     publicNetworkAccess: 'Disabled'
-    purviewConfiguration: {
+    purviewConfiguration: empty(purviewId) ? {} : {
       purviewResourceId: purviewId
     }
     sqlAdministratorLogin: administratorUsername
