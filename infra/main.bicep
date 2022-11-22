@@ -299,11 +299,11 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
   params: {
     logAnalyticsName: enableMonitoring ? logAnalytics001.outputs.logAnalyticsWorkspaceName: ''
     synapseName: synapse001Name
-    synapseSqlPools: [
-      synapse001.outputs.synapseSqlPool001Name
+    synapseSqlPools:[
+      enableSqlPool ? synapse001.outputs.synapseSqlPool001Name : null
     ]
     synapseSparkPools: [
-      synapse001.outputs.synapseBigDataPool001Name
+       synapse001.outputs.synapseBigDataPool001Name
     ]
     cosmosdbName: enableCosmos ? cosmosdb001.outputs.cosmosdbName : ''
     iothubName: iothub001Name
@@ -313,6 +313,7 @@ module diagnosticSettings './modules/services/diagnosticsettings.bicep' = if (en
     enableCosmos: enableCosmos
     enableStreamAnalytics: enableStreamAnalytics
     database001Name: enableSqlServer ? sql001.outputs.sqlserverDatabaseName : ''
+    enableSqlPool: enableSqlPool
   }
 }
 
