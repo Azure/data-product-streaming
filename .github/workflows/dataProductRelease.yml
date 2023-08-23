@@ -1,0 +1,63 @@
+name: Data Product Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+env:
+  DATA_PRODUCT_NAME: "DataProductStreaming"                     # Update to '{dataProductName}'
+  AZURE_SUBSCRIPTION_ID: "17588eb2-2943-461a-ab3f-00a3ceac3112" # Update to '{dataLandingZoneSubscriptionId}'
+  AZURE_RESOURCE_GROUP_NAME: "dmz-dev-automation"               # Update to '{dataLandingZoneName}-rg'
+  AZURE_LOCATION: "northeurope"                                 # Update to '{regionName}'
+
+jobs:
+  release:
+    name: "Data Product Release"
+    runs-on: ubuntu-latest
+    continue-on-error: false
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Check Out Repository
+        id: checkout_repository
+        uses: actions/checkout@v2
+
+      # Login to Azure
+      - name: Azure Login
+        id: azure_login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      # Deploy Template Spec
+      - name: Deploy Template Spec
+        id: template_spec_deployment
+        uses: azure/CLI@v1
+        with:
+          azcliversion: "latest"
+          inlineScript: |
+            # Strip git ref prefix from version
+            VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+            # Strip "v" prefix from tag name
+            [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+            echo VERSION=$VERSION
+
+            # Create Template Spec
+            az ts create \
+              --name ${{ env.DATA_PRODUCT_NAME }} \
+              --version $VERSION \
+              --subscription ${{ env.AZURE_SUBSCRIPTION_ID }} \
+              --resource-group ${{ env.AZURE_RESOURCE_GROUP_NAME }} \
+              --location ${{ env.AZURE_LOCATION }} \
+              --template-file "${{ github.workspace }}/infra/main.json"
+
+      # Log out from Azure
+      - name: Log out from Azure
+        id: azure_logout
+        uses: azure/cli@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az logout

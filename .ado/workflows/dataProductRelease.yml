@@ -1,0 +1,65 @@
+name: Data Product Release
+
+trigger:
+  tags:
+    include:
+      - v*
+
+variables:
+  DATA_PRODUCT_NAME: "DataProductStreaming"                                        # Update to '{dataProductName}'
+  AZURE_RESOURCE_MANAGER_CONNECTION_NAME: "integration-product-service-connection" # Update to '{resourceManagerConnectionName}'
+  AZURE_SUBSCRIPTION_ID: "17588eb2-2943-461a-ab3f-00a3ceac3112"                    # Update to '{dataLandingZoneSubscriptionId}'
+  AZURE_RESOURCE_GROUP_NAME: "dmz-dev-automation"                                  # Update to '{dataLandingZoneName}-rg'
+  AZURE_LOCATION: "North Europe"                                                   # Update to '{regionName}'
+
+stages:
+  - stage: Release
+    displayName: "Data Product Release"
+    jobs:
+      - job: Release
+        displayName: "Data Product Release"
+        continueOnError: false
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
+          # Checkout code
+          - checkout: self
+            name: checkout_repository
+            displayName: "Checkout repository"
+            submodules: true
+            lfs: false
+            clean: true
+            continueOnError: false
+            enabled: true
+
+          # Deploy Template Spec
+          - task: AzureCLI@2
+            name: template_spec_deployment
+            displayName: Deploy Template Spec
+            enabled: true
+            continueOnError: false
+            inputs:
+              azureSubscription: ${{ variables.AZURE_RESOURCE_MANAGER_CONNECTION_NAME }}
+              scriptType: bash
+              scriptLocation: inlineScript
+              powerShellErrorActionPreference: stop
+              addSpnToEnvironment: false
+              failOnStandardError: false
+              powerShellIgnoreLASTEXITCODE: false
+              inlineScript: |
+                # Strip git ref prefix from version
+                VERSION=$(echo "$(Build.SourceBranch)" | sed -e 's,.*/\(.*\),\1,')
+
+                # Strip "v" prefix from tag name
+                [[ "$(Build.SourceBranch)" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+                echo VERSION=$VERSION
+
+                # Create Template Spec
+                az ts create \
+                  --name ${{ variables.DATA_PRODUCT_NAME }} \
+                  --version $VERSION \
+                  --subscription ${{ variables.AZURE_SUBSCRIPTION_ID }} \
+                  --resource-group ${{ variables.AZURE_RESOURCE_GROUP_NAME }} \
+                  --location ${{ variables.AZURE_LOCATION }} \
+                  --template-file "$(System.DefaultWorkingDirectory)/infra/main.json"
